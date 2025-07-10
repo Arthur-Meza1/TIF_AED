@@ -220,11 +220,9 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o: \
  /usr/include/c++/15.1.1/list /usr/include/c++/15.1.1/bits/stl_list.h \
  /usr/include/c++/15.1.1/bits/allocated_ptr.h \
  /usr/include/c++/15.1.1/ext/aligned_buffer.h \
- /usr/include/c++/15.1.1/bits/list.tcc \
- /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/Utils.h \
- /usr/include/c++/15.1.1/iostream /usr/include/c++/15.1.1/ostream \
- /usr/include/c++/15.1.1/bits/ostream.h /usr/include/c++/15.1.1/ios \
- /usr/include/c++/15.1.1/bits/ios_base.h \
+ /usr/include/c++/15.1.1/bits/list.tcc /usr/include/c++/15.1.1/iostream \
+ /usr/include/c++/15.1.1/ostream /usr/include/c++/15.1.1/bits/ostream.h \
+ /usr/include/c++/15.1.1/ios /usr/include/c++/15.1.1/bits/ios_base.h \
  /usr/include/c++/15.1.1/ext/atomicity.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/gthr.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/gthr-default.h \
@@ -280,10 +278,8 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o: \
  /usr/include/c++/15.1.1/bits/stl_tempbuf.h \
  /usr/include/c++/15.1.1/bits/unicode-data.h \
  /usr/include/c++/15.1.1/bits/ostream.tcc /usr/include/c++/15.1.1/istream \
- /usr/include/c++/15.1.1/bits/istream.tcc /usr/include/c++/15.1.1/random \
- /usr/include/c++/15.1.1/bits/random.h \
- /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/opt_random.h \
- /usr/include/c++/15.1.1/bits/random.tcc /usr/include/c++/15.1.1/numeric \
- /usr/include/c++/15.1.1/bits/stl_numeric.h \
- /usr/include/c++/15.1.1/pstl/glue_numeric_defs.h \
+ /usr/include/c++/15.1.1/bits/istream.tcc \
+ /usr/include/c++/15.1.1/algorithm \
+ /usr/include/c++/15.1.1/bits/ranges_algo.h \
+ /usr/include/c++/15.1.1/pstl/glue_algorithm_defs.h \
  /usr/include/c++/15.1.1/pstl/execution_defs.h

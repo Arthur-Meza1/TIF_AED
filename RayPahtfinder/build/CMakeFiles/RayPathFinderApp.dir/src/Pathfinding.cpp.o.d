@@ -2,7 +2,6 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/Pathfinding.cpp \
  /usr/include/stdc-predef.h \
  /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/Pathfinding.h \
- /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/Graph.h \
  /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/Node.h \
  /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/raylib-cpp.hpp \
  /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/./AudioDevice.hpp \
@@ -217,16 +216,12 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/./VrStereoConfig.hpp \
  /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/./Wave.hpp \
  /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/./Window.hpp \
+ /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/Graph.h \
  /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/Obstacle.h \
  /usr/include/c++/15.1.1/list /usr/include/c++/15.1.1/bits/stl_list.h \
  /usr/include/c++/15.1.1/bits/allocated_ptr.h \
  /usr/include/c++/15.1.1/ext/aligned_buffer.h \
- /usr/include/c++/15.1.1/bits/list.tcc /usr/include/c++/15.1.1/map \
- /usr/include/c++/15.1.1/bits/stl_tree.h \
- /usr/include/c++/15.1.1/bits/node_handle.h \
- /usr/include/c++/15.1.1/bits/stl_map.h \
- /usr/include/c++/15.1.1/bits/stl_multimap.h \
- /usr/include/c++/15.1.1/bits/erase_if.h /usr/include/c++/15.1.1/queue \
+ /usr/include/c++/15.1.1/bits/list.tcc /usr/include/c++/15.1.1/queue \
  /usr/include/c++/15.1.1/deque /usr/include/c++/15.1.1/bits/stl_deque.h \
  /usr/include/c++/15.1.1/bits/deque.tcc \
  /usr/include/c++/15.1.1/bits/stl_heap.h \
@@ -265,41 +260,11 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /usr/include/c++/15.1.1/variant /usr/include/c++/15.1.1/bits/monostate.h \
  /usr/include/c++/15.1.1/bits/parse_numbers.h \
  /usr/include/c++/15.1.1/bits/elements_of.h \
- /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/Utils.h \
- /usr/include/c++/15.1.1/iostream /usr/include/c++/15.1.1/ostream \
- /usr/include/c++/15.1.1/bits/ostream.h /usr/include/c++/15.1.1/ios \
- /usr/include/c++/15.1.1/bits/basic_ios.h \
- /usr/include/c++/15.1.1/bits/locale_facets.h \
- /usr/include/c++/15.1.1/cwctype /usr/include/wctype.h \
- /usr/include/bits/wctype-wchar.h \
- /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/ctype_base.h \
- /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/ctype_inline.h \
- /usr/include/c++/15.1.1/bits/locale_facets.tcc \
- /usr/include/c++/15.1.1/bits/basic_ios.tcc \
- /usr/include/c++/15.1.1/format /usr/include/c++/15.1.1/charconv \
- /usr/include/c++/15.1.1/locale \
- /usr/include/c++/15.1.1/bits/locale_facets_nonio.h \
- /usr/include/c++/15.1.1/ctime \
- /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/time_members.h \
- /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/messages_members.h \
- /usr/include/libintl.h /usr/include/c++/15.1.1/bits/codecvt.h \
- /usr/include/c++/15.1.1/bits/locale_facets_nonio.tcc \
- /usr/include/c++/15.1.1/bits/locale_conv.h \
- /usr/include/c++/15.1.1/bits/unicode.h /usr/include/c++/15.1.1/cstdint \
- /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stdint.h \
- /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
- /usr/include/bits/stdint-least.h /usr/include/c++/15.1.1/bits/stl_algo.h \
+ /usr/include/c++/15.1.1/algorithm \
+ /usr/include/c++/15.1.1/bits/stl_algo.h \
  /usr/include/c++/15.1.1/bits/algorithmfwd.h \
  /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
  /usr/include/c++/15.1.1/bits/stl_tempbuf.h \
- /usr/include/c++/15.1.1/bits/unicode-data.h \
- /usr/include/c++/15.1.1/bits/ostream.tcc /usr/include/c++/15.1.1/istream \
- /usr/include/c++/15.1.1/bits/istream.tcc \
- /usr/include/c++/15.1.1/functional \
- /usr/include/c++/15.1.1/bits/std_function.h \
- /usr/include/c++/15.1.1/unordered_map \
- /usr/include/c++/15.1.1/bits/unordered_map.h \
- /usr/include/c++/15.1.1/bits/hashtable.h \
- /usr/include/c++/15.1.1/bits/hashtable_policy.h \
- /usr/include/c++/15.1.1/bits/move_only_function.h \
- /usr/include/c++/15.1.1/bits/mofunc_impl.h
+ /usr/include/c++/15.1.1/bits/ranges_algo.h \
+ /usr/include/c++/15.1.1/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/15.1.1/pstl/execution_defs.h

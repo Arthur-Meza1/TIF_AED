@@ -1,11 +1,18 @@
 #pragma once
-#include <utility> 
-struct RiverConnection {
-    int nodeId1; 
-    int nodeId2; 
 
-    RiverConnection(int id1, int id2) : nodeId1(id1), nodeId2(id2) {}
-    bool connects(int n1, int n2) const {
-        return ( (nodeId1 == n1 && nodeId2 == n2) || (nodeId1 == n2 && nodeId2 == n1) );
-    }
+#include "raylib.h"
+#include <string>
+
+// Estructura para representar un obstáculo con su forma y nombre
+struct Obstacle {
+    Rectangle rect;      // La forma del obstáculo
+    std::string name;    // El nombre del obstáculo (ej. "Río", "Pared")
+    Color color;         // Color para dibujar el obstáculo
+
+    // Constructor por defecto
+    Obstacle() : rect({0, 0, 0, 0}), name(""), color(DARKBLUE) {}
+
+    // Constructor con parámetros
+    Obstacle(Rectangle r, const std::string& n, Color c = DARKBLUE)
+        : rect(r), name(n), color(c) {}
 };

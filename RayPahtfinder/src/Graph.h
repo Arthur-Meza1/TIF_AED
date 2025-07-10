@@ -1,50 +1,41 @@
 #pragma once
-#include "Node.h"          // Necesita la definición de Node
-#include "Obstacle.h"      // Necesita la definición de RiverConnection
-#include <vector>          // Para almacenar nodos y la lista de adyacencia
-#include <list>            // Aunque no directamente usada en Graph, útil para la ruta final
 
-// Definición de la clase Graph
+#include "Node.h"
+#include "Obstacle.h" // Incluir el nuevo archivo Obstacle.h
+#include <vector>
+#include <list>
+#include <utility>
+#include "raylib.h" // Para Rectangle y CheckCollisionLineRec
+
+// Clase que representa el grafo
 class Graph {
 public:
-    Graph(); // Constructor por defecto
+    Graph();
+    void addNode(int id, float x, float y);
+    bool addEdge(int sourceId, int targetId, float weight);
+    const Node& getNode(int id) const;
+    const std::vector<std::pair<int, float>>& getAdjacentNodes(int id) const;
+    int getNumNodes() const;
+    int findNodeAtPosition(const raylib::Vector2& clickPos, float radius) const;
+    void generateRandomNodes(int count, int maxWidth, int maxHeight, int maxEdgesPerNode, float maxConnectionDistance);
+    void clear();
 
-    // Genera los nodos y sus conexiones.
-    // numNodes: cantidad de nodos a generar.
-    // maxConnectionDistance: distancia máxima para considerar dos nodos conectados.
-    // rivers: una lista de RiverConnection que no deben conectarse.
-    void generateNodesAndConnections(int numNodes, float maxConnectionDistance, const std::vector<RiverConnection>& rivers);
+    // --- MIEMBROS PARA OBSTÁCULOS (ahora con la nueva estructura Obstacle) ---
+    void generateRandomObstacles(int count, int maxWidth, int maxHeight);
+    const std::vector<Obstacle>& getObstacles() const; // Getter para los obstáculos
 
-    // Obtiene los nodos vecinos de un nodo dado su ID.
-    // Retorna un vector de pares {ID_vecino, peso_de_la_arista}.
-    const std::vector<std::pair<int, float>>& getNeighbors(int nodeId) const;
-
-    // Obtiene la información completa de un nodo dado su ID.
-    const Node& getNode(int nodeId) const;
-
-    // Retorna la cantidad total de nodos en el grafo.
-    int getNumNodes() const { return m_nodes.size(); }
-
-    // Encuentra el ID del nodo más cercano a una posición específica.
-    // Útil para cuando el usuario hace clic en el mapa.
-    int getNearestNodeId(raylib::Vector2 position) const;
-
-    // Retorna una referencia constante al vector de todos los nodos.
-    const std::vector<Node>& getAllNodes() const { return m_nodes; }
-
-    // Retorna una referencia constante a la lista de conexiones de río (obstáculos).
-    const std::vector<RiverConnection>& getRiverConnections() const { return m_rivers; }
+    // --- NUEVAS FUNCIONES PARA AÑADIR OBSTÁCULOS MANUALMENTE ---
+    void addObstacle(const Obstacle& obs);
+    void removeObstacle(int index); // Para eliminar por índice, si fuera necesario
+    bool areNodesWithinObstacle(int nodeId1, int nodeId2) const; // Verifica si ambos nodos están dentro de un mismo obstáculo
+                                                                // Útil para evitar aristas entre nodos si ambos ya están bloqueados
 
 private:
-    std::vector<Node> m_nodes; // Almacena todos los nodos del grafo
+    std::vector<Node> nodes;
+    std::vector<std::vector<std::pair<int, float>>> adjacencyList;
+    std::vector<std::vector<bool>> connected;
+    bool isValidNodeId(int id) const;
 
-    // Lista de adyacencia:
-    // Un vector donde cada índice 'i' representa el Node con ID 'i'.
-    // El valor es otro vector de pares {ID_vecino, peso_de_la_arista}.
-    std::vector<std::vector<std::pair<int, float>>> m_adjacencyList;
-
-    std::vector<RiverConnection> m_rivers; // Almacena las conexiones de río (obstáculos)
-
-    // Función auxiliar para verificar si una conexión entre dos IDs está bloqueada por un río.
-    bool isConnectionBlocked(int id1, int id2) const;
+    // --- ALMACENAMIENTO DE OBSTÁCULOS (ahora de tipo Obstacle) ---
+    std::vector<Obstacle> obstacles;
 };

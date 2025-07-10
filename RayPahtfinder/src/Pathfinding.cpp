@@ -1,84 +1,129 @@
 #include "Pathfinding.h"
-#include "Utils.h"
-#include <functional> 
+#include <algorithm>
+#include "raylib.h"     // Necessary for Rectangle, Vector2, GetRandomValue, etc.
+#include "raymath.h"    // Explicitly include for CheckCollisionLineRec (good practice)
+#include <limits>       // For std::numeric_limits
 
-
-Pathfinding::Pathfinding(const Graph& graph) : m_graph(graph) {}
-
-//hueristica 
-float Pathfinding::calculateHeuristic(int nodeId, int endNodeId) const {
-    return GetDistance(m_graph.getNode(nodeId).position, m_graph.getNode(endNodeId).position);
+// Constructor del Pathfinding, recibe una referencia constante al grafo
+Pathfinding::Pathfinding(const Graph& g) : graph(g) {
+    // Inicializa los vectores de costos y padres con tamaños apropiados
+    gScore.resize(graph.getNumNodes(), std::numeric_limits<float>::infinity());
+    fScore.resize(graph.getNumNodes(), std::numeric_limits<float>::infinity());
+    cameFrom.resize(graph.getNumNodes(), -1); // -1 indica sin padre
+    closedSet.resize(graph.getNumNodes(), false);
 }
 
-// Implementación del algoritmo A*
-std::list<int> Pathfinding::findShortestPath(int startNodeId, int endNodeId) const {
-    std::list<int> path; 
-    // Casos base: si no hay inicio/fin o si son el mismo nodo
-    if (startNodeId == -1 || endNodeId == -1) return path;
-    if (startNodeId == endNodeId) {
-        path.push_back(startNodeId);
-        return path;
+// Calcula la distancia euclidiana entre dos nodos (heurística)
+float Pathfinding::calculateHeuristic(int nodeId1, int nodeId2) const {
+    const Node& n1 = graph.getNode(nodeId1);
+    const Node& n2 = graph.getNode(nodeId2);
+    // Vector2Distance es una función de raymath.h, compatible con raylib-cpp
+    return Vector2Distance(n1.position, n2.position);
+}
+bool CheckLineRectangleCollisionCustom(raylib::Vector2 p1, raylib::Vector2 p2, raylib::Rectangle rec) {
+    // Comprueba si alguno de los puntos finales de la línea está dentro del rectángulo
+    if (CheckCollisionPointRec(p1, rec) || CheckCollisionPointRec(p2, rec)) {
+        return true;
     }
 
-    // costo del camino más barato desde el nodo inicial hasta n.
-    std::map<int, float> gScore;
-    // costo total estimado desde inical hasta nodo objetivo  (gScore[n] + heurística).
-    std::map<int, float> fScore;
-    // cameFrom[n]: El predecesor de n en el camino más barato encontrado hasta ahora.
-    std::map<int, int> cameFrom;
+    // Comprueba si la línea interseca con cualquiera de los cuatro bordes del rectángulo
+    // Borde 1: Borde superior (rec.x, rec.y) a (rec.x + rec.width, rec.y)
+    if (CheckCollisionLines(p1, p2, {rec.x, rec.y}, {rec.x + rec.width, rec.y}, nullptr)) return true;
+    // Borde 2: Borde inferior (rec.x, rec.y + rec.height) a (rec.x + rec.width, rec.y + rec.height)
+    if (CheckCollisionLines(p1, p2, {rec.x, rec.y + rec.height}, {rec.x + rec.width, rec.y + rec.height}, nullptr)) return true;
+    // Borde 3: Borde izquierdo (rec.x, rec.y) a (rec.x, rec.y + rec.height)
+    if (CheckCollisionLines(p1, p2, {rec.x, rec.y}, {rec.x, rec.y + rec.height}, nullptr)) return true;
+    // Borde 4: Borde derecho (rec.x + rec.width, rec.y) a (rec.x + rec.width, rec.y + rec.height)
+    if (CheckCollisionLines(p1, p2, {rec.x + rec.width, rec.y}, {rec.x + rec.width, rec.y + rec.height}, nullptr)) return true;
 
+    return false;
+}
+// Implementación del algoritmo A*
+std::list<int> Pathfinding::findPath(int startNodeId, int endNodeId) {
+    // Validar IDs de nodos
+    if (startNodeId < 0 || startNodeId >= graph.getNumNodes() ||
+        endNodeId < 0 || endNodeId >= graph.getNumNodes()) {
+        // std::cerr << "Error: ID de nodo de inicio/fin invalido." << std::endl;
+        return {}; // Retorna lista vacía si los IDs son inválidos
+    }
+
+    // Reiniciar estructuras para una nueva búsqueda
+    std::fill(gScore.begin(), gScore.end(), std::numeric_limits<float>::infinity());
+    std::fill(fScore.begin(), fScore.end(), std::numeric_limits<float>::infinity());
+    std::fill(cameFrom.begin(), cameFrom.end(), -1);
+    std::fill(closedSet.begin(), closedSet.end(), false);
 
     std::priority_queue<std::pair<float, int>, std::vector<std::pair<float, int>>, std::greater<std::pair<float, int>>> openSet;
 
-    //valores infinitos 
-    for (int i = 0; i < m_graph.getNumNodes(); ++i) {
-        gScore[i] = std::numeric_limits<float>::max();
-        fScore[i] = std::numeric_limits<float>::max();
-    }
-
-    // costo inicil 0
     gScore[startNodeId] = 0;
-    // El fScore inicial es solo la heurística desde el inicio al fin.
     fScore[startNodeId] = calculateHeuristic(startNodeId, endNodeId);
-    // Añade el nodo inicial al openSet
     openSet.push({fScore[startNodeId], startNodeId});
 
-    //principal
     while (!openSet.empty()) {
-        int currentId = openSet.top().second; // Obtiene el nodo con el fScore más bajo
-        openSet.pop();                        // Lo retira del openSet
+        int currentId = openSet.top().second;
+        openSet.pop();
 
-        // Si el nodo actual es el objetivo, hemos encontrado el camino
         if (currentId == endNodeId) {
-            // Reconstruir la ruta usandos el mapa cameFrom
-            int temp = endNodeId;
-            while (cameFrom.count(temp)) { // Mientras el nodo actual tenga un predecesor
-                path.push_front(temp);     // Añade el nodo al inicio de la lista de la ruta
-                temp = cameFrom[temp];     // Mueve al predecesor
-            }
-            path.push_front(startNodeId); // Añade el nodo inicial al inicio de la ruta
-            return path; // Retorna la ruta encontrada
+            return reconstructPath(currentId);
         }
 
-        // Explora los vecinos del nodo actual
-        const auto& neighbors = m_graph.getNeighbors(currentId);
+        if (closedSet[currentId]) {
+            continue;
+        }
+
+        closedSet[currentId] = true;
+
+        // Get the current node's position ONCE per current node to avoid recalculation
+        const raylib::Vector2 currentPos = graph.getNode(currentId).position;
+
+        const auto& neighbors = graph.getAdjacentNodes(currentId); // Corrected: iterate over graph.getAdjacentNodes()
+
         for (const auto& neighborPair : neighbors) {
-            int neighborId = neighborPair.first;    // ID del vecino
-            float weight = neighborPair.second;     // Costo de la arista al vecino
+            int neighborId = neighborPair.first;
+            float edgeCost = neighborPair.second;
 
-            // Calcula el costo tentativo desde el inicio al vecino pasando por el nodo actual
-            float tentative_gScore = gScore[currentId] + weight;
+            if (closedSet[neighborId]) {
+                continue;
+            }
 
-            // Si este camino es mejor que cualquier otro encontrado hasta ahora para este vecino
+            // --- VERIFICACIÓN DE OBSTÁCULOS (ahora usando obstacle.rect) ---
+            const raylib::Vector2 neighborPos = graph.getNode(neighborId).position;
+            bool isBlocked = false;
+            for (const auto& obstacle : graph.getObstacles()) {
+                // ¡¡¡CORRECCIÓN CLAVE AQUÍ: USA ::CheckCollisionLineRec O SOLO CheckCollisionLineRec!!!
+                // NO uses raylib::CheckCollisionLineRec
+                if (CheckLineRectangleCollisionCustom(currentPos, neighborPos, obstacle.rect)) {
+                    isBlocked = true;
+                     break;
+                }
+            }
+            if (isBlocked) {
+                continue;
+            }
+            // --- FIN DE LA VERIFICACIÓN DE OBSTÁCULOS ---
+
+            // Resto de la lógica A*
+            float tentative_gScore = gScore[currentId] + edgeCost;
+
             if (tentative_gScore < gScore[neighborId]) {
-                cameFrom[neighborId] = currentId;        // Actualiza el predecesor del vecino
-                gScore[neighborId] = tentative_gScore;   // Actualiza el gScore del vecino
-                // Actualiza el fScore del vecino (gScore + heurística)
+                cameFrom[neighborId] = currentId;
+                gScore[neighborId] = tentative_gScore;
                 fScore[neighborId] = gScore[neighborId] + calculateHeuristic(neighborId, endNodeId);
-                openSet.push({fScore[neighborId], neighborId}); // Añade o actualiza el vecino en el openSet
+                openSet.push({fScore[neighborId], neighborId});
             }
         }
     }
 
-    return path; 
+    return {}; // Ruta no encontrada
+}
+
+// Reconstruye el camino desde el nodo final usando el mapa cameFrom
+// FIX: The 'const' keyword must match the declaration in the header.
+std::list<int> Pathfinding::reconstructPath(int currentId) const {
+    std::list<int> totalPath;
+    while (currentId != -1) {
+        totalPath.push_front(currentId);
+        currentId = cameFrom[currentId];
+    }
+    return totalPath;
 }

@@ -1,93 +1,203 @@
 #include "Graph.h"
-#include "Utils.h" // Para usar GetDistance()
-#include <random>    // Para generar números aleatorios (posiciones de nodos)
+#include <iostream>  // Para mensajes de depuración
+#include <algorithm> // Para std::find
 #include <limits>    // Para std::numeric_limits
 
-// Constructor por defecto
-Graph::Graph() {}
-
-// Implementación de la función para verificar si una conexión está bloqueada.
-bool Graph::isConnectionBlocked(int id1, int id2) const {
-    for (const auto& river : m_rivers) { // Itera sobre todos los "ríos" definidos
-        if (river.connects(id1, id2)) { // Usa el método 'connects' de RiverConnection
-            return true; // La conexión está bloqueada
-        }
-    }
-    return false; // La conexión no está bloqueada
+Graph::Graph() {
+    // Constructor: Inicializa las listas vacías
 }
 
-// Implementación de la función para generar nodos y sus conexiones.
-void Graph::generateNodesAndConnections(int numNodes, float maxConnectionDistance, const std::vector<RiverConnection>& rivers) {
-    m_nodes.clear();         // Limpia nodos anteriores
-    m_adjacencyList.clear(); // Limpia conexiones anteriores
-    m_rivers = rivers;       // Copia la lista de "ríos" proporcionada
+// Limpia el grafo, preparándolo para una nueva generación
+void Graph::clear() {
+    nodes.clear();
+    adjacencyList.clear();
+    connected.clear();
+}
 
-    // Configuración para la generación de números aleatorios para las posiciones de los nodos
-    std::random_device rd;   // Semilla aleatoria
-    std::mt19937 gen(rd());  // Generador de números pseudoaleatorios
-    // Distribuciones para X e Y dentro de un rango (ej. 50 a 1280-50 para X, 50 a 720-50 para Y)
-    // Esto asegura que los nodos no se generen pegados a los bordes de la ventana.
-    std::uniform_real_distribution<> distribX(50, 1280 - 50);
-    std::uniform_real_distribution<> distribY(50, 720 - 50);
+// Añade un nodo al grafo. Asume que los IDs se añadirán secuencialmente.
+void Graph::addNode(int id, float x, float y) {
+    // Si el ID es mayor o igual al tamaño actual, redimensiona los vectores
+    if (id >= nodes.size()) {
+        nodes.resize(id + 1);
+        adjacencyList.resize(id + 1);
+        connected.resize(id + 1, std::vector<bool>(id + 1, false)); // Redimensiona y llena con false
+    }
+    nodes[id] = Node(id, x, y);
+    // También asegúrate de que todas las sub-vectores de 'connected' tengan el tamaño correcto
+    for(size_t i = 0; i <= id; ++i) {
+        if (connected[i].size() <= id) {
+            connected[i].resize(id + 1, false);
+        }
+    }
+}
 
-    // 1. Generar los nodos
-    for (int i = 0; i < numNodes; ++i) {
-        // Crea un nuevo Node con ID 'i' y posición aleatoria
-        m_nodes.emplace_back(i, static_cast<float>(distribX(gen)), static_cast<float>(distribY(gen)));
+// Añade una arista (conexión) entre dos nodos con un peso dado
+bool Graph::addEdge(int sourceId, int targetId, float weight) {
+    if (!isValidNodeId(sourceId) || !isValidNodeId(targetId)) {
+        // std::cerr << "Error: ID de nodo invalido al añadir arista: " << sourceId << " o " << targetId << std::endl;
+        return false;
+    }
+    if (sourceId == targetId) { // No permitir aristas a sí mismo
+        return false;
     }
 
-    // 2. Redimensionar la lista de adyacencia para que tenga espacio para todos los nodos
-    m_adjacencyList.resize(numNodes);
+    // Verificar si la arista ya existe para evitar duplicados
+    if (connected[sourceId][targetId]) {
+        return false; // Ya existe la arista
+    }
 
-    // 3. Crear las conexiones (aristas) entre los nodos
-    // Itera sobre todos los pares posibles de nodos
-    for (int i = 0; i < numNodes; ++i) {
-        for (int j = i + 1; j < numNodes; ++j) { // 'j' empieza en 'i+1' para evitar duplicados y conexiones de un nodo consigo mismo
-            // Calcula la distancia euclidiana entre los nodos i y j
-            float dist = GetDistance(m_nodes[i].position, m_nodes[j].position);
+    // Añadir la arista de source a target
+    adjacencyList[sourceId].push_back({targetId, weight});
+    connected[sourceId][targetId] = true;
 
-            // Si la distancia es menor o igual a la distancia máxima permitida para una conexión
-            if (dist <= maxConnectionDistance) {
-                // ¡Punto clave! Verifica si esta posible conexión está bloqueada por un "río"
-                if (!isConnectionBlocked(m_nodes[i].id, m_nodes[j].id)) {
-                    // Si no está bloqueada, añade la arista (conexión) a la lista de adyacencia
-                    // Se añade en ambos sentidos porque el grafo es no dirigido (se puede ir de A a B y de B a A)
-                    m_adjacencyList[i].push_back({j, dist}); // Conexión de i a j con peso 'dist'
-                    m_adjacencyList[j].push_back({i, dist}); // Conexión de j a i con peso 'dist'
+    // Para grafos no dirigidos, también añade la arista de target a source
+    // Asegúrate de que targetId tenga espacio en su lista de adyacencia
+    if (adjacencyList[targetId].empty()) { // Esto solo es un pequeño ajuste para el resize
+         adjacencyList[targetId].reserve(4); // Pre-reservar algo de espacio
+    }
+    adjacencyList[targetId].push_back({sourceId, weight});
+    connected[targetId][sourceId] = true;
+
+    return true;
+}
+
+// Obtiene una referencia constante a un nodo por su ID
+const Node& Graph::getNode(int id) const {
+    if (!isValidNodeId(id)) {
+        // Esto podría lanzar una excepción o retornar un nodo "nulo"
+        // Para simplicidad, se asume que siempre se pedirá un ID válido después de isValidNodeId
+        // o que el caller maneja el caso.
+        // Podrías lanzar: throw std::out_of_range("Node ID out of range");
+        std::cerr << "Error: Acceso a nodo con ID fuera de rango: " << id << std::endl;
+        // Retornar un nodo por defecto para evitar un crash inmediato, pero es un error lógico.
+        static Node defaultNode(-1, -1.0f, -1.0f); // Nodo estático por defecto
+        return defaultNode;
+    }
+    return nodes[id];
+}
+
+// Obtiene la lista de nodos adyacentes a un nodo dado
+const std::vector<std::pair<int, float>>& Graph::getAdjacentNodes(int id) const {
+    if (!isValidNodeId(id)) {
+        // std::cerr << "Error: ID de nodo invalido al obtener adyacentes: " << id << std::endl;
+        static const std::vector<std::pair<int, float>> emptyList; // Lista vacía para IDs inválidos
+        return emptyList;
+    }
+    return adjacencyList[id];
+}
+
+// Retorna el número total de nodos
+int Graph::getNumNodes() const {
+    return nodes.size();
+}
+
+// Encuentra el ID del nodo más cercano a una posición dada dentro de un radio de clic
+int Graph::findNodeAtPosition(const raylib::Vector2& clickPos, float radius) const {
+    float radiusSq = radius * radius; // Comparar con distancia al cuadrado para evitar sqrt
+    for (const auto& node : nodes) {
+        // Asegúrate de que el nodo sea válido (no sea un nodo por defecto con ID -1)
+        if (node.id != -1 && clickPos.DistanceSqr(node.position) <= radiusSq) {
+            return node.id;
+        }
+    }
+    return -1; // No se encontró ningún nodo en la posición
+}
+
+// Verifica si un ID de nodo es válido
+bool Graph::isValidNodeId(int id) const {
+    return id >= 0 && id < nodes.size();
+}
+
+// Genera un grafo aleatorio con nodos y conexiones
+void Graph::generateRandomNodes(int count, int maxWidth, int maxHeight, int maxEdgesPerNode, float maxConnectionDistance) {
+    clear(); // Limpia cualquier grafo existente
+    nodes.reserve(count); // Reserva espacio para los nodos
+    adjacencyList.resize(count); // Redimensiona la lista de adyacencia
+    connected.resize(count, std::vector<bool>(count, false)); // Redimensiona la matriz de conexión
+
+    // 1. Generar Nodos con posiciones aleatorias
+    for (int i = 0; i < count; ++i) {
+        // Genera posiciones dentro de los límites de la pantalla/área definida
+        float x = (float)GetRandomValue(0, maxWidth);
+        float y = (float)GetRandomValue(0, maxHeight);
+        addNode(i, x, y); // Llama a addNode que redimensiona si es necesario
+    }
+
+    // 2. Conectar Nodos
+    // Una estrategia simple: Conectar cada nodo a algunos vecinos aleatorios dentro de un radio.
+    for (int i = 0; i < count; ++i) {
+        raylib::Vector2 p1 = nodes[i].position;
+        int connectionsMade = 0;
+
+        // Intentar conectar con otros nodos
+        for (int j = 0; j < count && connectionsMade < maxEdgesPerNode; ++j) {
+            if (i == j) continue; // No conectar a sí mismo
+
+            raylib::Vector2 p2 = nodes[j].position;
+            float distance = p1.Distance(p2); // Distancia euclidiana
+
+            if (distance < maxConnectionDistance) { // Conectar solo si están lo suficientemente cerca
+                if (addEdge(i, j, distance)) { // addEdge ya maneja duplicados
+                    connectionsMade++;
                 }
             }
         }
-    }
-}
+        // Si no se hicieron suficientes conexiones cercanas, intentar con nodos aleatorios
+        while (connectionsMade < maxEdgesPerNode) {
+            int targetNodeId = GetRandomValue(0, count - 1);
+            if (targetNodeId == i) continue;
 
-// Retorna los vecinos de un nodo dado su ID
-const std::vector<std::pair<int, float>>& Graph::getNeighbors(int nodeId) const {
-    // .at() proporciona comprobación de límites, lanzando una excepción si el ID es inválido
-    return m_adjacencyList.at(nodeId);
-}
-
-// Retorna la información de un nodo dado su ID
-const Node& Graph::getNode(int nodeId) const {
-    return m_nodes.at(nodeId);
-}
-
-// Encuentra el nodo más cercano a una posición dada
-int Graph::getNearestNodeId(raylib::Vector2 position) const {
-    if (m_nodes.empty()) return -1; // Si no hay nodos, no hay uno cercano
-
-    int nearestId = -1;
-    float minDistanceSq = std::numeric_limits<float>::max(); // Usamos distancia al cuadrado para eficiencia (evita sqrt)
-
-    for (const auto& node : m_nodes) {
-        // Calcula la distancia al cuadrado entre la posición dada y la posición del nodo actual
-        float distSq = position.DistanceSqr(node.position);
-        if (distSq < minDistanceSq) {
-            minDistanceSq = distSq; // Actualiza la distancia mínima
-            nearestId = node.id;    // Actualiza el ID del nodo más cercano
+            raylib::Vector2 p2 = nodes[targetNodeId].position;
+            float distance = p1.Distance(p2);
+            if (addEdge(i, targetNodeId, distance)) {
+                connectionsMade++;
+            }
         }
     }
-    // Opcional: Si el clic del mouse está demasiado lejos de cualquier nodo,
-    // se considera que no se seleccionó ningún nodo.
-    if (minDistanceSq > 50 * 50) return -1; // Si la distancia al cuadrado es mayor que (50*50) = 2500, ignora el clic.
-    return nearestId;
+    std::cout << "Grafo generado y conectado con " << nodes.size() << " nodos." << std::endl;
+
+
+
+}
+// --- FUNCIONES PARA OBSTÁCULOS (ahora usando Obstacle struct) ---
+void Graph::generateRandomObstacles(int count, int maxWidth, int maxHeight) {
+    obstacles.clear();
+    obstacles.reserve(count);
+
+    std::cout << "Generando " << count << " obstaculos aleatorios..." << std::endl;
+    // Nombres predefinidos para los obstáculos aleatorios
+    std::vector<std::string> obstacleNames = {"Rio", "Pared", "Lago", "Montana", "Barranco", "Zona Prohibida", "Bosque Denso"};
+    std::vector<Color> obstacleColors = {BLUE, DARKGREEN, BROWN, GRAY, MAROON, VIOLET, LIME}; // Colores de Raylib C
+
+    for (int i = 0; i < count; ++i) {
+        int minSize = 30;
+        int maxSize = 150;
+        int width = GetRandomValue(minSize, maxSize);
+        int height = GetRandomValue(minSize, maxSize);
+
+        int x = GetRandomValue(0, maxWidth - width);
+        int y = GetRandomValue(0, maxHeight - height);
+
+        Rectangle rect = {(float)x, (float)y, (float)width, (float)height};
+        std::string name = obstacleNames[GetRandomValue(0, obstacleNames.size() - 1)];
+        Color color = obstacleColors[GetRandomValue(0, obstacleColors.size() - 1)];
+
+        // Usamos emplace_back para construir el objeto Obstacle directamente en el vector
+        obstacles.emplace_back(rect, name, color);
+    }
+    std::cout << "Obstaculos aleatorios generados." << std::endl;
+}
+
+const std::vector<Obstacle>& Graph::getObstacles() const {
+    return obstacles;
+}
+
+void Graph::addObstacle(const Obstacle& obs) {
+    obstacles.push_back(obs);
+}
+
+void Graph::removeObstacle(int index) {
+    if (index >= 0 && index < obstacles.size()) {
+        obstacles.erase(obstacles.begin() + index);
+    }
 }
