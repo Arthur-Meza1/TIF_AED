@@ -1,34 +1,32 @@
 #pragma once
 
+#include "Estructuras_datos/vector.h"
+#include "Estructuras_datos/list.h" 
 #include "Node.h"
-#include "Graph.h" // Necesario para acceder al grafo y sus nodos/obstáculos
-#include <vector>
-#include <list>
-#include <queue>
-#include <utility> // Para std::pair
+#include "Graph.h" 
+#include <utility>
 
-// Clase que implementa el algoritmo A*
+
 class Pathfinding {
 public:
-    // Constructor
+   
     Pathfinding(const Graph& g);
 
-    // Función principal para encontrar el camino
-    std::list<int> findPath(int startNodeId, int endNodeId);
+    
+    SimpleList<int> findPath(int startNodeId, int endNodeId);
 
 private:
-    const Graph& graph; // Referencia constante al grafo sobre el que se buscará
+    const Graph& graph; 
 
     // Vectores para almacenar los costos g, f, y los predecesores
-    std::vector<float> gScore;
-    std::vector<float> fScore;
-    std::vector<int> cameFrom; // Almacena el ID del nodo precedente en el camino óptimo
-    std::vector<bool> closedSet; // Para saber si un nodo ya ha sido evaluado
+    Vector<float> gScore;
+    Vector<float> fScore;
+    Vector<int> cameFrom; // Almacena el ID del nodo precedente en el camino óptimo
+    Vector<bool> closedSet; // Para saber si un nodo ya ha sido evaluado
 
     // Función heurística (distancia euclidiana)
     float calculateHeuristic(int nodeId1, int nodeId2) const;
 
-    // Función para reconstruir el camino desde el nodo final
-    // ¡¡¡ASEGÚRATE DE QUE ESTA LÍNEA ESTÉ ASÍ EN TU Pathfinding.h!!!
-    std::list<int> reconstructPath(int currentId) const; // <--- Añade 'const' aquí
+    
+    SimpleList<int> reconstructPath(int currentId) const;
 };

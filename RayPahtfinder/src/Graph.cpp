@@ -1,17 +1,12 @@
 #include "Graph.h"
-#include <iostream>  // Para mensajes de depuración
-#include <algorithm> // Para std::find
-#include <limits>    // Para std::numeric_limits
+#include "MyVector.h"
+#include <string>
+#include <iostream>  
+#include <algorithm> 
+#include <limits>    
 
 Graph::Graph() {
     // Constructor: Inicializa las listas vacías
-}
-
-// Limpia el grafo, preparándolo para una nueva generación
-void Graph::clear() {
-    nodes.clear();
-    adjacencyList.clear();
-    connected.clear();
 }
 
 // Añade un nodo al grafo. Asume que los IDs se añadirán secuencialmente.
@@ -20,43 +15,28 @@ void Graph::addNode(int id, float x, float y) {
     if (id >= nodes.size()) {
         nodes.resize(id + 1);
         adjacencyList.resize(id + 1);
-        connected.resize(id + 1, std::vector<bool>(id + 1, false)); // Redimensiona y llena con false
     }
     nodes[id] = Node(id, x, y);
-    // También asegúrate de que todas las sub-vectores de 'connected' tengan el tamaño correcto
-    for(size_t i = 0; i <= id; ++i) {
-        if (connected[i].size() <= id) {
-            connected[i].resize(id + 1, false);
-        }
-    }
 }
 
 // Añade una arista (conexión) entre dos nodos con un peso dado
 bool Graph::addEdge(int sourceId, int targetId, float weight) {
     if (!isValidNodeId(sourceId) || !isValidNodeId(targetId)) {
-        // std::cerr << "Error: ID de nodo invalido al añadir arista: " << sourceId << " o " << targetId << std::endl;
         return false;
     }
-    if (sourceId == targetId) { // No permitir aristas a sí mismo
+    if (sourceId == targetId) { 
         return false;
     }
 
-    // Verificar si la arista ya existe para evitar duplicados
-    if (connected[sourceId][targetId]) {
-        return false; // Ya existe la arista
+    for(const auto& edge: adjacencyList[sourceId]){
+        if(edge.first == targetId){
+            return false;
+        }
     }
-
     // Añadir la arista de source a target
     adjacencyList[sourceId].push_back({targetId, weight});
-    connected[sourceId][targetId] = true;
-
-    // Para grafos no dirigidos, también añade la arista de target a source
-    // Asegúrate de que targetId tenga espacio en su lista de adyacencia
-    if (adjacencyList[targetId].empty()) { // Esto solo es un pequeño ajuste para el resize
-         adjacencyList[targetId].reserve(4); // Pre-reservar algo de espacio
-    }
     adjacencyList[targetId].push_back({sourceId, weight});
-    connected[targetId][sourceId] = true;
+    
 
     return true;
 }
@@ -77,10 +57,10 @@ const Node& Graph::getNode(int id) const {
 }
 
 // Obtiene la lista de nodos adyacentes a un nodo dado
-const std::vector<std::pair<int, float>>& Graph::getAdjacentNodes(int id) const {
+const MyVector<std::pair<int, float>>& Graph::getAdjacentNodes(int id) const {
     if (!isValidNodeId(id)) {
         // std::cerr << "Error: ID de nodo invalido al obtener adyacentes: " << id << std::endl;
-        static const std::vector<std::pair<int, float>> emptyList; // Lista vacía para IDs inválidos
+        static const MyVector<std::pair<int, float>> emptyList; // Lista vacía para IDs inválidos
         return emptyList;
     }
     return adjacencyList[id];
@@ -113,14 +93,14 @@ void Graph::generateRandomNodes(int count, int maxWidth, int maxHeight, int maxE
     clear(); // Limpia cualquier grafo existente
     nodes.reserve(count); // Reserva espacio para los nodos
     adjacencyList.resize(count); // Redimensiona la lista de adyacencia
-    connected.resize(count, std::vector<bool>(count, false)); // Redimensiona la matriz de conexión
 
     // 1. Generar Nodos con posiciones aleatorias
     for (int i = 0; i < count; ++i) {
         // Genera posiciones dentro de los límites de la pantalla/área definida
         float x = (float)GetRandomValue(0, maxWidth);
         float y = (float)GetRandomValue(0, maxHeight);
-        addNode(i, x, y); // Llama a addNode que redimensiona si es necesario
+
+        nodes.emplace_back(i,x,y);
     }
 
     // 2. Conectar Nodos
@@ -166,8 +146,8 @@ void Graph::generateRandomObstacles(int count, int maxWidth, int maxHeight) {
 
     std::cout << "Generando " << count << " obstaculos aleatorios..." << std::endl;
     // Nombres predefinidos para los obstáculos aleatorios
-    std::vector<std::string> obstacleNames = {"Rio", "Pared", "Lago", "Montana", "Barranco", "Zona Prohibida", "Bosque Denso"};
-    std::vector<Color> obstacleColors = {BLUE, DARKGREEN, BROWN, GRAY, MAROON, VIOLET, LIME}; // Colores de Raylib C
+    MyVector<std::string> obstacleNames = {"Rio", "Pared", "Lago", "Montana", "Barranco", "Zona Prohibida", "Bosque Denso"};
+    MyVector<Color> obstacleColors = {BLUE, DARKGREEN, BROWN, GRAY, MAROON, VIOLET, LIME}; // Colores de Raylib C
 
     for (int i = 0; i < count; ++i) {
         int minSize = 30;
@@ -188,7 +168,7 @@ void Graph::generateRandomObstacles(int count, int maxWidth, int maxHeight) {
     std::cout << "Obstaculos aleatorios generados." << std::endl;
 }
 
-const std::vector<Obstacle>& Graph::getObstacles() const {
+const MyVector<Obstacle>& Graph::getObstacles() const {
     return obstacles;
 }
 
@@ -200,4 +180,9 @@ void Graph::removeObstacle(int index) {
     if (index >= 0 && index < obstacles.size()) {
         obstacles.erase(obstacles.begin() + index);
     }
+}
+
+void Graph::clear() {
+    nodes.clear();
+    adjacencyList.clear();
 }
