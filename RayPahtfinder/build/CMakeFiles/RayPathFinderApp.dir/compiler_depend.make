@@ -3,6 +3,7 @@
 
 CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o: /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/Graph.cpp \
   /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/Graph.h \
+  /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/MyVector.h \
   /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/Node.h \
   /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/Obstacle.h \
   /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/Color.hpp \
@@ -1597,21 +1598,17 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o:
 
 /usr/include/c++/15.1.1/pstl/pstl_config.h:
 
-/usr/include/gnu/stubs.h:
-
-/usr/include/c++/15.1.1/pstl/glue_algorithm_defs.h:
-
 /usr/include/c++/15.1.1/pstl/execution_defs.h:
 
 /usr/include/c++/15.1.1/iomanip:
 
 /usr/include/c++/15.1.1/ostream:
 
+/usr/include/c++/15.1.1/optional:
+
 /usr/include/bits/types/struct_timespec.h:
 
 /usr/include/c++/15.1.1/clocale:
-
-/usr/include/bits/waitflags.h:
 
 /usr/include/bits/types/struct_sched_param.h:
 
@@ -1819,30 +1816,6 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o:
 
 /usr/include/c++/15.1.1/bits/char_traits.h:
 
-/home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/FileText.hpp:
-
-/home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/Ray.hpp:
-
-/usr/include/c++/15.1.1/bits/stream_iterator.h:
-
-/home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/VrStereoConfig.hpp:
-
-/usr/include/bits/stdlib-float.h:
-
-/usr/include/bits/time64.h:
-
-/usr/lib/libstdc++.so:
-
-/usr/include/locale.h:
-
-/usr/include/c++/15.1.1/bits/memoryfwd.h:
-
-/usr/include/c++/15.1.1/deque:
-
-/usr/include/rlgl.h:
-
-/usr/include/alloca.h:
-
 /usr/include/c++/15.1.1/bits/exception_ptr.h:
 
 /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++allocator.h:
@@ -1869,6 +1842,20 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o:
 
 /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/Model.hpp:
 
+/usr/include/bits/stdlib-float.h:
+
+/usr/include/c++/15.1.1/bits/stream_iterator.h:
+
+/home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/VrStereoConfig.hpp:
+
+/usr/include/bits/time64.h:
+
+/usr/lib/libstdc++.so:
+
+/usr/include/locale.h:
+
+/usr/include/c++/15.1.1/bits/memoryfwd.h:
+
 /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/Graph.h:
 
 /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/Rectangle.hpp:
@@ -1886,8 +1873,6 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o:
 /usr/include/bits/time.h:
 
 /usr/include/asm/posix_types.h:
-
-/usr/include/c++/15.1.1/optional:
 
 /usr/include/bits/floatn-common.h:
 
@@ -1945,6 +1930,16 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o:
 
 /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/Material.hpp:
 
+/home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/FileText.hpp:
+
+/home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/Ray.hpp:
+
+/usr/include/c++/15.1.1/deque:
+
+/usr/include/rlgl.h:
+
+/usr/include/alloca.h:
+
 /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/Font.hpp:
 
 /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/ModelAnimation.hpp:
@@ -1958,6 +1953,12 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o:
 /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/ShaderUnmanaged.hpp:
 
 /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/Camera2D.hpp:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/c++/15.1.1/pstl/glue_algorithm_defs.h:
+
+/home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/MyVector.h:
 
 /usr/include/c++/15.1.1/tr1/gamma.tcc:
 
@@ -2004,6 +2005,8 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o:
 /usr/include/c++/15.1.1/bits/locale_facets_nonio.h:
 
 /usr/include/c++/15.1.1/bits/stl_iterator.h:
+
+/usr/include/bits/waitflags.h:
 
 /usr/include/bits/wctype-wchar.h:
 

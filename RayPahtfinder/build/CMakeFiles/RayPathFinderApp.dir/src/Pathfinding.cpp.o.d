@@ -217,6 +217,18 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/./Wave.hpp \
  /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/ventor/raylib-cpp/include/./Window.hpp \
  /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/Graph.h \
+ /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/MyVector.h \
+ /usr/include/c++/15.1.1/algorithm \
+ /usr/include/c++/15.1.1/bits/stl_algo.h \
+ /usr/include/c++/15.1.1/bits/algorithmfwd.h \
+ /usr/include/c++/15.1.1/bits/stl_heap.h \
+ /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
+ /usr/include/c++/15.1.1/bits/stl_tempbuf.h \
+ /usr/include/c++/15.1.1/bits/ranges_algo.h \
+ /usr/include/c++/15.1.1/optional \
+ /usr/include/c++/15.1.1/bits/enable_special_members.h \
+ /usr/include/c++/15.1.1/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/15.1.1/pstl/execution_defs.h \
  /home/arthurm/Documentos/AED/proyecto/RayPahtfinder/src/Obstacle.h \
  /usr/include/c++/15.1.1/list /usr/include/c++/15.1.1/bits/stl_list.h \
  /usr/include/c++/15.1.1/bits/allocated_ptr.h \
@@ -224,7 +236,6 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /usr/include/c++/15.1.1/bits/list.tcc /usr/include/c++/15.1.1/queue \
  /usr/include/c++/15.1.1/deque /usr/include/c++/15.1.1/bits/stl_deque.h \
  /usr/include/c++/15.1.1/bits/deque.tcc \
- /usr/include/c++/15.1.1/bits/stl_heap.h \
  /usr/include/c++/15.1.1/bits/stl_queue.h /usr/include/c++/15.1.1/ranges \
  /usr/include/c++/15.1.1/iterator \
  /usr/include/c++/15.1.1/bits/stream_iterator.h \
@@ -253,18 +264,8 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /usr/include/c++/15.1.1/bits/locale_classes.tcc \
  /usr/include/c++/15.1.1/system_error \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/error_constants.h \
- /usr/include/c++/15.1.1/bits/streambuf.tcc \
- /usr/include/c++/15.1.1/optional \
- /usr/include/c++/15.1.1/bits/enable_special_members.h \
- /usr/include/c++/15.1.1/span /usr/include/c++/15.1.1/array \
- /usr/include/c++/15.1.1/variant /usr/include/c++/15.1.1/bits/monostate.h \
+ /usr/include/c++/15.1.1/bits/streambuf.tcc /usr/include/c++/15.1.1/span \
+ /usr/include/c++/15.1.1/array /usr/include/c++/15.1.1/variant \
+ /usr/include/c++/15.1.1/bits/monostate.h \
  /usr/include/c++/15.1.1/bits/parse_numbers.h \
- /usr/include/c++/15.1.1/bits/elements_of.h \
- /usr/include/c++/15.1.1/algorithm \
- /usr/include/c++/15.1.1/bits/stl_algo.h \
- /usr/include/c++/15.1.1/bits/algorithmfwd.h \
- /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
- /usr/include/c++/15.1.1/bits/stl_tempbuf.h \
- /usr/include/c++/15.1.1/bits/ranges_algo.h \
- /usr/include/c++/15.1.1/pstl/glue_algorithm_defs.h \
- /usr/include/c++/15.1.1/pstl/execution_defs.h
+ /usr/include/c++/15.1.1/bits/elements_of.h

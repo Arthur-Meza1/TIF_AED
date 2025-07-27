@@ -1,42 +1,41 @@
-#include "raylib-cpp.hpp" // Usa el wrapper raylib-cpp
+#include "raylib-cpp.hpp" 
 #include "Graph.h"
 #include "Node.h"
 #include "Pathfinding.h"
-#include "Obstacle.h"     // ¡Importante! Incluir la nueva estructura Obstacle
+#include "Obstacle.h"     
 #include <iostream>
 #include <list>
 #include <string>
-#include <limits>         // Para std::numeric_limits
-#include <chrono>         // Para medir tiempos (opcional)
-#include <algorithm>      // Para std::min y std::max
+#include <limits>         
+#include <chrono>         
+#include <algorithm>      
 #include <cstring>
-// --- Constantes de Configuración ---
+
 const int SCREEN_WIDTH = 1200;
 const int SCREEN_HEIGHT = 800;
-const int GRAPHICAL_NODE_LIMIT = 700; // Umbral para la visualización gráfica
-const float NODE_GENERATION_AREA_PADDING = 50.0f; // Margen para la generación de nodos aleatorios
-const int MAX_EDGES_PER_NODE_GENERATION = 5; // Máx. conexiones por nodo en la generación aleatoria
-const float MAX_CONNECTION_DISTANCE_GENERATION = 200.0f; // Radio para conectar nodos en la generación aleatoria
-const int NUM_OBSTACLES = 5; // Cantidad de obstáculos aleatorios a generar al inicio
+const int GRAPHICAL_NODE_LIMIT = 700; //umbral
+const float NODE_GENERATION_AREA_PADDING = 50.0f; 
+const int MAX_EDGES_PER_NODE_GENERATION = 4;
+const float MAX_CONNECTION_DISTANCE_GENERATION = 200.0f; //radio para la conexion
+const int NUM_OBSTACLES = 5;
 
-// --- Variables Globales de la Aplicación ---
+
 Graph myGraph;
 Pathfinding* myPathfinding = nullptr;
 int startNodeId = -1;
 int endNodeId = -1;
-std::list<int> path; // La ruta calculada por A*
+std::list<int> path; 
 
 raylib::Camera2D camera; // Declarar y luego inicializar en InitializeApplication
 
 bool graphicalMode = true;     // Controla si la aplicación se ejecuta en modo gráfico o terminal
 
 // --- Variables Globales Adicionales para Modo Gráfico (Edición de Obstáculos) ---
-bool editingObstacles = false; // Nuevo estado para el modo de edición de obstáculos
-raylib::Vector2 startDragPos;  // Punto de inicio del arrastre para dibujar el rectángulo
-bool isDragging = false;       // Indica si estamos arrastrando para dibujar un obstáculo
-char obstacleNameInput[64] = ""; // Buffer para el nombre del obstáculo
-bool typingObstacleName = false; // Indica si el usuario está introduciendo el nombre
-// Posición de la caja de entrada de texto en la pantalla (coordenadas de pantalla, no del mundo)
+bool editingObstacles = false; 
+raylib::Vector2 startDragPos;  
+bool isDragging = false;       
+char obstacleNameInput[64] = ""; 
+bool typingObstacleName = false; 
 Rectangle nameInputBox = { 10, (float)SCREEN_HEIGHT - 40, 200, 30 };
 
 
@@ -122,7 +121,16 @@ void InitializeApplication(int numNodes) {
     // Generar el grafo: se usa la misma función para ambos modos
     myGraph.generateRandomNodes(numNodes, SCREEN_WIDTH, SCREEN_HEIGHT,
                                 MAX_EDGES_PER_NODE_GENERATION, MAX_CONNECTION_DISTANCE_GENERATION);
-
+    
+    size_t totalEdges = 0;
+    for (int i = 0; i < myGraph.getNumNodes(); ++i) {
+        totalEdges += myGraph.getAdjacentNodes(i).size();
+    }
+    std::cout << "--- Generacion del Grafo Completada ---" << std::endl;
+    std::cout << "Numero de nodos generados: " << myGraph.getNumNodes() << std::endl;
+    std::cout << "Numero total de entradas de aristas en lista de adyacencia: " << totalEdges << std::endl;
+    std::cout << "Numero aproximado de aristas unicas (si no dirigido): " << totalEdges / 2 << std::endl;
+    // ---------------------------------------------------                            
     // --- Generar obstáculos aleatorios (afectan la lógica en ambos modos) ---
     myGraph.generateRandomObstacles(NUM_OBSTACLES, SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -390,44 +398,75 @@ void HandleGraphicalInput() {
 // Dibuja los elementos del grafo (solo camino, inicio, fin)
 // Esta función está separada de DrawApplication para mantener la modularidad
 void DrawGraphElements(const Graph& graph, const std::list<int>& pathNodes, int startNodeId, int endNodeId) {
+
+    // --- NUEVO: Dibuja TODAS las aristas del grafo (solo si estamos en modo gráfico y con pocos nodos) ---
+    // (Asegúrate de que 'graphicalMode' sea accesible o pasa como parámetro si es necesario)
+    // Para esta función, asumimos que estamos en modo gráfico si se llama desde DrawApplication
+    // Y que la cantidad de nodos es baja, según la lógica de 'InitializeApplication'.
+    if (graph.getNumNodes() <= GRAPHICAL_NODE_LIMIT) { // Opcional: una comprobación extra aquí para estar seguros
+        for (int i = 0; i < graph.getNumNodes(); ++i) {
+            const Node& currentNode = graph.getNode(i);
+            for (const auto& edge : graph.getAdjacentNodes(i)) {
+                const Node& targetNode = graph.getNode(edge.first);
+                // Dibuja la línea que conecta los nodos
+                DrawLineV(currentNode.position, targetNode.position, GRAY); // Color gris para aristas generales
+            }
+        }
+    }
+
+    // --- NUEVO: Dibuja TODOS los nodos del grafo (solo si estamos en modo gráfico y con pocos nodos) ---
+    if (graph.getNumNodes() <= GRAPHICAL_NODE_LIMIT) { // Opcional: una comprobación extra aquí para estar seguros
+        for (int i = 0; i < graph.getNumNodes(); ++i) {
+            const Node& currentNode = graph.getNode(i);
+            // Dibuja un círculo para el nodo. Usa un color diferente si el nodo es el de inicio o fin.
+            Color nodeColor = BLUE; // Color por defecto para nodos
+            if (i == startNodeId) nodeColor = GREEN;
+            else if (i == endNodeId) nodeColor = RED;
+
+            // Dibuja el círculo del nodo
+            DrawCircleV(currentNode.position, 5, nodeColor); // Radio 5 para visibilidad
+            // Opcional: Dibuja el ID del nodo (puede saturar mucho si hay muchos)
+            // DrawText(TextFormat("%i", currentNode.id), (int)currentNode.position.x + 5, (int)currentNode.position.y + 5, 10, BLACK);
+        }
+    }
+
+
     // --- Dibuja la ruta encontrada (si existe) ---
+    // Esta parte ya la tienes y se dibujará encima del grafo completo, lo cual es bueno.
     if (!pathNodes.empty()) {
         raylib::Vector2 prevPos;
-        bool firstNode = true; // Para manejar el primer punto de la línea
+        bool firstNode = true;
         for (int nodeId : pathNodes) {
-            // Asegúrate de que el nodo exista en el grafo
             if (nodeId >= 0 && nodeId < graph.getNumNodes()) {
                 const Node& currentPathNode = graph.getNode(nodeId);
                 raylib::Vector2 currentPos = currentPathNode.position;
 
-                // Si no es el primer nodo en la ruta, dibuja una línea desde el anterior
                 if (!firstNode) {
-                    DrawLineEx(prevPos, currentPos, 4, LIME); // Línea verde gruesa (usando Raylib C Color)
+                    DrawLineEx(prevPos, currentPos, 4, LIME);
                 }
                 prevPos = currentPos;
                 firstNode = false;
 
-                // Opcional: Dibuja un círculo en cada nodo de la ruta
-                DrawCircleV(currentPos, 4, LIME); // Usando Raylib C Color
+                DrawCircleV(currentPos, 4, LIME);
             }
         }
     }
 
     // --- Dibuja el nodo de inicio (si está seleccionado) ---
+    // Esto se dibujará de nuevo para resaltarlo, encima de su dibujo como nodo normal.
     if (startNodeId != -1 && startNodeId < graph.getNumNodes()) {
         const Node& startNode = graph.getNode(startNodeId);
         raylib::Vector2 sNodePos = startNode.position;
-        DrawCircleV(sNodePos, 8, GREEN); // Círculo más grande para el inicio (Raylib C Color)
+        DrawCircleV(sNodePos, 8, GREEN);
     }
 
     // --- Dibuja el nodo final (si está seleccionado) ---
+    // También se dibujará de nuevo para resaltarlo.
     if (endNodeId != -1 && endNodeId < graph.getNumNodes()) {
         const Node& endNode = graph.getNode(endNodeId);
         raylib::Vector2 eNodePos = endNode.position;
-        DrawCircleV(eNodePos, 8, RED); // Círculo más grande para el fin (Raylib C Color)
+        DrawCircleV(eNodePos, 8, RED);
     }
-
-    // NOTA: No se dibuja el grafo completo (todos los nodos y aristas) para eficiencia.
 }
 
 // Dibuja la Interfaz de Usuario (HUD) en modo gráfico
