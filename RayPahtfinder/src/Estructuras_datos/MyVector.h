@@ -157,12 +157,18 @@ public:
         if (cap > sz) reallocate(sz);
     }
 
-    void resize(size_t new_size) {
-        if (new_size > cap) reallocate(new_size);
-        for (size_t i = sz; i < new_size; ++i) {
-            data[i] = T();
-        }
+    void resize(size_t new_size, const T& value) {
+    if (new_size < sz) {
         sz = new_size;
+    } else {
+        reserve(new_size);
+        for (size_t i = sz; i < new_size; ++i)
+            data[i] = value;
+        sz = new_size;
+    }
+}
+    void resize(size_t new_size) {
+    resize(new_size, T{});
     }
 
     void erase(size_t index) {

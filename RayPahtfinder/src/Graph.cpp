@@ -1,5 +1,6 @@
 #include "Graph.h"
-#include "MyVector.h"
+#include "Estructuras_datos/MyVector.h"
+
 #include <string>
 #include <iostream>  
 #include <algorithm> 

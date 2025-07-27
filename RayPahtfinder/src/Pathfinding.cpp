@@ -2,16 +2,15 @@
 #include <algorithm>        
 #include <limits>
 #include "Estructuras_datos/queue.h"
-
-#include "Estructuras_datos/vector.h"      
+#include "Estructuras_datos/MyVector.h"      
 
 // Constructor del Pathfinding, recibe una referencia constante al grafo
 Pathfinding::Pathfinding(const Graph& g) : graph(g) {
     int n = g.getNumNodes();
-    gScore.ren_tam(n, std::numeric_limits<float>::infinity());
-    fScore.ren_tam(n, std::numeric_limits<float>::infinity());
-    cameFrom.ren_tam(n, -1);
-    closedSet.ren_tam(n, false);
+    gScore.resize(n, std::numeric_limits<float>::infinity());
+    fScore.resize(n, std::numeric_limits<float>::infinity());
+    cameFrom.resize(n, -1);
+    closedSet.resize(n, false);
 }
 
 
@@ -36,17 +35,17 @@ bool CheckLineRectangleCollisionCustom(raylib::Vector2 p1, raylib::Vector2 p2, r
 // Implementación del algoritmo A*
 SimpleList<int> Pathfinding::findPath(int startNodeId, int endNodeId) {
     // Validar IDs de nodos
-    if (startNodeId < 0 || startNodeId >= gScore.n_tam() ||
-        endNodeId < 0 || endNodeId >= gScore.n_tam()) {
+    if (startNodeId < 0 || startNodeId >= gScore.size() ||
+        endNodeId < 0 || endNodeId >= gScore.size()) {
        
         return {}; 
     }
 
     // Reiniciar estructuras para una nueva búsqueda
-    gScore.ren_tam(gScore.n_tam(), std::numeric_limits<float>::infinity());
-    fScore.ren_tam(gScore.n_tam(), std::numeric_limits<float>::infinity());
-    cameFrom.ren_tam(gScore.n_tam(), -1);
-    closedSet.ren_tam(gScore.n_tam(), false);
+    gScore.resize(gScore.size(), std::numeric_limits<float>::infinity());
+    fScore.resize(gScore.size(), std::numeric_limits<float>::infinity());
+    cameFrom.resize(gScore.size(), -1);
+    closedSet.resize(gScore.size(), false);
 
 
     PriorityQueue<std::pair<float, int>> openSet;
@@ -113,11 +112,11 @@ SimpleList<int> Pathfinding::findPath(int startNodeId, int endNodeId) {
 //reconstruccion del camino
 SimpleList<int> Pathfinding::reconstructPath(int currentId) const {
     // Usamos tu Vector en lugar de std::vector
-    Vector<int> temp;        // Empieza vacío
+    MyVector<int> temp;        // Empieza vacío
     while (currentId != -1) {
         // Aumentar tamaño de temp en 1 y añadir el valor
-        int oldSize = temp.n_tam();
-        temp.ren_tam(oldSize + 1, 0);
+        int oldSize = temp.size();
+        temp.resize(oldSize + 1, 0);
         temp[oldSize] = currentId;
 
         currentId = cameFrom[currentId];
@@ -125,7 +124,7 @@ SimpleList<int> Pathfinding::reconstructPath(int currentId) const {
 
     // Convertimos en orden inverso para usar push_back
     SimpleList<int> totalPath;
-    for (int i = temp.n_tam() - 1; i >= 0; --i) {
+    for (int i = temp.size() - 1; i >= 0; --i) {
         totalPath.push_back(temp[i]);
     }
 

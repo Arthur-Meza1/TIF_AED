@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/joaquin-castelo/Escritorio/Trabajo_1milliondenodos/TIF_AED/RayPahtfinder/src/ventor/raylib-cpp/include
+CXX_INCLUDES = -I/home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/ventor/raylib-cpp/include -I/home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/Estructuras_datos
 
-CXX_FLAGS = -std=gnu++23 -I/usr/local/include
+CXX_FLAGS = -std=gnu++23 -I/usr/include
 

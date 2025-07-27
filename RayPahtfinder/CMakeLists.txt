@@ -3,7 +3,10 @@ project(RayPathFinderApp CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(raylib CONFIG REQUIRED)
-include_directories(src/ventor/raylib-cpp/include)
+include_directories(
+    src/ventor/raylib-cpp/include 
+    Estructuras_datos
+)
 
 set(PROJECT_SOURCES
     src/main.cpp
@@ -15,6 +18,7 @@ set(PROJECT_SOURCES
     src/Pathfinding.h
     src/Utils.cpp
     src/Utils.h
+    
 )
 
 # Crear el ejecutable

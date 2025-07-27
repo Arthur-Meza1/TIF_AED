@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Estructuras_datos/vector.h"
+#include "Estructuras_datos/MyVector.h"
 #include "Estructuras_datos/list.h" 
 #include "Node.h"
 #include "Graph.h" 
@@ -18,11 +18,11 @@ public:
 private:
     const Graph& graph; 
 
-    // Vectores para almacenar los costos g, f, y los predecesores
-    Vector<float> gScore;
-    Vector<float> fScore;
-    Vector<int> cameFrom; // Almacena el ID del nodo precedente en el camino óptimo
-    Vector<bool> closedSet; // Para saber si un nodo ya ha sido evaluado
+    
+    MyVector<float> gScore;
+    MyVector<float> fScore;
+    MyVector<int> cameFrom; // Almacena el ID del nodo precedente en el camino óptimo
+    MyVector<bool> closedSet; // Para saber si un nodo ya ha sido evaluado
 
     // Función heurística (distancia euclidiana)
     float calculateHeuristic(int nodeId1, int nodeId2) const;

@@ -1,46 +1,46 @@
 RayPathFinderApp: \
-  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/Scrt1.o \
-  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crti.o \
-  /usr/lib/gcc/x86_64-linux-gnu/13/crtbeginS.o \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/../../../../lib/Scrt1.o \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/../../../../lib/crti.o \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/crtbeginS.o \
   CMakeFiles/RayPathFinderApp.dir/src/main.cpp.o \
   CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o \
   CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o \
   CMakeFiles/RayPathFinderApp.dir/src/Utils.cpp.o \
-  /usr/local/lib/libraylib.a \
-  /usr/local/lib/libraylib.a \
-  /usr/lib/gcc/x86_64-linux-gnu/13/libstdc++.so \
-  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libm.so \
-  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libm.so \
-  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libm.so \
-  /lib/x86_64-linux-gnu/libm.so.6 \
-  /lib/x86_64-linux-gnu/libmvec.so.1 \
-  /usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so \
-  /usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so \
-  /usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so \
-  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libgcc_s.so.1 \
-  /usr/lib/gcc/x86_64-linux-gnu/13/libgcc.a \
-  /usr/lib/gcc/x86_64-linux-gnu/13/libgcc.a \
-  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libc.so \
-  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libc.so \
-  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libc.so \
-  /lib/x86_64-linux-gnu/libc.so.6 \
-  /usr/lib/x86_64-linux-gnu/libc_nonshared.a \
-  /lib64/ld-linux-x86-64.so.2 \
-  /usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so \
-  /usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so \
-  /usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so \
-  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libgcc_s.so.1 \
-  /usr/lib/gcc/x86_64-linux-gnu/13/libgcc.a \
-  /usr/lib/gcc/x86_64-linux-gnu/13/libgcc.a \
-  /usr/lib/gcc/x86_64-linux-gnu/13/crtendS.o \
-  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crtn.o \
-  /lib64/ld-linux-x86-64.so.2
+  /usr/lib/libraylib.so \
+  /usr/lib/libraylib.so \
+  /usr/lib/libstdc++.so \
+  /usr/lib/libm.so \
+  /usr/lib/libm.so \
+  /usr/lib/libm.so \
+  /usr/lib/libm.so.6 \
+  /usr/lib/libmvec.so.1 \
+  /usr/lib/libgcc_s.so \
+  /usr/lib/libgcc_s.so \
+  /usr/lib/libgcc_s.so \
+  /usr/lib/libgcc_s.so.1 \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/libgcc.a \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/libgcc.a \
+  /usr/lib/libc.so \
+  /usr/lib/libc.so \
+  /usr/lib/libc.so \
+  /usr/lib/libc.so.6 \
+  /usr/lib/libc_nonshared.a \
+  /usr/lib/ld-linux-x86-64.so.2 \
+  /usr/lib/libgcc_s.so \
+  /usr/lib/libgcc_s.so \
+  /usr/lib/libgcc_s.so \
+  /usr/lib/libgcc_s.so.1 \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/libgcc.a \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/libgcc.a \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/crtendS.o \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/../../../../lib/crtn.o \
+  /usr/lib/ld-linux-x86-64.so.2
 
-/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/Scrt1.o:
+/usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/../../../../lib/Scrt1.o:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crti.o:
+/usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/../../../../lib/crti.o:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/crtbeginS.o:
+/usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/crtbeginS.o:
 
 CMakeFiles/RayPathFinderApp.dir/src/main.cpp.o:
 
@@ -50,60 +50,60 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o:
 
 CMakeFiles/RayPathFinderApp.dir/src/Utils.cpp.o:
 
-/usr/local/lib/libraylib.a:
+/usr/lib/libraylib.so:
 
-/usr/local/lib/libraylib.a:
+/usr/lib/libraylib.so:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/libstdc++.so:
+/usr/lib/libstdc++.so:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libm.so:
+/usr/lib/libm.so:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libm.so:
+/usr/lib/libm.so:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libm.so:
+/usr/lib/libm.so:
 
-/lib/x86_64-linux-gnu/libm.so.6:
+/usr/lib/libm.so.6:
 
-/lib/x86_64-linux-gnu/libmvec.so.1:
+/usr/lib/libmvec.so.1:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so:
+/usr/lib/libgcc_s.so:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so:
+/usr/lib/libgcc_s.so:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so:
+/usr/lib/libgcc_s.so:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libgcc_s.so.1:
+/usr/lib/libgcc_s.so.1:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/libgcc.a:
+/usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/libgcc.a:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/libgcc.a:
+/usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/libgcc.a:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libc.so:
+/usr/lib/libc.so:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libc.so:
+/usr/lib/libc.so:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libc.so:
+/usr/lib/libc.so:
 
-/lib/x86_64-linux-gnu/libc.so.6:
+/usr/lib/libc.so.6:
 
-/usr/lib/x86_64-linux-gnu/libc_nonshared.a:
+/usr/lib/libc_nonshared.a:
 
-/lib64/ld-linux-x86-64.so.2:
+/usr/lib/ld-linux-x86-64.so.2:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so:
+/usr/lib/libgcc_s.so:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so:
+/usr/lib/libgcc_s.so:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/libgcc_s.so:
+/usr/lib/libgcc_s.so:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libgcc_s.so.1:
+/usr/lib/libgcc_s.so.1:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/libgcc.a:
+/usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/libgcc.a:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/libgcc.a:
+/usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/libgcc.a:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/crtendS.o:
+/usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/crtendS.o:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crtn.o:
+/usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/../../../../lib/crtn.o:
 
-/lib64/ld-linux-x86-64.so.2:
+/usr/lib/ld-linux-x86-64.so.2:

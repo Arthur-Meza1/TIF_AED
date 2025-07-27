@@ -1,5 +1,5 @@
 #pragma once
-#include "MyVector.h"
+#include "Estructuras_datos/MyVector.h"
 #include "Node.h"
 #include "Obstacle.h" 
 #include <utility>
