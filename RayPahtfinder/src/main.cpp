@@ -1,10 +1,10 @@
-#include "raylib-cpp.hpp" 
+#include "raylib-cpp.hpp"
+#include "Estructuras_datos/list.h" 
 #include "Graph.h"
 #include "Node.h"
 #include "Pathfinding.h"
 #include "Obstacle.h"     
 #include <iostream>
-#include <list>
 #include <string>
 #include <limits>         
 #include <chrono>         
@@ -24,7 +24,7 @@ Graph myGraph;
 Pathfinding* myPathfinding = nullptr;
 int startNodeId = -1;
 int endNodeId = -1;
-std::list<int> path; 
+SimpleList<int> path; 
 
 raylib::Camera2D camera; // Declarar y luego inicializar en InitializeApplication
 
@@ -48,11 +48,11 @@ void CleanupApplication();
 // Funciones específicas del modo gráfico
 void HandleGraphicalInput();
 void DrawGraphicalHUD();
-void DrawGraphElements(const Graph& graph, const std::list<int>& pathNodes, int startNodeId, int endNodeId);
+void DrawGraphElements(const Graph& graph, const SimpleList<int>& pathNodes, int startNodeId, int endNodeId);
 
 // Funciones específicas del modo terminal
 void RunTerminalMode();
-void PrintPathToTerminal(const std::list<int>& p);
+void PrintPathToTerminal(const SimpleList<int>& p);
 int GetValidNodeIdFromUser(const std::string& prompt, int maxId);
 
 // --- Implementación de main ---
@@ -397,7 +397,7 @@ void HandleGraphicalInput() {
 
 // Dibuja los elementos del grafo (solo camino, inicio, fin)
 // Esta función está separada de DrawApplication para mantener la modularidad
-void DrawGraphElements(const Graph& graph, const std::list<int>& pathNodes, int startNodeId, int endNodeId) {
+void DrawGraphElements(const Graph& graph, const SimpleList<int>& pathNodes, int startNodeId, int endNodeId) {
 
     // --- NUEVO: Dibuja TODAS las aristas del grafo (solo si estamos en modo gráfico y con pocos nodos) ---
     // (Asegúrate de que 'graphicalMode' sea accesible o pasa como parámetro si es necesario)
@@ -436,7 +436,8 @@ void DrawGraphElements(const Graph& graph, const std::list<int>& pathNodes, int 
     if (!pathNodes.empty()) {
         raylib::Vector2 prevPos;
         bool firstNode = true;
-        for (int nodeId : pathNodes) {
+        for (auto it = pathNodes.begin(); it != pathNodes.end(); ++it) {
+            int nodeId = *it;  // ✅ Esta línea es la que te faltaba
             if (nodeId >= 0 && nodeId < graph.getNumNodes()) {
                 const Node& currentPathNode = graph.getNode(nodeId);
                 raylib::Vector2 currentPos = currentPathNode.position;
@@ -451,6 +452,7 @@ void DrawGraphElements(const Graph& graph, const std::list<int>& pathNodes, int 
             }
         }
     }
+
 
     // --- Dibuja el nodo de inicio (si está seleccionado) ---
     // Esto se dibujará de nuevo para resaltarlo, encima de su dibujo como nodo normal.
@@ -526,7 +528,7 @@ void RunTerminalMode() {
             // Realizar la búsqueda A* y medir el tiempo
             std::cout << "Buscando ruta de " << sNode << " a " << eNode << "..." << std::endl;
             auto startTime = std::chrono::high_resolution_clock::now();
-            std::list<int> terminalPath = myPathfinding->findPath(sNode, eNode);
+            SimpleList<int> terminalPath = myPathfinding->findPath(sNode, eNode);
             auto endTime = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double> elapsed = endTime - startTime;
 
@@ -578,7 +580,7 @@ int GetValidNodeIdFromUser(const std::string& prompt, int maxId) {
 
 
 // Imprime la ruta al terminal
-void PrintPathToTerminal(const std::list<int>& p) {
+void PrintPathToTerminal(const SimpleList<int>& p) {
     if (!p.empty()) {
         std::cout << "Ruta encontrada: ";
         bool first = true;

@@ -2,8 +2,6 @@
 #include "MyVector.h"
 #include "Node.h"
 #include "Obstacle.h" 
-#include <vector>
-#include <list>
 #include <utility>
 #include "raylib.h" 
 

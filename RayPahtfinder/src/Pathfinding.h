@@ -1,10 +1,9 @@
 #pragma once
 
+#include "Estructuras_datos/vector.h"
+#include "Estructuras_datos/list.h" 
 #include "Node.h"
 #include "Graph.h" 
-#include <vector>
-#include <list>
-#include <queue>
 #include <utility>
 
 
@@ -14,20 +13,20 @@ public:
     Pathfinding(const Graph& g);
 
     
-    std::list<int> findPath(int startNodeId, int endNodeId);
+    SimpleList<int> findPath(int startNodeId, int endNodeId);
 
 private:
     const Graph& graph; 
 
     // Vectores para almacenar los costos g, f, y los predecesores
-    std::vector<float> gScore;
-    std::vector<float> fScore;
-    std::vector<int> cameFrom; // Almacena el ID del nodo precedente en el camino óptimo
-    std::vector<bool> closedSet; // Para saber si un nodo ya ha sido evaluado
+    Vector<float> gScore;
+    Vector<float> fScore;
+    Vector<int> cameFrom; // Almacena el ID del nodo precedente en el camino óptimo
+    Vector<bool> closedSet; // Para saber si un nodo ya ha sido evaluado
 
     // Función heurística (distancia euclidiana)
     float calculateHeuristic(int nodeId1, int nodeId2) const;
 
     
-    std::list<int> reconstructPath(int currentId) const; 
+    SimpleList<int> reconstructPath(int currentId) const;
 };

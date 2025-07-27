@@ -1,15 +1,20 @@
 #include "Pathfinding.h"
 #include <algorithm>        
-#include <limits>       
+#include <limits>
+#include "Estructuras_datos/queue.h"
+
+#include "Estructuras_datos/vector.h"      
 
 // Constructor del Pathfinding, recibe una referencia constante al grafo
 Pathfinding::Pathfinding(const Graph& g) : graph(g) {
-    
-    gScore.resize(graph.getNumNodes(), std::numeric_limits<float>::infinity());
-    fScore.resize(graph.getNumNodes(), std::numeric_limits<float>::infinity());
-    cameFrom.resize(graph.getNumNodes(), -1); // -1 indica sin padre
-    closedSet.resize(graph.getNumNodes(), false);
+    int n = g.getNumNodes();
+    gScore.ren_tam(n, std::numeric_limits<float>::infinity());
+    fScore.ren_tam(n, std::numeric_limits<float>::infinity());
+    cameFrom.ren_tam(n, -1);
+    closedSet.ren_tam(n, false);
 }
+
+
 
 // Calcula la distancia euclidiana entre dos nodos (heurística)
 float Pathfinding::calculateHeuristic(int nodeId1, int nodeId2) const {
@@ -29,21 +34,23 @@ bool CheckLineRectangleCollisionCustom(raylib::Vector2 p1, raylib::Vector2 p2, r
     return false;
 }
 // Implementación del algoritmo A*
-std::list<int> Pathfinding::findPath(int startNodeId, int endNodeId) {
+SimpleList<int> Pathfinding::findPath(int startNodeId, int endNodeId) {
     // Validar IDs de nodos
-    if (startNodeId < 0 || startNodeId >= graph.getNumNodes() ||
-        endNodeId < 0 || endNodeId >= graph.getNumNodes()) {
+    if (startNodeId < 0 || startNodeId >= gScore.n_tam() ||
+        endNodeId < 0 || endNodeId >= gScore.n_tam()) {
        
         return {}; 
     }
 
     // Reiniciar estructuras para una nueva búsqueda
-    std::fill(gScore.begin(), gScore.end(), std::numeric_limits<float>::infinity());
-    std::fill(fScore.begin(), fScore.end(), std::numeric_limits<float>::infinity());
-    std::fill(cameFrom.begin(), cameFrom.end(), -1);
-    std::fill(closedSet.begin(), closedSet.end(), false);
+    gScore.ren_tam(gScore.n_tam(), std::numeric_limits<float>::infinity());
+    fScore.ren_tam(gScore.n_tam(), std::numeric_limits<float>::infinity());
+    cameFrom.ren_tam(gScore.n_tam(), -1);
+    closedSet.ren_tam(gScore.n_tam(), false);
 
-    std::priority_queue<std::pair<float, int>, std::vector<std::pair<float, int>>, std::greater<std::pair<float, int>>> openSet; //crear cola de prioridad 
+
+    PriorityQueue<std::pair<float, int>> openSet;
+
 
     gScore[startNodeId] = 0;
     fScore[startNodeId] = calculateHeuristic(startNodeId, endNodeId);
@@ -100,15 +107,27 @@ std::list<int> Pathfinding::findPath(int startNodeId, int endNodeId) {
         }
     }
 
-    return {}; //no encontrado
+    return SimpleList<int>(); //no encontrado
 }
 
 //reconstruccion del camino
-std::list<int> Pathfinding::reconstructPath(int currentId) const {
-    std::list<int> totalPath;
+SimpleList<int> Pathfinding::reconstructPath(int currentId) const {
+    // Usamos tu Vector en lugar de std::vector
+    Vector<int> temp;        // Empieza vacío
     while (currentId != -1) {
-        totalPath.push_front(currentId);
+        // Aumentar tamaño de temp en 1 y añadir el valor
+        int oldSize = temp.n_tam();
+        temp.ren_tam(oldSize + 1, 0);
+        temp[oldSize] = currentId;
+
         currentId = cameFrom[currentId];
     }
+
+    // Convertimos en orden inverso para usar push_back
+    SimpleList<int> totalPath;
+    for (int i = temp.n_tam() - 1; i >= 0; --i) {
+        totalPath.push_back(temp[i]);
+    }
+
     return totalPath;
 }
