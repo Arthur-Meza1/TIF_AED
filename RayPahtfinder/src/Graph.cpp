@@ -1,6 +1,6 @@
 #include "Graph.h"
 #include "Estructuras_datos/MyVector.h"
-
+#include "Estructuras_datos/pair.h"
 #include <string>
 #include <iostream>  
 #include <algorithm> 
@@ -58,10 +58,10 @@ const Node& Graph::getNode(int id) const {
 }
 
 // Obtiene la lista de nodos adyacentes a un nodo dado
-const MyVector<std::pair<int, float>>& Graph::getAdjacentNodes(int id) const {
+const MyVector<Pair<int, float>>& Graph::getAdjacentNodes(int id) const {
     if (!isValidNodeId(id)) {
         // std::cerr << "Error: ID de nodo invalido al obtener adyacentes: " << id << std::endl;
-        static const MyVector<std::pair<int, float>> emptyList; // Lista vacía para IDs inválidos
+        static const MyVector<Pair<int, float>> emptyList; // Lista vacía para IDs inválidos
         return emptyList;
     }
     return adjacencyList[id];
@@ -147,8 +147,17 @@ void Graph::generateRandomObstacles(int count, int maxWidth, int maxHeight) {
 
     std::cout << "Generando " << count << " obstaculos aleatorios..." << std::endl;
     // Nombres predefinidos para los obstáculos aleatorios
-    MyVector<std::string> obstacleNames = {"Rio", "Pared", "Lago", "Montana", "Barranco", "Zona Prohibida", "Bosque Denso"};
-    MyVector<Color> obstacleColors = {BLUE, DARKGREEN, BROWN, GRAY, MAROON, VIOLET, LIME}; // Colores de Raylib C
+    static const std::string obstacleNames_array[] = {
+    "Rio", "Pared", "Lago", "Montana", "Barranco", "Zona Prohibida", "Bosque Denso"
+    };
+    MyVector<std::string> obstacleNames(my_initializer_list<std::string>(
+        obstacleNames_array, sizeof(obstacleNames_array) / sizeof(std::string)));
+
+    static const Color obstacleColors_array[] = {
+        BLUE, DARKGREEN, BROWN, GRAY, MAROON, VIOLET, LIME
+    };
+    MyVector<Color> obstacleColors(my_initializer_list<Color>(
+        obstacleColors_array, sizeof(obstacleColors_array) / sizeof(Color)));
 
     for (int i = 0; i < count; ++i) {
         int minSize = 30;

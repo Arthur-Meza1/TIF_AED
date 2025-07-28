@@ -1,11 +1,13 @@
 #ifndef MY_VECTOR_H
 #define MY_VECTOR_H
 
-#include <initializer_list>
+#include "initializer_list.h"
 #include <cstddef>
 #include <algorithm>
 #include <stdexcept>
 #include <utility>
+#include <limits>
+
 
 template <typename T>
 class MyVector {
@@ -28,10 +30,12 @@ private:
         cap = new_capacity;
     }
 
+
+
 public:
     MyVector() : data(nullptr), sz(0), cap(0) {}
 
-    MyVector(std::initializer_list<T> init) : data(nullptr), sz(0), cap(0) {
+    MyVector(my_initializer_list<T> init) : data(nullptr), sz(0), cap(0) {
         reallocate(init.size());
         sz = init.size();
         size_t i = 0;
@@ -39,6 +43,20 @@ public:
             data[i++] = val;
         }
     }
+
+    void resize(size_t n, const T& value) {
+        if (n > cap) {
+            reallocate(n);
+        }
+        if (n > sz) {
+            for (size_t i = sz; i < n; ++i) {
+                data[i] = value;
+            }
+        }
+        sz = n;
+    }
+
+
 
     ~MyVector() {
         delete[] data;
@@ -157,18 +175,12 @@ public:
         if (cap > sz) reallocate(sz);
     }
 
-    void resize(size_t new_size, const T& value) {
-    if (new_size < sz) {
-        sz = new_size;
-    } else {
-        reserve(new_size);
-        for (size_t i = sz; i < new_size; ++i)
-            data[i] = value;
-        sz = new_size;
-    }
-}
     void resize(size_t new_size) {
-    resize(new_size, T{});
+        if (new_size > cap) reallocate(new_size);
+        for (size_t i = sz; i < new_size; ++i) {
+            data[i] = T();
+        }
+        sz = new_size;
     }
 
     void erase(size_t index) {

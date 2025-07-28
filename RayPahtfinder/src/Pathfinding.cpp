@@ -3,6 +3,7 @@
 #include <limits>
 #include "Estructuras_datos/queue.h"
 #include "Estructuras_datos/MyVector.h"      
+#include "Estructuras_datos/pair.h"      
 
 // Constructor del Pathfinding, recibe una referencia constante al grafo
 Pathfinding::Pathfinding(const Graph& g) : graph(g) {
