@@ -4,6 +4,7 @@
 #include "Obstacle.h" 
 #include <utility>
 #include "raylib.h" 
+#include "Estructuras_datos/pair.h"
 
 // Clase que representa el grafo
 class Graph {
@@ -12,7 +13,7 @@ public:
     void addNode(int id, float x, float y);
     bool addEdge(int sourceId, int targetId, float weight);
     const Node& getNode(int id) const;
-    const MyVector<std::pair<int, float>>& getAdjacentNodes(int id) const;
+    const MyVector<Pair<int, float>>& getAdjacentNodes(int id) const;
     int getNumNodes() const;
     int findNodeAtPosition(const raylib::Vector2& clickPos, float radius) const;
     void generateRandomNodes(int count, int maxWidth, int maxHeight, int maxEdgesPerNode, float maxConnectionDistance);
@@ -30,7 +31,7 @@ public:
 
 private:
     MyVector<Node> nodes;
-    MyVector<MyVector<std::pair<int, float>>> adjacencyList;
+    MyVector<MyVector<Pair<int, float>>> adjacencyList;
     bool isValidNodeId(int id) const;
     MyVector<Obstacle> obstacles;
 };

@@ -1,7 +1,7 @@
 #ifndef MY_VECTOR_H
 #define MY_VECTOR_H
 
-#include <initializer_list>
+#include "Estructuras_datos/initializer_list.h"
 #include <cstddef>
 #include <algorithm>
 #include <stdexcept>
@@ -31,7 +31,7 @@ private:
 public:
     MyVector() : data(nullptr), sz(0), cap(0) {}
 
-    MyVector(std::initializer_list<T> init) : data(nullptr), sz(0), cap(0) {
+    MyVector(my_initializer_list<T> init) : data(nullptr), sz(0), cap(0) {
         reallocate(init.size());
         sz = init.size();
         size_t i = 0;
@@ -39,6 +39,7 @@ public:
             data[i++] = val;
         }
     }
+
 
     ~MyVector() {
         delete[] data;

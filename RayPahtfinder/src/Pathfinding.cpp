@@ -2,7 +2,7 @@
 #include <algorithm>        
 #include <limits>
 #include "Estructuras_datos/queue.h"
-
+#include "Estructuras_datos/pair.h"
 #include "Estructuras_datos/vector.h"      
 
 // Constructor del Pathfinding, recibe una referencia constante al grafo
@@ -49,7 +49,7 @@ SimpleList<int> Pathfinding::findPath(int startNodeId, int endNodeId) {
     closedSet.ren_tam(gScore.n_tam(), false);
 
 
-    PriorityQueue<std::pair<float, int>> openSet;
+    PriorityQueue<Pair<float, int>> openSet;
 
 
     gScore[startNodeId] = 0;
