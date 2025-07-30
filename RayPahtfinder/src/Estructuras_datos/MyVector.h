@@ -16,19 +16,25 @@ private:
     size_t sz;
     size_t cap;
 
-    void reallocate(size_t new_capacity) {
-        if (new_capacity <= cap && new_capacity >= sz) return;
+   void reallocate(size_t new_capacity) {
+    if (new_capacity <= cap && new_capacity >= sz)
+        return;
 
-        T* new_data = new_capacity > 0 ? new T[new_capacity] : nullptr;
+    if (new_capacity == 0)
+        new_capacity = 1;
 
-        for (size_t i = 0; i < sz; ++i) {
-            new_data[i] = std::move(data[i]);
-        }
+    T* new_data = new T[new_capacity];
 
-        delete[] data;
-        data = new_data;
-        cap = new_capacity;
+    for (size_t i = 0; i < sz; ++i) {
+        new_data[i] = std::move(data[i]);
     }
+
+    delete[] data;
+    data = new_data;
+    cap = new_capacity;
+}
+
+
 
 
 
@@ -36,6 +42,7 @@ public:
     MyVector() : data(nullptr), sz(0), cap(0) {}
 
     MyVector(my_initializer_list<T> init) : data(nullptr), sz(0), cap(0) {
+    if (init.size() > 0) {
         reallocate(init.size());
         sz = init.size();
         size_t i = 0;
@@ -43,18 +50,23 @@ public:
             data[i++] = val;
         }
     }
+}
 
     void resize(size_t n, const T& value) {
-        if (n > cap) {
-            reallocate(n);
+    if (n > cap)
+        reallocate(n);
+
+    if (!data)
+        throw std::runtime_error("resize(): data is nullptr after reallocate");
+
+    if (n > sz) {
+        for (size_t i = sz; i < n; ++i) {
+            data[i] = value;
         }
-        if (n > sz) {
-            for (size_t i = sz; i < n; ++i) {
-                data[i] = value;
-            }
-        }
-        sz = n;
     }
+    sz = n;
+}
+
 
 
 
@@ -104,10 +116,11 @@ public:
         return *this;
     }
 
-    void push_back(const T& value) {
+   void push_back(const T& value) {
         if (sz == cap) reallocate(cap == 0 ? 1 : cap * 2);
         data[sz++] = value;
-    }
+    }       
+
 
     void push_back(T&& value) {
         if (sz == cap) reallocate(cap == 0 ? 1 : cap * 2);
@@ -176,12 +189,18 @@ public:
     }
 
     void resize(size_t new_size) {
-        if (new_size > cap) reallocate(new_size);
-        for (size_t i = sz; i < new_size; ++i) {
-            data[i] = T();
-        }
-        sz = new_size;
+    if (new_size > cap)
+        reallocate(new_size);
+
+    if (!data)
+        throw std::runtime_error("resize(): data is nullptr after reallocate");
+
+    for (size_t i = sz; i < new_size; ++i) {
+        data[i] = T();
     }
+    sz = new_size;
+}
+
 
     void erase(size_t index) {
         if (index >= sz) throw std::out_of_range("erase() index out of range");

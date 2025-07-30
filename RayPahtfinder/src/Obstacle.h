@@ -9,10 +9,8 @@ struct Obstacle {
     std::string name;    
     Color color;         
 
-    
     Obstacle() : rect({0, 0, 0, 0}), name(""), color(DARKBLUE) {}
 
-    
     Obstacle(Rectangle r, const std::string& n, Color c = DARKBLUE)
         : rect(r), name(n), color(c) {}
 };

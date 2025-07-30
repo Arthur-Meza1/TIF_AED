@@ -3,7 +3,7 @@
 #include "Graph.h"
 #include "Node.h"
 #include "Pathfinding.h"
-#include "Obstacle.h"     
+#include "Obstacle.h"    
 #include <iostream>
 #include <string>
 #include <limits>         
@@ -26,10 +26,9 @@ int startNodeId = -1;
 int endNodeId = -1;
 SimpleList<int> path; 
 
-raylib::Camera2D camera; // Declarar y luego inicializar en InitializeApplication
+raylib::Camera2D camera;
 
-bool graphicalMode = true;     // Controla si la aplicación se ejecuta en modo gráfico o terminal
-
+bool graphicalMode = true;
 // --- Variables Globales Adicionales para Modo Gráfico (Edición de Obstáculos) ---
 bool editingObstacles = false; 
 raylib::Vector2 startDragPos;  

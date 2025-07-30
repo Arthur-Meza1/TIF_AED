@@ -6,8 +6,8 @@
 #include <algorithm> 
 #include <limits>    
 
-Graph::Graph() {
-    // Constructor: Inicializa las listas vacías
+Graph::Graph() : gridCols (0), gridRows(0) {
+
 }
 
 // Añade un nodo al grafo. Asume que los IDs se añadirán secuencialmente.
@@ -34,24 +34,29 @@ bool Graph::addEdge(int sourceId, int targetId, float weight) {
             return false;
         }
     }
+
+    for(size_t i = 0; i < adjacencyList[sourceId].size(); ++i){ 
+        if(adjacencyList[sourceId][i].first == targetId){
+            return false; // La arista ya existe, no se añade de nuevo
+        }
+    }
+
     // Añadir la arista de source a target
-    adjacencyList[sourceId].push_back({targetId, weight});
-    adjacencyList[targetId].push_back({sourceId, weight});
+    adjacencyList[sourceId].push_back(Pair<int, float>(targetId, weight)); 
+
+    adjacencyList[targetId].push_back(Pair<int, float>(sourceId, weight)); 
     
 
     return true;
 }
 
+
 // Obtiene una referencia constante a un nodo por su ID
 const Node& Graph::getNode(int id) const {
     if (!isValidNodeId(id)) {
-        // Esto podría lanzar una excepción o retornar un nodo "nulo"
-        // Para simplicidad, se asume que siempre se pedirá un ID válido después de isValidNodeId
-        // o que el caller maneja el caso.
-        // Podrías lanzar: throw std::out_of_range("Node ID out of range");
         std::cerr << "Error: Acceso a nodo con ID fuera de rango: " << id << std::endl;
         // Retornar un nodo por defecto para evitar un crash inmediato, pero es un error lógico.
-        static Node defaultNode(-1, -1.0f, -1.0f); // Nodo estático por defecto
+        static Node defaultNode(-1, -1.0f, -1.0f); 
         return defaultNode;
     }
     return nodes[id];
@@ -81,7 +86,7 @@ int Graph::findNodeAtPosition(const raylib::Vector2& clickPos, float radius) con
             return node.id;
         }
     }
-    return -1; // No se encontró ningún nodo en la posición
+    return -1; 
 }
 
 // Verifica si un ID de nodo es válido
@@ -89,11 +94,20 @@ bool Graph::isValidNodeId(int id) const {
     return id >= 0 && id < nodes.size();
 }
 
-// Genera un grafo aleatorio con nodos y conexiones
+//-------implementacion optimizada usando cuadricula espacial--------- 
 void Graph::generateRandomNodes(int count, int maxWidth, int maxHeight, int maxEdgesPerNode, float maxConnectionDistance) {
-    clear(); // Limpia cualquier grafo existente
-    nodes.reserve(count); // Reserva espacio para los nodos
-    adjacencyList.resize(count); // Redimensiona la lista de adyacencia
+    clear(); 
+    nodes.reserve(count);
+    adjacencyList.resize(count); 
+
+    gridCols = maxWidth / CellSize +1; 
+    gridRows = maxHeight / CellSize +1;
+    
+    
+    spatialGrid.resize(gridRows);
+    for(int r = 0; r <gridCols; ++r){
+        spatialGrid[r].resize(gridRows);
+    }
 
     // 1. Generar Nodos con posiciones aleatorias
     for (int i = 0; i < count; ++i) {
@@ -102,43 +116,50 @@ void Graph::generateRandomNodes(int count, int maxWidth, int maxHeight, int maxE
         float y = (float)GetRandomValue(0, maxHeight);
 
         nodes.emplace_back(i,x,y);
+
+        int cellX= getCellX(x);
+        int cellY= getCellY(y);
+        if(isValidGridCell(cellX, cellY))
+            spatialGrid[cellY][cellX].push_back(i);
     }
 
     // 2. Conectar Nodos
-    // Una estrategia simple: Conectar cada nodo a algunos vecinos aleatorios dentro de un radio.
-    for (int i = 0; i < count; ++i) {
-        raylib::Vector2 p1 = nodes[i].position;
-        int connectionsMade = 0;
+        for (int i = 0; i < count; ++i) {
+        const Node& currentNode = nodes[i];
+        int currentCellX = getCellX(currentNode.position.x);
+        int currentCellY = getCellY(currentNode.position.y);
 
-        // Intentar conectar con otros nodos
-        for (int j = 0; j < count && connectionsMade < maxEdgesPerNode; ++j) {
-            if (i == j) continue; // No conectar a sí mismo
+        int edgesConnected = 0;
 
-            raylib::Vector2 p2 = nodes[j].position;
-            float distance = p1.Distance(p2); // Distancia euclidiana
+        // Iterar sobre la celda actual y sus 8 celdas vecinas (un cuadrado de 3x3)
+        for (int dy = -1; dy <= 1; ++dy) { 
+            for (int dx = -1; dx <= 1; ++dx) { 
+                int neighborCellX = currentCellX + dx;
+                int neighborCellY = currentCellY + dy;
 
-            if (distance < maxConnectionDistance) { // Conectar solo si están lo suficientemente cerca
-                if (addEdge(i, j, distance)) { // addEdge ya maneja duplicados
-                    connectionsMade++;
+                if (isValidGridCell(neighborCellX, neighborCellY)) {
+                    const MyVector<int>& nodesInNeighborCell = spatialGrid[neighborCellY][neighborCellX];
+                    for (size_t k = 0; k < nodesInNeighborCell.size(); ++k) {
+                        int neighborNodeId = nodesInNeighborCell[k];
+                        
+                        if (i == neighborNodeId || edgesConnected >= maxEdgesPerNode) {
+                            continue; 
+                        }
+
+                        const Node& neighborNode = nodes[neighborNodeId];
+                        float dist = currentNode.position.Distance(neighborNode.position);
+
+                        if (dist <= maxConnectionDistance) {
+                            if (addEdge(i, neighborNodeId, dist)) { 
+                                edgesConnected++;
+                            }
+                        }
+                    }
                 }
-            }
-        }
-        // Si no se hicieron suficientes conexiones cercanas, intentar con nodos aleatorios
-        while (connectionsMade < maxEdgesPerNode) {
-            int targetNodeId = GetRandomValue(0, count - 1);
-            if (targetNodeId == i) continue;
-
-            raylib::Vector2 p2 = nodes[targetNodeId].position;
-            float distance = p1.Distance(p2);
-            if (addEdge(i, targetNodeId, distance)) {
-                connectionsMade++;
             }
         }
     }
     std::cout << "Grafo generado y conectado con " << nodes.size() << " nodos." << std::endl;
-
-
-
 }
 // --- FUNCIONES PARA OBSTÁCULOS (ahora usando Obstacle struct) ---
 void Graph::generateRandomObstacles(int count, int maxWidth, int maxHeight) {
@@ -195,4 +216,42 @@ void Graph::removeObstacle(int index) {
 void Graph::clear() {
     nodes.clear();
     adjacencyList.clear();
+    
+    
+        for (int r = 0; r < gridRows; ++r) {
+        for (int c = 0; c < gridCols; ++c) {
+            if (r < spatialGrid.size() && c < spatialGrid[r].size()) { 
+                 spatialGrid[r][c].clear(); 
+            }
+        }
+    }
+    spatialGrid.clear(); 
+    gridCols = 0;
+    gridRows = 0;
 }
+size_t Graph::getEstimatedMemoryUsage() const {
+    size_t total_memory = 0;
+
+    total_memory += nodes.capacity() * sizeof(Node);
+
+    total_memory += adjacencyList.capacity() * sizeof(MyVector<Pair<int, float>>);
+    for (size_t i = 0; i < adjacencyList.size(); ++i) {
+        total_memory += adjacencyList[i].capacity() * sizeof(Pair<int, float>);
+    }
+
+    total_memory += obstacles.capacity() * sizeof(Obstacle);
+
+    total_memory += spatialGrid.capacity() * sizeof(MyVector<MyVector<int>>);
+    for (size_t r = 0; r < spatialGrid.size(); ++r) {
+        total_memory += spatialGrid[r].capacity() * sizeof(MyVector<int>);
+        for (size_t c = 0; c < spatialGrid[r].size(); ++c) {
+            total_memory += spatialGrid[r][c].capacity() * sizeof(int);
+        }
+    }
+
+    return total_memory; 
+}
+
+Graph::~Graph() {}
+
+

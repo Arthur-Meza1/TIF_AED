@@ -1,9 +1,11 @@
 #include "Pathfinding.h"
-#include <algorithm>        
-#include <limits>
+#include "Utils.h"
 #include "Estructuras_datos/queue.h"
 #include "Estructuras_datos/MyVector.h"      
-#include "Estructuras_datos/pair.h"      
+#include "Estructuras_datos/pair.h"    
+#include <algorithm>        
+#include <limits>
+  
 
 // Constructor del Pathfinding, recibe una referencia constante al grafo
 Pathfinding::Pathfinding(const Graph& g) : graph(g) {
@@ -14,24 +16,11 @@ Pathfinding::Pathfinding(const Graph& g) : graph(g) {
     closedSet.resize(n, false);
 }
 
-
-
 // Calcula la distancia euclidiana entre dos nodos (heurística)
 float Pathfinding::calculateHeuristic(int nodeId1, int nodeId2) const {
     const Node& n1 = graph.getNode(nodeId1);
     const Node& n2 = graph.getNode(nodeId2);
     return Vector2Distance(n1.position, n2.position);
-}
-bool CheckLineRectangleCollisionCustom(raylib::Vector2 p1, raylib::Vector2 p2, raylib::Rectangle rec) {
-    if (CheckCollisionPointRec(p1, rec) || CheckCollisionPointRec(p2, rec)) {
-        return true;
-    }
-    if (CheckCollisionLines(p1, p2, {rec.x, rec.y}, {rec.x + rec.width, rec.y}, nullptr)) return true;
-    if (CheckCollisionLines(p1, p2, {rec.x, rec.y + rec.height}, {rec.x + rec.width, rec.y + rec.height}, nullptr)) return true;
-    if (CheckCollisionLines(p1, p2, {rec.x, rec.y}, {rec.x, rec.y + rec.height}, nullptr)) return true;
-    if (CheckCollisionLines(p1, p2, {rec.x + rec.width, rec.y}, {rec.x + rec.width, rec.y + rec.height}, nullptr)) return true;
-
-    return false;
 }
 // Implementación del algoritmo A*
 SimpleList<int> Pathfinding::findPath(int startNodeId, int endNodeId) {
@@ -49,7 +38,7 @@ SimpleList<int> Pathfinding::findPath(int startNodeId, int endNodeId) {
     closedSet.resize(gScore.size(), false);
 
 
-    PriorityQueue<std::pair<float, int>> openSet;
+    PriorityQueue<Pair<float, int>> openSet;
 
 
     gScore[startNodeId] = 0;
@@ -87,9 +76,9 @@ SimpleList<int> Pathfinding::findPath(int startNodeId, int endNodeId) {
             const raylib::Vector2 neighborPos = graph.getNode(neighborId).position;
             bool isBlocked = false;
             for (const auto& obstacle : graph.getObstacles()) {
-                if (CheckLineRectangleCollisionCustom(currentPos, neighborPos, obstacle.rect)) {
+                if (Utils::CheckLineRectangleCollision(currentPos, neighborPos, obstacle.rect)) {
                     isBlocked = true;
-                     break;
+                    break;
                 }
             }
             if (isBlocked) {
@@ -107,15 +96,14 @@ SimpleList<int> Pathfinding::findPath(int startNodeId, int endNodeId) {
         }
     }
 
-    return SimpleList<int>(); //no encontrado
+    return SimpleList<int>(); 
 }
 
 //reconstruccion del camino
 SimpleList<int> Pathfinding::reconstructPath(int currentId) const {
     // Usamos tu Vector en lugar de std::vector
-    MyVector<int> temp;        // Empieza vacío
+    MyVector<int> temp;        
     while (currentId != -1) {
-        // Aumentar tamaño de temp en 1 y añadir el valor
         int oldSize = temp.size();
         temp.resize(oldSize + 1, 0);
         temp[oldSize] = currentId;
