@@ -3,7 +3,8 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /usr/include/stdc-predef.h \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Pathfinding.h \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Estructuras_datos/MyVector.h \
- /usr/include/c++/15.1.1/initializer_list \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Estructuras_datos/initializer_list.h \
+ /usr/include/c++/15.1.1/cstddef \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++config.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -12,7 +13,6 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/cpu_defines.h \
  /usr/include/c++/15.1.1/pstl/pstl_config.h \
- /usr/include/c++/15.1.1/cstddef \
  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stddef.h \
  /usr/include/c++/15.1.1/bits/version.h /usr/include/c++/15.1.1/algorithm \
  /usr/include/c++/15.1.1/bits/stl_algobase.h \
@@ -40,6 +40,7 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /usr/include/c++/15.1.1/bits/predefined_ops.h \
  /usr/include/c++/15.1.1/bit /usr/include/c++/15.1.1/bits/stl_algo.h \
  /usr/include/c++/15.1.1/bits/algorithmfwd.h \
+ /usr/include/c++/15.1.1/initializer_list \
  /usr/include/c++/15.1.1/bits/stl_heap.h \
  /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
  /usr/include/c++/15.1.1/bits/stl_tempbuf.h \
@@ -127,8 +128,65 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /usr/include/c++/15.1.1/bits/uses_allocator.h \
  /usr/include/c++/15.1.1/bits/uses_allocator_args.h \
  /usr/include/c++/15.1.1/tuple /usr/include/c++/15.1.1/utility \
- /usr/include/c++/15.1.1/bits/stl_relops.h \
+ /usr/include/c++/15.1.1/bits/stl_relops.h /usr/include/c++/15.1.1/limits \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Estructuras_datos/list.h \
+ /usr/include/c++/15.1.1/iostream /usr/include/c++/15.1.1/ostream \
+ /usr/include/c++/15.1.1/bits/ostream.h /usr/include/c++/15.1.1/ios \
+ /usr/include/c++/15.1.1/bits/ios_base.h \
+ /usr/include/c++/15.1.1/ext/atomicity.h \
+ /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/gthr.h \
+ /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/gthr-default.h \
+ /usr/include/pthread.h /usr/include/sched.h /usr/include/bits/sched.h \
+ /usr/include/linux/sched/types.h /usr/include/linux/types.h \
+ /usr/include/asm/types.h /usr/include/asm-generic/types.h \
+ /usr/include/asm-generic/int-ll64.h /usr/include/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h /usr/include/asm/posix_types.h \
+ /usr/include/asm/posix_types_64.h /usr/include/asm-generic/posix_types.h \
+ /usr/include/bits/types/struct_sched_param.h /usr/include/bits/cpu-set.h \
+ /usr/include/time.h /usr/include/bits/time.h /usr/include/bits/timex.h \
+ /usr/include/bits/types/struct_tm.h \
+ /usr/include/bits/types/struct_itimerspec.h /usr/include/bits/setjmp.h \
+ /usr/include/bits/types/struct___jmp_buf_tag.h \
+ /usr/include/bits/pthread_stack_min-dynamic.h \
+ /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/atomic_word.h \
+ /usr/include/sys/single_threaded.h \
+ /usr/include/c++/15.1.1/bits/locale_classes.h \
+ /usr/include/c++/15.1.1/bits/locale_classes.tcc \
+ /usr/include/c++/15.1.1/system_error \
+ /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/error_constants.h \
+ /usr/include/c++/15.1.1/streambuf \
+ /usr/include/c++/15.1.1/bits/streambuf.tcc \
+ /usr/include/c++/15.1.1/bits/basic_ios.h \
+ /usr/include/c++/15.1.1/bits/locale_facets.h \
+ /usr/include/c++/15.1.1/cwctype /usr/include/wctype.h \
+ /usr/include/bits/wctype-wchar.h \
+ /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/ctype_base.h \
+ /usr/include/c++/15.1.1/bits/streambuf_iterator.h \
+ /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/ctype_inline.h \
+ /usr/include/c++/15.1.1/bits/locale_facets.tcc \
+ /usr/include/c++/15.1.1/bits/basic_ios.tcc \
+ /usr/include/c++/15.1.1/format /usr/include/c++/15.1.1/array \
+ /usr/include/c++/15.1.1/charconv /usr/include/c++/15.1.1/locale \
+ /usr/include/c++/15.1.1/bits/locale_facets_nonio.h \
+ /usr/include/c++/15.1.1/ctime \
+ /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/time_members.h \
+ /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/15.1.1/bits/codecvt.h \
+ /usr/include/c++/15.1.1/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/15.1.1/bits/locale_conv.h /usr/include/c++/15.1.1/span \
+ /usr/include/c++/15.1.1/bits/monostate.h \
+ /usr/include/c++/15.1.1/bits/formatfwd.h \
+ /usr/include/c++/15.1.1/bits/unicode.h /usr/include/c++/15.1.1/cstdint \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
+ /usr/include/bits/stdint-least.h \
+ /usr/include/c++/15.1.1/bits/unicode-data.h \
+ /usr/include/c++/15.1.1/bits/ostream.tcc /usr/include/c++/15.1.1/istream \
+ /usr/include/c++/15.1.1/bits/istream.tcc \
+ /usr/include/c++/15.1.1/iterator \
+ /usr/include/c++/15.1.1/bits/stream_iterator.h \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Estructuras_datos/SimpleMap.h \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Node.h \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/ventor/raylib-cpp/include/raylib-cpp.hpp \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/ventor/raylib-cpp/include/./AudioDevice.hpp \
@@ -149,7 +207,7 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /usr/include/bits/mathcalls-helper-functions.h \
  /usr/include/bits/mathcalls.h /usr/include/bits/mathcalls-narrow.h \
  /usr/include/bits/iscanonical.h /usr/include/c++/15.1.1/bits/specfun.h \
- /usr/include/c++/15.1.1/limits /usr/include/c++/15.1.1/tr1/gamma.tcc \
+ /usr/include/c++/15.1.1/tr1/gamma.tcc \
  /usr/include/c++/15.1.1/tr1/special_function_util.h \
  /usr/include/c++/15.1.1/tr1/bessel_function.tcc \
  /usr/include/c++/15.1.1/tr1/beta_function.tcc \
@@ -183,7 +241,6 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /usr/include/c++/15.1.1/bits/stl_vector.h \
  /usr/include/c++/15.1.1/bits/stl_bvector.h \
  /usr/include/c++/15.1.1/bits/vector.tcc \
- /usr/include/c++/15.1.1/bits/formatfwd.h \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/ventor/raylib-cpp/include/./././RaylibException.hpp \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/ventor/raylib-cpp/include/./././Vector2.hpp \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/ventor/raylib-cpp/include/./Functions.hpp \
@@ -227,5 +284,7 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/ventor/raylib-cpp/include/./Wave.hpp \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/ventor/raylib-cpp/include/./Window.hpp \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Graph.h \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Estructuras_datos/pair.h \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Obstacle.h \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Utils.h \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Estructuras_datos/queue.h

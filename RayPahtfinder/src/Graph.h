@@ -40,7 +40,7 @@ private:
     int gridCols;
     int gridRows;
 
-    static const int CellSize = 100; // ajustar valor si quieren
+    static const int CellSize = 200; // ajustar valor si quieren
 
     //Metodos axucialres de la cuadricula 
     int getCellX(float x) const { return static_cast<int>(x / CellSize); }

@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Estructuras_datos/MyVector.h"
-#include "Estructuras_datos/list.h" 
+#include "Estructuras_datos/list.h"
+#include "Estructuras_datos/SimpleMap.h" 
 #include "Node.h"
 #include "Graph.h" 
 #include <utility>
@@ -21,7 +22,7 @@ private:
     
     MyVector<float> gScore;
     MyVector<float> fScore;
-    MyVector<int> cameFrom; // Almacena el ID del nodo precedente en el camino óptimo
+    SimpleMap<int,int> cameFrom; // Almacena el ID del nodo precedente en el camino óptimo
     MyVector<bool> closedSet; // Para saber si un nodo ya ha sido evaluado
 
     // Función heurística (distancia euclidiana)

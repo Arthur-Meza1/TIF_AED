@@ -2,44 +2,40 @@
 #include "Utils.h"
 #include "Estructuras_datos/queue.h"
 #include "Estructuras_datos/MyVector.h"      
-#include "Estructuras_datos/pair.h"    
+#include "Estructuras_datos/pair.h"
+#include "Estructuras_datos/SimpleMap.h"     
 #include <algorithm>        
 #include <limits>
   
 
-// Constructor del Pathfinding, recibe una referencia constante al grafo
 Pathfinding::Pathfinding(const Graph& g) : graph(g) {
     int n = g.getNumNodes();
     gScore.resize(n, std::numeric_limits<float>::infinity());
     fScore.resize(n, std::numeric_limits<float>::infinity());
-    cameFrom.resize(n, -1);
     closedSet.resize(n, false);
 }
 
-// Calcula la distancia euclidiana entre dos nodos (heurística)
 float Pathfinding::calculateHeuristic(int nodeId1, int nodeId2) const {
     const Node& n1 = graph.getNode(nodeId1);
     const Node& n2 = graph.getNode(nodeId2);
     return Vector2Distance(n1.position, n2.position);
 }
-// Implementación del algoritmo A*
+
 SimpleList<int> Pathfinding::findPath(int startNodeId, int endNodeId) {
-    // Validar IDs de nodos
-    if (startNodeId < 0 || startNodeId >= gScore.size() ||
-        endNodeId < 0 || endNodeId >= gScore.size()) {
-       
+    int numNodes = graph.getNumNodes();
+
+    if (startNodeId < 0 || startNodeId >= numNodes ||
+        endNodeId < 0 || endNodeId >= numNodes) {
         return {}; 
     }
 
-    // Reiniciar estructuras para una nueva búsqueda
-    gScore.resize(gScore.size(), std::numeric_limits<float>::infinity());
-    fScore.resize(gScore.size(), std::numeric_limits<float>::infinity());
-    cameFrom.resize(gScore.size(), -1);
-    closedSet.resize(gScore.size(), false);
-
+    // Reiniciar estructuras internas
+    gScore = MyVector<float>(numNodes, std::numeric_limits<float>::infinity());
+    fScore = MyVector<float>(numNodes, std::numeric_limits<float>::infinity());
+    closedSet = MyVector<bool>(numNodes, false);
+    cameFrom.clear();  
 
     PriorityQueue<Pair<float, int>> openSet;
-
 
     gScore[startNodeId] = 0;
     fScore[startNodeId] = calculateHeuristic(startNodeId, endNodeId);
@@ -59,9 +55,7 @@ SimpleList<int> Pathfinding::findPath(int startNodeId, int endNodeId) {
 
         closedSet[currentId] = true;
 
-        
         const raylib::Vector2 currentPos = graph.getNode(currentId).position;
-
         const auto& neighbors = graph.getAdjacentNodes(currentId); 
 
         for (const auto& neighborPair : neighbors) {
@@ -72,7 +66,6 @@ SimpleList<int> Pathfinding::findPath(int startNodeId, int endNodeId) {
                 continue;
             }
 
-            //verificacion de obstaculos 
             const raylib::Vector2 neighborPos = graph.getNode(neighborId).position;
             bool isBlocked = false;
             for (const auto& obstacle : graph.getObstacles()) {
@@ -81,37 +74,38 @@ SimpleList<int> Pathfinding::findPath(int startNodeId, int endNodeId) {
                     break;
                 }
             }
-            if (isBlocked) {
-                continue;
-            }
-            // Resto de la lógica A*
+            if (isBlocked) continue;
+
             float tentative_gScore = gScore[currentId] + edgeCost;
 
             if (tentative_gScore < gScore[neighborId]) {
-                cameFrom[neighborId] = currentId;
+                cameFrom.set(neighborId, currentId); 
                 gScore[neighborId] = tentative_gScore;
-                fScore[neighborId] = gScore[neighborId] + calculateHeuristic(neighborId, endNodeId);
+                fScore[neighborId] = tentative_gScore + calculateHeuristic(neighborId, endNodeId);
                 openSet.push({fScore[neighborId], neighborId});
             }
         }
     }
 
-    return SimpleList<int>(); 
+    return {}; // Camino no encontrado
 }
 
-//reconstruccion del camino
-SimpleList<int> Pathfinding::reconstructPath(int currentId) const {
-    // Usamos tu Vector en lugar de std::vector
-    MyVector<int> temp;        
-    while (currentId != -1) {
-        int oldSize = temp.size();
-        temp.resize(oldSize + 1, 0);
-        temp[oldSize] = currentId;
 
-        currentId = cameFrom[currentId];
+SimpleList<int> Pathfinding::reconstructPath(int currentId) const {
+    if (!cameFrom.contains(currentId)) {
+        std::cout << "No se puede reconstruir el camino desde nodo " << currentId << ".\n";
+        return {};
     }
 
-    // Convertimos en orden inverso para usar push_back
+    MyVector<int> temp;
+    while (true) {
+        temp.push_back(currentId);
+        if (!cameFrom.contains(currentId)) break;
+        int prev = cameFrom.get(currentId);
+        if (prev == -1) break;
+        currentId = prev;
+    }
+
     SimpleList<int> totalPath;
     for (int i = temp.size() - 1; i >= 0; --i) {
         totalPath.push_back(temp[i]);

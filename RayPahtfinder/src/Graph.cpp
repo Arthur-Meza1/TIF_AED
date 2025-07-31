@@ -100,65 +100,67 @@ void Graph::generateRandomNodes(int count, int maxWidth, int maxHeight, int maxE
     nodes.reserve(count);
     adjacencyList.resize(count); 
 
-    gridCols = maxWidth / CellSize +1; 
-    gridRows = maxHeight / CellSize +1;
+    gridCols = maxWidth / CellSize + 1; 
+    gridRows = maxHeight / CellSize + 1;
     
-    
+    // Preparar la grilla
     spatialGrid.resize(gridRows);
-    for(int r = 0; r <gridCols; ++r){
-        spatialGrid[r].resize(gridRows);
+    for (int r = 0; r < gridRows; ++r) {
+        spatialGrid[r].resize(gridCols);
+        for (int c = 0; c < gridCols; ++c) {
+            spatialGrid[r][c].reserve(10); // Reservar para evitar muchas reasignaciones
+        }
     }
 
-    // 1. Generar Nodos con posiciones aleatorias
+    // 1. Generar nodos y distribuir en spatialGrid
     for (int i = 0; i < count; ++i) {
-        // Genera posiciones dentro de los límites de la pantalla/área definida
         float x = (float)GetRandomValue(0, maxWidth);
         float y = (float)GetRandomValue(0, maxHeight);
 
-        nodes.emplace_back(i,x,y);
+        nodes.emplace_back(i, x, y);
 
-        int cellX= getCellX(x);
-        int cellY= getCellY(y);
-        if(isValidGridCell(cellX, cellY))
+        int cellX = getCellX(x);
+        int cellY = getCellY(y);
+        if (isValidGridCell(cellX, cellY))
             spatialGrid[cellY][cellX].push_back(i);
     }
 
-    // 2. Conectar Nodos
-        for (int i = 0; i < count; ++i) {
+    // 2. Conectar nodos evitando duplicados y exceso de aristas
+    for (int i = 0; i < count; ++i) {
         const Node& currentNode = nodes[i];
         int currentCellX = getCellX(currentNode.position.x);
         int currentCellY = getCellY(currentNode.position.y);
 
         int edgesConnected = 0;
 
-        // Iterar sobre la celda actual y sus 8 celdas vecinas (un cuadrado de 3x3)
-        for (int dy = -1; dy <= 1; ++dy) { 
-            for (int dx = -1; dx <= 1; ++dx) { 
+        for (int dy = -1; dy <= 1 && edgesConnected < maxEdgesPerNode; ++dy) {
+            for (int dx = -1; dx <= 1 && edgesConnected < maxEdgesPerNode; ++dx) {
                 int neighborCellX = currentCellX + dx;
                 int neighborCellY = currentCellY + dy;
 
-                if (isValidGridCell(neighborCellX, neighborCellY)) {
-                    const MyVector<int>& nodesInNeighborCell = spatialGrid[neighborCellY][neighborCellX];
-                    for (size_t k = 0; k < nodesInNeighborCell.size(); ++k) {
-                        int neighborNodeId = nodesInNeighborCell[k];
-                        
-                        if (i == neighborNodeId || edgesConnected >= maxEdgesPerNode) {
-                            continue; 
-                        }
+                if (!isValidGridCell(neighborCellX, neighborCellY))
+                    continue;
 
-                        const Node& neighborNode = nodes[neighborNodeId];
-                        float dist = currentNode.position.Distance(neighborNode.position);
+                const MyVector<int>& neighborNodes = spatialGrid[neighborCellY][neighborCellX];
+                for (size_t k = 0; k < neighborNodes.size() && edgesConnected < maxEdgesPerNode; ++k) {
+                    int neighborId = neighborNodes[k];
 
-                        if (dist <= maxConnectionDistance) {
-                            if (addEdge(i, neighborNodeId, dist)) { 
-                                edgesConnected++;
-                            }
+                    // Evitar conexiones duplicadas
+                    if (neighborId <= i) continue;
+
+                    const Node& neighborNode = nodes[neighborId];
+                    float dist = currentNode.position.Distance(neighborNode.position);
+
+                    if (dist <= maxConnectionDistance) {
+                        if (addEdge(i, neighborId, dist)) {
+                            edgesConnected++;
                         }
                     }
                 }
             }
         }
     }
+
     std::cout << "Grafo generado y conectado con " << nodes.size() << " nodos." << std::endl;
 }
 // --- FUNCIONES PARA OBSTÁCULOS (ahora usando Obstacle struct) ---

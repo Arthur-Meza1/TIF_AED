@@ -69,10 +69,8 @@ int main() {
         std::cerr << "Error: Entrada invalida. Por favor, ingrese un numero entero positivo." << std::endl;
         return 1; // Salir con código de error
     }
-    // Limpiar el buffer de entrada para evitar problemas con futuras lecturas (e.g., '\n')
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    // 2. Inicializar la aplicación (configura Raylib, grafo, pathfinding)
     InitializeApplication(numNodes);
 
     // 3. Bucle principal basado en el modo de ejecución
@@ -187,9 +185,9 @@ void UpdateApplication(float deltaTime) {
 // Dibuja el estado actual de la aplicación (solo modo gráfico)
 void DrawApplication() {
     BeginDrawing(); // Iniciar el modo de dibujo de Raylib
-    ClearBackground(RAYWHITE); // Limpiar la pantalla con un color de fondo (usando macro C)
+    ClearBackground(RAYWHITE); 
 
-    BeginMode2D(camera); // Iniciar el modo 2D con nuestra cámara
+    BeginMode2D(camera); 
 
     // --- Dibuja los obstáculos PRIMERO para que no tapen la ruta ---
     for (const auto& obstacle : myGraph.getObstacles()) {
@@ -385,8 +383,7 @@ void HandleGraphicalInput() {
             }
         }
 
-        // Limpiar la selección de nodos y la ruta con la tecla 'C'
-        if (IsKeyPressed(KEY_C)) {
+        if (IsKeyPressed(KEY_C)) { //limpieza 
             startNodeId = -1;
             endNodeId = -1;
             path.clear();
@@ -394,81 +391,60 @@ void HandleGraphicalInput() {
     }
 }
 
-// Dibuja los elementos del grafo (solo camino, inicio, fin)
 // Esta función está separada de DrawApplication para mantener la modularidad
 void DrawGraphElements(const Graph& graph, const SimpleList<int>& pathNodes, int startNodeId, int endNodeId) {
-
-    // --- NUEVO: Dibuja TODAS las aristas del grafo (solo si estamos en modo gráfico y con pocos nodos) ---
-    // (Asegúrate de que 'graphicalMode' sea accesible o pasa como parámetro si es necesario)
-    // Para esta función, asumimos que estamos en modo gráfico si se llama desde DrawApplication
-    // Y que la cantidad de nodos es baja, según la lógica de 'InitializeApplication'.
-    if (graph.getNumNodes() <= GRAPHICAL_NODE_LIMIT) { // Opcional: una comprobación extra aquí para estar seguros
+    if (graph.getNumNodes() <= GRAPHICAL_NODE_LIMIT) {
+        // Dibujar todas las aristas
         for (int i = 0; i < graph.getNumNodes(); ++i) {
             const Node& currentNode = graph.getNode(i);
             for (const auto& edge : graph.getAdjacentNodes(i)) {
                 const Node& targetNode = graph.getNode(edge.first);
-                // Dibuja la línea que conecta los nodos
-                DrawLineV(currentNode.position, targetNode.position, GRAY); // Color gris para aristas generales
+                DrawLineV(currentNode.position, targetNode.position, GRAY);
             }
         }
-    }
 
-    // --- NUEVO: Dibuja TODOS los nodos del grafo (solo si estamos en modo gráfico y con pocos nodos) ---
-    if (graph.getNumNodes() <= GRAPHICAL_NODE_LIMIT) { // Opcional: una comprobación extra aquí para estar seguros
+        // Dibujar todos los nodos
         for (int i = 0; i < graph.getNumNodes(); ++i) {
             const Node& currentNode = graph.getNode(i);
-            // Dibuja un círculo para el nodo. Usa un color diferente si el nodo es el de inicio o fin.
-            Color nodeColor = BLUE; // Color por defecto para nodos
+            Color nodeColor = BLUE;
             if (i == startNodeId) nodeColor = GREEN;
             else if (i == endNodeId) nodeColor = RED;
 
-            // Dibuja el círculo del nodo
-            DrawCircleV(currentNode.position, 5, nodeColor); // Radio 5 para visibilidad
-            // Opcional: Dibuja el ID del nodo (puede saturar mucho si hay muchos)
-            // DrawText(TextFormat("%i", currentNode.id), (int)currentNode.position.x + 5, (int)currentNode.position.y + 5, 10, BLACK);
+            DrawCircleV(currentNode.position, 5, nodeColor);
         }
     }
 
-
-    // --- Dibuja la ruta encontrada (si existe) ---
-    // Esta parte ya la tienes y se dibujará encima del grafo completo, lo cual es bueno.
+    // --- Dibuja la ruta encontrada ---
     if (!pathNodes.empty()) {
         raylib::Vector2 prevPos;
         bool firstNode = true;
         for (auto it = pathNodes.begin(); it != pathNodes.end(); ++it) {
-            int nodeId = *it;  // ✅ Esta línea es la que te faltaba
-            if (nodeId >= 0 && nodeId < graph.getNumNodes()) {
-                const Node& currentPathNode = graph.getNode(nodeId);
-                raylib::Vector2 currentPos = currentPathNode.position;
+            int nodeId = *it;
+            if (nodeId < 0 || nodeId >= graph.getNumNodes()) continue; // Seguridad
 
-                if (!firstNode) {
-                    DrawLineEx(prevPos, currentPos, 4, LIME);
-                }
-                prevPos = currentPos;
-                firstNode = false;
+            const Node& currentPathNode = graph.getNode(nodeId);
+            raylib::Vector2 currentPos = currentPathNode.position;
 
-                DrawCircleV(currentPos, 4, LIME);
+            if (!firstNode) {
+                DrawLineEx(prevPos, currentPos, 4, LIME);
             }
+            DrawCircleV(currentPos, 4, LIME);
+            prevPos = currentPos;
+            firstNode = false;
         }
     }
 
-
-    // --- Dibuja el nodo de inicio (si está seleccionado) ---
-    // Esto se dibujará de nuevo para resaltarlo, encima de su dibujo como nodo normal.
-    if (startNodeId != -1 && startNodeId < graph.getNumNodes()) {
-        const Node& startNode = graph.getNode(startNodeId);
-        raylib::Vector2 sNodePos = startNode.position;
-        DrawCircleV(sNodePos, 8, GREEN);
+    // --- Nodo de inicio ---
+    if (startNodeId >= 0 && startNodeId < graph.getNumNodes()) {
+        DrawCircleV(graph.getNode(startNodeId).position, 8, GREEN);
     }
 
-    // --- Dibuja el nodo final (si está seleccionado) ---
-    // También se dibujará de nuevo para resaltarlo.
-    if (endNodeId != -1 && endNodeId < graph.getNumNodes()) {
-        const Node& endNode = graph.getNode(endNodeId);
-        raylib::Vector2 eNodePos = endNode.position;
-        DrawCircleV(eNodePos, 8, RED);
+    // --- Nodo final ---
+    if (endNodeId >= 0 && endNodeId < graph.getNumNodes()) {
+        DrawCircleV(graph.getNode(endNodeId).position, 8, RED);
     }
 }
+
 
 // Dibuja la Interfaz de Usuario (HUD) en modo gráfico
 void DrawGraphicalHUD() {

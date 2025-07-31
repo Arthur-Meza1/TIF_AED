@@ -215,22 +215,6 @@ CMakeFiles/RayPathFinderApp.dir/src/main.cpp.o: \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/ventor/raylib-cpp/include/./Wave.hpp \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/ventor/raylib-cpp/include/./Window.hpp \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Estructuras_datos/list.h \
- /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Graph.h \
- /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Estructuras_datos/MyVector.h \
- /usr/include/c++/15.1.1/algorithm \
- /usr/include/c++/15.1.1/bits/stl_algo.h \
- /usr/include/c++/15.1.1/bits/algorithmfwd.h \
- /usr/include/c++/15.1.1/bits/stl_heap.h \
- /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
- /usr/include/c++/15.1.1/bits/stl_tempbuf.h \
- /usr/include/c++/15.1.1/bits/ranges_algo.h \
- /usr/include/c++/15.1.1/optional \
- /usr/include/c++/15.1.1/bits/enable_special_members.h \
- /usr/include/c++/15.1.1/pstl/glue_algorithm_defs.h \
- /usr/include/c++/15.1.1/pstl/execution_defs.h \
- /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Node.h \
- /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Obstacle.h \
- /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Pathfinding.h \
  /usr/include/c++/15.1.1/iostream /usr/include/c++/15.1.1/ostream \
  /usr/include/c++/15.1.1/bits/ostream.h /usr/include/c++/15.1.1/ios \
  /usr/include/c++/15.1.1/bits/ios_base.h \
@@ -275,16 +259,37 @@ CMakeFiles/RayPathFinderApp.dir/src/main.cpp.o: \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/messages_members.h \
  /usr/include/libintl.h /usr/include/c++/15.1.1/bits/codecvt.h \
  /usr/include/c++/15.1.1/bits/locale_facets_nonio.tcc \
- /usr/include/c++/15.1.1/bits/locale_conv.h /usr/include/c++/15.1.1/span \
- /usr/include/c++/15.1.1/bits/monostate.h \
+ /usr/include/c++/15.1.1/bits/locale_conv.h \
+ /usr/include/c++/15.1.1/optional \
+ /usr/include/c++/15.1.1/bits/enable_special_members.h \
+ /usr/include/c++/15.1.1/span /usr/include/c++/15.1.1/bits/monostate.h \
  /usr/include/c++/15.1.1/bits/unicode.h /usr/include/c++/15.1.1/cstdint \
  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
- /usr/include/bits/stdint-least.h \
+ /usr/include/bits/stdint-least.h /usr/include/c++/15.1.1/bits/stl_algo.h \
+ /usr/include/c++/15.1.1/bits/algorithmfwd.h \
+ /usr/include/c++/15.1.1/bits/stl_heap.h \
+ /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
+ /usr/include/c++/15.1.1/bits/stl_tempbuf.h \
  /usr/include/c++/15.1.1/bits/unicode-data.h \
  /usr/include/c++/15.1.1/bits/ostream.tcc /usr/include/c++/15.1.1/istream \
- /usr/include/c++/15.1.1/bits/istream.tcc /usr/include/c++/15.1.1/chrono \
- /usr/include/c++/15.1.1/bits/chrono.h /usr/include/c++/15.1.1/ratio \
+ /usr/include/c++/15.1.1/bits/istream.tcc \
+ /usr/include/c++/15.1.1/iterator \
+ /usr/include/c++/15.1.1/bits/stream_iterator.h \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Graph.h \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Estructuras_datos/MyVector.h \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Estructuras_datos/initializer_list.h \
+ /usr/include/c++/15.1.1/algorithm \
+ /usr/include/c++/15.1.1/bits/ranges_algo.h \
+ /usr/include/c++/15.1.1/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/15.1.1/pstl/execution_defs.h \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Estructuras_datos/pair.h \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Node.h \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Obstacle.h \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Pathfinding.h \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Estructuras_datos/SimpleMap.h \
+ /usr/include/c++/15.1.1/chrono /usr/include/c++/15.1.1/bits/chrono.h \
+ /usr/include/c++/15.1.1/ratio \
  /usr/include/c++/15.1.1/bits/parse_numbers.h \
  /usr/include/c++/15.1.1/sstream /usr/include/c++/15.1.1/bits/sstream.tcc \
  /usr/include/c++/15.1.1/bits/shared_ptr.h \

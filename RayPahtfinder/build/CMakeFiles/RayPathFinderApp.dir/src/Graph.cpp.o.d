@@ -3,7 +3,8 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o: \
  /usr/include/stdc-predef.h \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Graph.h \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Estructuras_datos/MyVector.h \
- /usr/include/c++/15.1.1/initializer_list \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Estructuras_datos/initializer_list.h \
+ /usr/include/c++/15.1.1/cstddef \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++config.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -12,7 +13,6 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o: \
  /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/cpu_defines.h \
  /usr/include/c++/15.1.1/pstl/pstl_config.h \
- /usr/include/c++/15.1.1/cstddef \
  /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stddef.h \
  /usr/include/c++/15.1.1/bits/version.h /usr/include/c++/15.1.1/algorithm \
  /usr/include/c++/15.1.1/bits/stl_algobase.h \
@@ -40,6 +40,7 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o: \
  /usr/include/c++/15.1.1/bits/predefined_ops.h \
  /usr/include/c++/15.1.1/bit /usr/include/c++/15.1.1/bits/stl_algo.h \
  /usr/include/c++/15.1.1/bits/algorithmfwd.h \
+ /usr/include/c++/15.1.1/initializer_list \
  /usr/include/c++/15.1.1/bits/stl_heap.h \
  /usr/include/c++/15.1.1/bits/uniform_int_dist.h \
  /usr/include/c++/15.1.1/bits/stl_tempbuf.h \
@@ -127,7 +128,8 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o: \
  /usr/include/c++/15.1.1/bits/uses_allocator.h \
  /usr/include/c++/15.1.1/bits/uses_allocator_args.h \
  /usr/include/c++/15.1.1/tuple /usr/include/c++/15.1.1/utility \
- /usr/include/c++/15.1.1/bits/stl_relops.h \
+ /usr/include/c++/15.1.1/bits/stl_relops.h /usr/include/c++/15.1.1/limits \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Estructuras_datos/pair.h \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/Node.h \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/ventor/raylib-cpp/include/raylib-cpp.hpp \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/src/ventor/raylib-cpp/include/./AudioDevice.hpp \
@@ -148,7 +150,7 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o: \
  /usr/include/bits/mathcalls-helper-functions.h \
  /usr/include/bits/mathcalls.h /usr/include/bits/mathcalls-narrow.h \
  /usr/include/bits/iscanonical.h /usr/include/c++/15.1.1/bits/specfun.h \
- /usr/include/c++/15.1.1/limits /usr/include/c++/15.1.1/tr1/gamma.tcc \
+ /usr/include/c++/15.1.1/tr1/gamma.tcc \
  /usr/include/c++/15.1.1/tr1/special_function_util.h \
  /usr/include/c++/15.1.1/tr1/bessel_function.tcc \
  /usr/include/c++/15.1.1/tr1/beta_function.tcc \
