@@ -42,16 +42,25 @@ public:
     MyVector() : data(nullptr), sz(0), cap(0) {}
 
     MyVector(my_initializer_list<T> init) : data(nullptr), sz(0), cap(0) {
-    if (init.size() > 0) {
-        reallocate(init.size());
-        sz = init.size();
-        size_t i = 0;
-        for (const T& val : init) {
-            data[i++] = val;
+        if (init.size() > 0) {
+            reallocate(init.size());
+            sz = init.size();
+            size_t i = 0;
+            for (const T& val : init) {
+                data[i++] = val;
+            }
         }
     }
-}
 
+    MyVector(int n, const T& value) : data(nullptr), sz(0), cap(0) {
+        if (n > 0) {
+            data = new T[n];
+            for (int i = 0; i < n; ++i) {
+                data[i] = value;
+            }
+            sz = cap = n;
+        }
+    }
     void resize(size_t n, const T& value) {
     if (n > cap)
         reallocate(n);
