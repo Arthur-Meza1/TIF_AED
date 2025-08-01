@@ -300,4 +300,8 @@ CMakeFiles/RayPathFinderApp.dir/src/Dijkstra_Algorithm.cpp.o: \
  /usr/include/c++/15.1.1/bits/move_only_function.h \
  /usr/include/c++/15.1.1/bits/mofunc_impl.h \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/queue.hpp \
- /home/arthurm/Documentos/AED/proyecto/TIF_AED/include/Utils.hpp
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/include/Utils.hpp \
+ /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+ /usr/include/bits/environments.h /usr/include/bits/confname.h \
+ /usr/include/bits/getopt_posix.h /usr/include/bits/getopt_core.h \
+ /usr/include/bits/unistd_ext.h /usr/include/linux/close_range.h

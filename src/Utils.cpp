@@ -1,4 +1,5 @@
 #include "Utils.hpp"
+#include <fstream>
 
 namespace Utils {
 void ClearInputBuffer() {
@@ -36,4 +37,17 @@ bool CheckLineRectangleCollision(raylib::Vector2 p1, raylib::Vector2 p2,
 
   return false;
 }
+  size_t GetCurrentMemoryUsageInKB() {
+    size_t resident_memory = 0;
+    std::ifstream statm_file("/proc/self/statm");
+    if (statm_file.is_open()) {
+        long size, resident, share, text, lib, data, dt;
+        statm_file >> size >> resident >> share >> text >> lib >> data >> dt;
+        resident_memory = resident * (sysconf(_SC_PAGESIZE) / 1024);
+        statm_file.close();
+    }
+    return resident_memory;
+}
+
+
 } // namespace Utils

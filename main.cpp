@@ -6,12 +6,14 @@
 #include "raylib-cpp.hpp"
 #include "SearchAlgorithm.hpp"
 #include "SimpleMap.hpp"
+#include "Utils.hpp"
 #include <algorithm>
 #include <chrono>
 #include <memory>
 #include <cstring>
 #include <iostream>
 #include <limits>
+#include <chrono>
 #include <string>
 
 const int SCREEN_WIDTH = 1200;
@@ -135,25 +137,29 @@ void InitializeApplication(int numNodes) {
               << GRAPHICAL_NODE_LIMIT << " nodos." << std::endl;
   }
 
-  // Generar el grafo: se usa la misma función para ambos modos
+
+  auto start_time_graph = std::chrono::high_resolution_clock::now();
   myGraph.generateRandomNodes(numNodes, SCREEN_WIDTH, SCREEN_HEIGHT,
                               MAX_EDGES_PER_NODE_GENERATION,
                               MAX_CONNECTION_DISTANCE_GENERATION);
+  myGraph.generateRandomObstacles(NUM_OBSTACLES, SCREEN_WIDTH, SCREEN_HEIGHT);
+  
+  auto end_time_graph = std::chrono::high_resolution_clock::now();
+  auto duration_graph = std::chrono::duration_cast<std::chrono::milliseconds>(end_time_graph - start_time_graph);
 
   size_t totalEdges = 0;
   for (int i = 0; i < myGraph.getNumNodes(); ++i) {
     totalEdges += myGraph.getAdjacentNodes(i).size();
   }
   std::cout << "--- Generacion del Grafo Completada ---" << std::endl;
-  std::cout << "Numero de nodos generados: " << myGraph.getNumNodes()
-            << std::endl;
+  std::cout << "Numero de nodos generados: " << myGraph.getNumNodes() << std::endl;
   std::cout << "Numero total de entradas de aristas en lista de adyacencia: "
             << totalEdges << std::endl;
   std::cout << "Numero aproximado de aristas unicas (si no dirigido): "
             << totalEdges / 2 << std::endl;
-  // ---------------------------------------------------
-  // --- Generar obstáculos aleatorios (afectan la lógica en ambos modos) ---
-  myGraph.generateRandomObstacles(NUM_OBSTACLES, SCREEN_WIDTH, SCREEN_HEIGHT);
+  std::cout << "Tiempo de construccion del grafo: " << duration_graph.count() << " ms" << std::endl;
+  std::cout << "Memoria usada despues de la construccion: " << Utils::GetCurrentMemoryUsageInKB() << " KB" << std::endl;
+
 
   // Mostrar detalles de obstáculos en terminal si no es modo gráfico
   if (!graphicalMode) {
@@ -579,7 +585,7 @@ void RunTerminalMode() {
 
   do {
     std::cout << "\n------------------------------------------" << std::endl;
-    std::cout << "Comandos: 'buscar', 'info', 'salir'" << std::endl;
+    std::cout << "Comandos: 'buscar', 'info', 'salir' 'set-algorithm'" << std::endl;
     std::cout << "Ingrese comando: ";
     std::cin >> command;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(),

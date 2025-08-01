@@ -79,6 +79,7 @@ CMakeFiles/RayPathFinderApp.dir/main.cpp.o: /home/arthurm/Documentos/AED/proyect
   /home/arthurm/Documentos/AED/proyecto/TIF_AED/include/Obstacle.hpp \
   /home/arthurm/Documentos/AED/proyecto/TIF_AED/include/Pathfinding.hpp \
   /home/arthurm/Documentos/AED/proyecto/TIF_AED/include/SearchAlgorithm.hpp \
+  /home/arthurm/Documentos/AED/proyecto/TIF_AED/include/Utils.hpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
   /usr/include/asm-generic/errno-base.h \
@@ -515,15 +516,19 @@ CMakeFiles/RayPathFinderApp.dir/src/AStar_Algorithm.cpp.o: /home/arthurm/Documen
   /usr/include/asm/types.h \
   /usr/include/bits/atomic_wide_counter.h \
   /usr/include/bits/byteswap.h \
+  /usr/include/bits/confname.h \
   /usr/include/bits/cpu-set.h \
   /usr/include/bits/endian.h \
   /usr/include/bits/endianness.h \
+  /usr/include/bits/environments.h \
   /usr/include/bits/errno.h \
   /usr/include/bits/floatn-common.h \
   /usr/include/bits/floatn.h \
   /usr/include/bits/flt-eval-method.h \
   /usr/include/bits/fp-fast.h \
   /usr/include/bits/fp-logb.h \
+  /usr/include/bits/getopt_core.h \
+  /usr/include/bits/getopt_posix.h \
   /usr/include/bits/iscanonical.h \
   /usr/include/bits/libc-header-start.h \
   /usr/include/bits/libm-simd-decl-stubs.h \
@@ -534,6 +539,7 @@ CMakeFiles/RayPathFinderApp.dir/src/AStar_Algorithm.cpp.o: /home/arthurm/Documen
   /usr/include/bits/mathcalls-macros.h \
   /usr/include/bits/mathcalls-narrow.h \
   /usr/include/bits/mathcalls.h \
+  /usr/include/bits/posix_opt.h \
   /usr/include/bits/pthread_stack_min-dynamic.h \
   /usr/include/bits/pthreadtypes-arch.h \
   /usr/include/bits/pthreadtypes.h \
@@ -579,6 +585,7 @@ CMakeFiles/RayPathFinderApp.dir/src/AStar_Algorithm.cpp.o: /home/arthurm/Documen
   /usr/include/bits/types/wint_t.h \
   /usr/include/bits/typesizes.h \
   /usr/include/bits/uintn-identity.h \
+  /usr/include/bits/unistd_ext.h \
   /usr/include/bits/waitflags.h \
   /usr/include/bits/waitstatus.h \
   /usr/include/bits/wchar.h \
@@ -766,6 +773,7 @@ CMakeFiles/RayPathFinderApp.dir/src/AStar_Algorithm.cpp.o: /home/arthurm/Documen
   /usr/include/gnu/stubs-64.h \
   /usr/include/gnu/stubs.h \
   /usr/include/libintl.h \
+  /usr/include/linux/close_range.h \
   /usr/include/linux/errno.h \
   /usr/include/linux/posix_types.h \
   /usr/include/linux/sched/types.h \
@@ -787,6 +795,7 @@ CMakeFiles/RayPathFinderApp.dir/src/AStar_Algorithm.cpp.o: /home/arthurm/Documen
   /usr/include/sys/single_threaded.h \
   /usr/include/sys/types.h \
   /usr/include/time.h \
+  /usr/include/unistd.h \
   /usr/include/wchar.h \
   /usr/include/wctype.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stdarg.h \
@@ -886,15 +895,19 @@ CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.o: /home/arthurm/Documento
   /usr/include/asm/types.h \
   /usr/include/bits/atomic_wide_counter.h \
   /usr/include/bits/byteswap.h \
+  /usr/include/bits/confname.h \
   /usr/include/bits/cpu-set.h \
   /usr/include/bits/endian.h \
   /usr/include/bits/endianness.h \
+  /usr/include/bits/environments.h \
   /usr/include/bits/errno.h \
   /usr/include/bits/floatn-common.h \
   /usr/include/bits/floatn.h \
   /usr/include/bits/flt-eval-method.h \
   /usr/include/bits/fp-fast.h \
   /usr/include/bits/fp-logb.h \
+  /usr/include/bits/getopt_core.h \
+  /usr/include/bits/getopt_posix.h \
   /usr/include/bits/iscanonical.h \
   /usr/include/bits/libc-header-start.h \
   /usr/include/bits/libm-simd-decl-stubs.h \
@@ -905,6 +918,7 @@ CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.o: /home/arthurm/Documento
   /usr/include/bits/mathcalls-macros.h \
   /usr/include/bits/mathcalls-narrow.h \
   /usr/include/bits/mathcalls.h \
+  /usr/include/bits/posix_opt.h \
   /usr/include/bits/pthread_stack_min-dynamic.h \
   /usr/include/bits/pthreadtypes-arch.h \
   /usr/include/bits/pthreadtypes.h \
@@ -950,6 +964,7 @@ CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.o: /home/arthurm/Documento
   /usr/include/bits/types/wint_t.h \
   /usr/include/bits/typesizes.h \
   /usr/include/bits/uintn-identity.h \
+  /usr/include/bits/unistd_ext.h \
   /usr/include/bits/waitflags.h \
   /usr/include/bits/waitstatus.h \
   /usr/include/bits/wchar.h \
@@ -1137,6 +1152,7 @@ CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.o: /home/arthurm/Documento
   /usr/include/gnu/stubs-64.h \
   /usr/include/gnu/stubs.h \
   /usr/include/libintl.h \
+  /usr/include/linux/close_range.h \
   /usr/include/linux/errno.h \
   /usr/include/linux/posix_types.h \
   /usr/include/linux/sched/types.h \
@@ -1158,6 +1174,7 @@ CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.o: /home/arthurm/Documento
   /usr/include/sys/single_threaded.h \
   /usr/include/sys/types.h \
   /usr/include/time.h \
+  /usr/include/unistd.h \
   /usr/include/wchar.h \
   /usr/include/wctype.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stdarg.h \
@@ -1256,15 +1273,19 @@ CMakeFiles/RayPathFinderApp.dir/src/Dijkstra_Algorithm.cpp.o: /home/arthurm/Docu
   /usr/include/asm/types.h \
   /usr/include/bits/atomic_wide_counter.h \
   /usr/include/bits/byteswap.h \
+  /usr/include/bits/confname.h \
   /usr/include/bits/cpu-set.h \
   /usr/include/bits/endian.h \
   /usr/include/bits/endianness.h \
+  /usr/include/bits/environments.h \
   /usr/include/bits/errno.h \
   /usr/include/bits/floatn-common.h \
   /usr/include/bits/floatn.h \
   /usr/include/bits/flt-eval-method.h \
   /usr/include/bits/fp-fast.h \
   /usr/include/bits/fp-logb.h \
+  /usr/include/bits/getopt_core.h \
+  /usr/include/bits/getopt_posix.h \
   /usr/include/bits/iscanonical.h \
   /usr/include/bits/libc-header-start.h \
   /usr/include/bits/libm-simd-decl-stubs.h \
@@ -1275,6 +1296,7 @@ CMakeFiles/RayPathFinderApp.dir/src/Dijkstra_Algorithm.cpp.o: /home/arthurm/Docu
   /usr/include/bits/mathcalls-macros.h \
   /usr/include/bits/mathcalls-narrow.h \
   /usr/include/bits/mathcalls.h \
+  /usr/include/bits/posix_opt.h \
   /usr/include/bits/pthread_stack_min-dynamic.h \
   /usr/include/bits/pthreadtypes-arch.h \
   /usr/include/bits/pthreadtypes.h \
@@ -1320,6 +1342,7 @@ CMakeFiles/RayPathFinderApp.dir/src/Dijkstra_Algorithm.cpp.o: /home/arthurm/Docu
   /usr/include/bits/types/wint_t.h \
   /usr/include/bits/typesizes.h \
   /usr/include/bits/uintn-identity.h \
+  /usr/include/bits/unistd_ext.h \
   /usr/include/bits/waitflags.h \
   /usr/include/bits/waitstatus.h \
   /usr/include/bits/wchar.h \
@@ -1507,6 +1530,7 @@ CMakeFiles/RayPathFinderApp.dir/src/Dijkstra_Algorithm.cpp.o: /home/arthurm/Docu
   /usr/include/gnu/stubs-64.h \
   /usr/include/gnu/stubs.h \
   /usr/include/libintl.h \
+  /usr/include/linux/close_range.h \
   /usr/include/linux/errno.h \
   /usr/include/linux/posix_types.h \
   /usr/include/linux/sched/types.h \
@@ -1528,6 +1552,7 @@ CMakeFiles/RayPathFinderApp.dir/src/Dijkstra_Algorithm.cpp.o: /home/arthurm/Docu
   /usr/include/sys/single_threaded.h \
   /usr/include/sys/types.h \
   /usr/include/time.h \
+  /usr/include/unistd.h \
   /usr/include/wchar.h \
   /usr/include/wctype.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stdarg.h \
@@ -2378,15 +2403,19 @@ CMakeFiles/RayPathFinderApp.dir/src/Utils.cpp.o: /home/arthurm/Documentos/AED/pr
   /usr/include/asm/types.h \
   /usr/include/bits/atomic_wide_counter.h \
   /usr/include/bits/byteswap.h \
+  /usr/include/bits/confname.h \
   /usr/include/bits/cpu-set.h \
   /usr/include/bits/endian.h \
   /usr/include/bits/endianness.h \
+  /usr/include/bits/environments.h \
   /usr/include/bits/errno.h \
   /usr/include/bits/floatn-common.h \
   /usr/include/bits/floatn.h \
   /usr/include/bits/flt-eval-method.h \
   /usr/include/bits/fp-fast.h \
   /usr/include/bits/fp-logb.h \
+  /usr/include/bits/getopt_core.h \
+  /usr/include/bits/getopt_posix.h \
   /usr/include/bits/iscanonical.h \
   /usr/include/bits/libc-header-start.h \
   /usr/include/bits/libm-simd-decl-stubs.h \
@@ -2397,6 +2426,7 @@ CMakeFiles/RayPathFinderApp.dir/src/Utils.cpp.o: /home/arthurm/Documentos/AED/pr
   /usr/include/bits/mathcalls-macros.h \
   /usr/include/bits/mathcalls-narrow.h \
   /usr/include/bits/mathcalls.h \
+  /usr/include/bits/posix_opt.h \
   /usr/include/bits/pthread_stack_min-dynamic.h \
   /usr/include/bits/pthreadtypes-arch.h \
   /usr/include/bits/pthreadtypes.h \
@@ -2442,6 +2472,7 @@ CMakeFiles/RayPathFinderApp.dir/src/Utils.cpp.o: /home/arthurm/Documentos/AED/pr
   /usr/include/bits/types/wint_t.h \
   /usr/include/bits/typesizes.h \
   /usr/include/bits/uintn-identity.h \
+  /usr/include/bits/unistd_ext.h \
   /usr/include/bits/waitflags.h \
   /usr/include/bits/waitstatus.h \
   /usr/include/bits/wchar.h \
@@ -2612,6 +2643,7 @@ CMakeFiles/RayPathFinderApp.dir/src/Utils.cpp.o: /home/arthurm/Documentos/AED/pr
   /usr/include/gnu/stubs-64.h \
   /usr/include/gnu/stubs.h \
   /usr/include/libintl.h \
+  /usr/include/linux/close_range.h \
   /usr/include/linux/errno.h \
   /usr/include/linux/posix_types.h \
   /usr/include/linux/sched/types.h \
@@ -2633,6 +2665,7 @@ CMakeFiles/RayPathFinderApp.dir/src/Utils.cpp.o: /home/arthurm/Documentos/AED/pr
   /usr/include/sys/single_threaded.h \
   /usr/include/sys/types.h \
   /usr/include/time.h \
+  /usr/include/unistd.h \
   /usr/include/wchar.h \
   /usr/include/wctype.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/stdarg.h \
@@ -2686,8 +2719,6 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o:
 /home/arthurm/Documentos/AED/proyecto/TIF_AED/src/Graph.cpp:
 
 /home/arthurm/Documentos/AED/proyecto/TIF_AED/src/Dijkstra_Algorithm.cpp:
-
-/home/arthurm/Documentos/AED/proyecto/TIF_AED/include/Utils.hpp:
 
 /home/arthurm/Documentos/AED/proyecto/TIF_AED/src/AStar_Algorithm.cpp:
 
@@ -2877,6 +2908,8 @@ CMakeFiles/RayPathFinderApp.dir/main.cpp.o:
 
 /usr/include/c++/15.1.1/bits/unicode-data.h:
 
+/usr/include/c++/15.1.1/bits/string_view.tcc:
+
 /usr/include/bits/types/__locale_t.h:
 
 /usr/include/bits/types/__fpos64_t.h:
@@ -3029,6 +3062,8 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o:
 
 /usr/include/asm-generic/posix_types.h:
 
+/usr/include/asm-generic/errno-base.h:
+
 /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/list.hpp:
 
 /usr/include/c++/15.1.1/bits/locale_classes.h:
@@ -3090,6 +3125,8 @@ _deps/raylib_cpp-src/include/ShaderUnmanaged.hpp:
 /usr/include/c++/15.1.1/compare:
 
 _deps/raylib_cpp-src/include/Shader.hpp:
+
+/home/arthurm/Documentos/AED/proyecto/TIF_AED/include/Utils.hpp:
 
 /usr/include/c++/15.1.1/bits/basic_ios.tcc:
 
@@ -3199,8 +3236,6 @@ _deps/raylib_cpp-src/include/AudioDevice.hpp:
 
 _deps/raylib_cpp-src/include/RenderTexture.hpp:
 
-/usr/include/asm-generic/errno-base.h:
-
 /usr/include/bits/floatn.h:
 
 _deps/raylib_cpp-src/include/Matrix.hpp:
@@ -3294,8 +3329,6 @@ _deps/raylib_cpp-src/include/Ray.hpp:
 /usr/include/bits/types/struct_sched_param.h:
 
 /usr/include/c++/15.1.1/bits/enable_special_members.h:
-
-/usr/include/c++/15.1.1/bits/string_view.tcc:
 
 /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/initializer_list.hpp:
 
