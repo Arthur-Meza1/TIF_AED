@@ -1,4 +1,4 @@
-# Install script for directory: /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src
+# Install script for directory: /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,13 +44,13 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-build/include/cmake_install.cmake")
+  include("/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-build/include/cmake_install.cmake")
 
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-build/install_local_manifest.txt"
+  file(WRITE "/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-build/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

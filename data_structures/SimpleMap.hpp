@@ -1,4 +1,11 @@
 #pragma once
+#include "MyVector.hpp"
+#include "pair.hpp"
+#include "list.hpp"
+#include <functional>
+#include <string>
+#include <utility>
+#include <stdexcept>
 
 template <typename K, typename V>
 class SimpleMap {
@@ -8,88 +15,118 @@ private:
     V value;
   };
 
-  Pair* data;
-  int capacity;
-  int count;
+  MyVector<Pair> data;
+  size_t count = 0;
+  size_t capacity = 8;
+  const double LOAD_FACTOR = 0.75;
 
   void resize() {
-    int newCapacity = capacity * 2;
-    Pair* newData = new Pair[newCapacity];
-    for (int i = 0; i < count; ++i) {
-      newData[i] = data[i];
+    size_t newCapacity = capacity * 2;
+    MyVector<Pair> newData;
+    newData.resize(newCapacity);
+
+    for (size_t i = 0; i < count; ++i) {
+      newData[i] = std::move(data[i]); 
     }
-    delete[] data;
-    data = newData;
+    
+    data = std::move(newData);
     capacity = newCapacity;
   }
 
 public:
-  SimpleMap(int initialCap = 10) : capacity(initialCap), count(0) {
-    data = new Pair[capacity];
-  }
+  SimpleMap() { data.resize(capacity); }
 
-  ~SimpleMap() {
-    delete[] data;
-  }
+  using iterator = typename MyVector<Pair>::iterator;
+  using const_iterator = typename MyVector<Pair>::const_iterator;
+  
+  iterator begin() { return data.begin(); }
+  iterator end() { return data.begin() + count; }
+  const_iterator begin() const { return data.begin(); }
+  const_iterator end() const { return data.begin() + count; }
 
-  void insert(const K& key, const V& value) {
-    for (int i = 0; i < count; ++i) {
-      if (data[i].key == key) {
-        data[i].value = value;
-        return;
+  iterator find(const K& key) {
+    for (iterator it = data.begin(); it != data.begin() + count; ++it) {
+      if (it->key == key) {
+        return it;
       }
     }
-    if (count == capacity)
-      resize();
-    data[count++] = {key, value};
+    return end();
   }
 
-  // Nuevo: reemplazo directo (alias de insert)
-  void set(const K& key, const V& value) {
-    insert(key, value);
-  }
-
-  // Nuevo: limpiar el mapa
-  void clear() {
-    count = 0;
-  }
-
-  bool contains(const K& key) const {
-    for (int i = 0; i < count; ++i) {
-      if (data[i].key == key)
-        return true;
+  const_iterator find(const K& key) const {
+    for (const_iterator it = data.begin(); it != data.begin() + count; ++it) {
+      if (it->key == key) {
+        return it;
+      }
     }
-    return false;
+    return end();
   }
 
-  V get(const K& key) const {
-    for (int i = 0; i < count; ++i) {
-      if (data[i].key == key)
-        return data[i].value;
+  // Método insert() mejorado
+  void insert(const K& key, V value) {
+    if (find(key) == end()) {
+      if ((double)count / capacity >= LOAD_FACTOR) {
+        resize();
+      }
+      data[count].key = key;
+      data[count].value = std::move(value);
+      count++;
+    } else {
+        // Opcional: manejar el caso de que la clave ya exista,
+        // por ejemplo, lanzando una excepción o no haciendo nada.
+        // En esta implementación, simplemente no se inserta.
     }
-    return V(); // o lanza excepción si prefieres
   }
 
-  // Opcional: acceso como en std::map
+  // operador [] mejorado para crear un nuevo par si la clave no existe
   V& operator[](const K& key) {
-    for (int i = 0; i < count; ++i) {
-      if (data[i].key == key)
-        return data[i].value;
+    iterator it = find(key);
+    if (it != end()) {
+      return it->value;
     }
-    // Si no existe, lo crea con valor por defecto
-    if (count == capacity)
+    
+    // Si no se encuentra, inserta un nuevo par con un valor por defecto
+    if ((double)count / capacity >= LOAD_FACTOR) {
       resize();
-    data[count++] = {key, V()};
+    }
+    data[count].key = key;
+    data[count].value = V(); // V() llama al constructor por defecto de V
+    count++;
     return data[count - 1].value;
   }
 
-  // Versión const del operador[]
-  const V& operator[](const K& key) const {
-    for (int i = 0; i < count; ++i) {
-      if (data[i].key == key)
-        return data[i].value;
+  // get() no constante que usa find()
+  V& get(const K& key) {
+    iterator it = find(key);
+    if (it != end()) {
+      return it->value;
     }
-    static V defaultValue = V();
-    return defaultValue;
+    throw std::out_of_range("Key not found");
   }
+
+  // get() constante que usa find()
+  const V& get(const K& key) const {
+    const_iterator it = find(key);
+    if (it != end()) {
+      return it->value;
+    }
+    throw std::out_of_range("Key not found");
+  } 
+  
+  // set() mejorado que usa find()
+  void set(const K& key, V value) {
+    iterator it = find(key);
+    if (it != end()) {
+      it->value = std::move(value);
+    } else {
+      insert(key, std::move(value));
+    }
+  }
+
+  // contains() mejorado que usa find()
+  bool contains(const K& key) const {
+    return find(key) != end();
+  }
+
+  size_t size() const { return count; }
 };

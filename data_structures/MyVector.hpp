@@ -35,6 +35,9 @@ private:
 
 public:
   MyVector() : data(nullptr), sz(0), cap(0) {}
+  
+  using iterator = T*;
+  using const_iterator = const T*;
 
   MyVector(my_initializer_list<T> init) : data(nullptr), sz(0), cap(0) {
     if (init.size() > 0) {
@@ -258,17 +261,16 @@ public:
   bool empty() const {
     return sz == 0;
   }
-
-  T* begin() {
+  iterator begin() {
     return data;
   }
-  const T* begin() const {
+  const_iterator begin() const {
     return data;
   }
-  T* end() {
+  iterator end() {
     return data + sz;
   }
-  const T* end() const {
+  const_iterator end() const {
     return data + sz;
   }
 };

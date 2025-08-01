@@ -3,9 +3,9 @@
 # No other meaning or use of this file is supported.
 
 method=url
-command=/usr/local/bin/cmake;-DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE;-P;/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-subbuild/raylib_cpp-populate-prefix/src/raylib_cpp-populate-stamp/download-raylib_cpp-populate.cmake;COMMAND;/usr/local/bin/cmake;-DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE;-P;/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-subbuild/raylib_cpp-populate-prefix/src/raylib_cpp-populate-stamp/verify-raylib_cpp-populate.cmake;COMMAND;/usr/local/bin/cmake;-DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE;-P;/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-subbuild/raylib_cpp-populate-prefix/src/raylib_cpp-populate-stamp/extract-raylib_cpp-populate.cmake
-source_dir=/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src
-work_dir=/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps
+command=/usr/local/bin/cmake;-DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE;-P;/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-subbuild/raylib_cpp-populate-prefix/src/raylib_cpp-populate-stamp/download-raylib_cpp-populate.cmake;COMMAND;/usr/local/bin/cmake;-DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE;-P;/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-subbuild/raylib_cpp-populate-prefix/src/raylib_cpp-populate-stamp/verify-raylib_cpp-populate.cmake;COMMAND;/usr/local/bin/cmake;-DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE;-P;/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-subbuild/raylib_cpp-populate-prefix/src/raylib_cpp-populate-stamp/extract-raylib_cpp-populate.cmake
+source_dir=/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src
+work_dir=/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps
 url(s)=https://github.com/RobLoach/raylib-cpp/archive/refs/tags/v5.5.0.tar.gz
 hash=
       no_extract=

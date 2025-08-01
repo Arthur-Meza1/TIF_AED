@@ -1,6 +1,7 @@
-CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o: \
- /home/arthurm/Documentos/AED/proyecto/TIF_AED/src/Graph.cpp \
+CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.o: \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/src/BFS_Algorithm.cpp \
  /usr/include/stdc-predef.h \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/include/SearchAlgorithm.hpp \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/include/Graph.hpp \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/MyVector.hpp \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/initializer_list.hpp \
@@ -228,6 +229,10 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o: \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Window.hpp \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/include/Obstacle.hpp \
  /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/pair.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/SimpleMap.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/MyVector.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/pair.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/list.hpp \
  /usr/include/c++/15.1.1/iostream /usr/include/c++/15.1.1/ostream \
  /usr/include/c++/15.1.1/bits/ostream.h /usr/include/c++/15.1.1/ios \
  /usr/include/c++/15.1.1/bits/ios_base.h \
@@ -280,4 +285,20 @@ CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o: \
  /usr/include/bits/stdint-least.h \
  /usr/include/c++/15.1.1/bits/unicode-data.h \
  /usr/include/c++/15.1.1/bits/ostream.tcc /usr/include/c++/15.1.1/istream \
- /usr/include/c++/15.1.1/bits/istream.tcc
+ /usr/include/c++/15.1.1/bits/istream.tcc \
+ /usr/include/c++/15.1.1/iterator \
+ /usr/include/c++/15.1.1/bits/stream_iterator.h \
+ /usr/include/c++/15.1.1/functional \
+ /usr/include/c++/15.1.1/bits/std_function.h \
+ /usr/include/c++/15.1.1/unordered_map \
+ /usr/include/c++/15.1.1/bits/unordered_map.h \
+ /usr/include/c++/15.1.1/bits/hashtable.h \
+ /usr/include/c++/15.1.1/bits/hashtable_policy.h \
+ /usr/include/c++/15.1.1/ext/aligned_buffer.h \
+ /usr/include/c++/15.1.1/bits/node_handle.h \
+ /usr/include/c++/15.1.1/bits/erase_if.h \
+ /usr/include/c++/15.1.1/bits/move_only_function.h \
+ /usr/include/c++/15.1.1/bits/mofunc_impl.h \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/queue.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/Queue.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/include/Utils.hpp

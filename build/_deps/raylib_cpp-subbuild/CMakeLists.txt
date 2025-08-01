@@ -20,8 +20,8 @@ project(raylib_cpp-populate NONE)
 include(ExternalProject)
 ExternalProject_Add(raylib_cpp-populate
                      "UPDATE_DISCONNECTED" "False" "DOWNLOAD_EXTRACT_TIMESTAMP" "OFF" "EXTERNALPROJECT_INTERNAL_ARGUMENT_SEPARATOR" "URL" "https://github.com/RobLoach/raylib-cpp/archive/refs/tags/v5.5.0.tar.gz"
-                    SOURCE_DIR          "/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src"
-                    BINARY_DIR          "/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-build"
+                    SOURCE_DIR          "/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src"
+                    BINARY_DIR          "/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-build"
                     CONFIGURE_COMMAND   ""
                     BUILD_COMMAND       ""
                     INSTALL_COMMAND     ""

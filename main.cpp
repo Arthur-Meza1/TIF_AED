@@ -4,8 +4,11 @@
 #include "Pathfinding.hpp"
 #include "list.hpp"
 #include "raylib-cpp.hpp"
+#include "SearchAlgorithm.hpp"
+#include "SimpleMap.hpp"
 #include <algorithm>
 #include <chrono>
+#include <memory>
 #include <cstring>
 #include <iostream>
 #include <limits>
@@ -13,24 +16,24 @@
 
 const int SCREEN_WIDTH = 1200;
 const int SCREEN_HEIGHT = 800;
-const int GRAPHICAL_NODE_LIMIT = 700; // umbral
+const int GRAPHICAL_NODE_LIMIT = 700; 
 const float NODE_GENERATION_AREA_PADDING = 50.0f;
 const int MAX_EDGES_PER_NODE_GENERATION = 4;
-const float MAX_CONNECTION_DISTANCE_GENERATION =
-    200.0f; // radio para la conexion
+const float MAX_CONNECTION_DISTANCE_GENERATION =200.0f; // radio para la conexion
 const int NUM_OBSTACLES = 5;
 
 Graph myGraph;
-Pathfinding* myPathfinding = nullptr;
 int startNodeId = -1;
 int endNodeId = -1;
 SimpleList<int> path;
+std::unique_ptr<Pathfinding> myPathfinding;
+SimpleMap<std::string, std::unique_ptr<SearchAlgorithm>> algorithms;
+const SearchAlgorithm* currentAlgorithm = nullptr;
 
 raylib::Camera2D camera;
 
 bool graphicalMode = true;
-// --- Variables Globales Adicionales para Modo Gráfico (Edición de Obstáculos)
-// ---
+// --- Variables Globales Adicionales para Modo Gráfico (Edición de Obstáculos)// ---
 bool editingObstacles = false;
 raylib::Vector2 startDragPos;
 bool isDragging = false;
@@ -60,7 +63,7 @@ int main() {
   // 1. Solicitar cantidad de nodos al usuario
   int numNodes;
   std::cout << "------------------------------------------" << std::endl;
-  std::cout << "        ALGORITMO DE BUSQUEDA A* " << std::endl;
+  std::cout << "        RECORRIDOS DE GRAFOS              " << std::endl;
   std::cout << "------------------------------------------" << std::endl;
   std::cout << "Ingrese la cantidad de nodos (se recomienda <= "
             << GRAPHICAL_NODE_LIMIT << " para interfaz grafica): ";
@@ -75,7 +78,18 @@ int main() {
   }
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
+
+  algorithms["A*"] = std::make_unique<AStar_Algorithm>();
+  algorithms["BFS"] = std::make_unique<BFS_Algorithm>();
+  algorithms["Dijkstra"] = std::make_unique<Dijkstra_Algorithm>();
+
+
+  currentAlgorithm = algorithms["A*"].get();
+
   InitializeApplication(numNodes);
+
+
+
 
   // 3. Bucle principal basado en el modo de ejecución
   if (graphicalMode) {
@@ -97,12 +111,12 @@ int main() {
 
 // --- Implementaciones de Funciones Auxiliares ---
 
-// Inicializa la ventana de Raylib, el grafo y el objeto Pathfinding
+
 void InitializeApplication(int numNodes) {
   if (numNodes <= GRAPHICAL_NODE_LIMIT) {
     graphicalMode = true;
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "RayPathFinder - Modo Grafico");
-    SetTargetFPS(60); // Limitar FPS para un rendimiento consistente
+    SetTargetFPS(60); 
 
     // Inicializar cámara 2D de forma segura
     camera.target = {(float)SCREEN_WIDTH / 2, (float)SCREEN_HEIGHT / 2};
@@ -157,54 +171,50 @@ void InitializeApplication(int numNodes) {
     }
     std::cout << "----------------------------" << std::endl;
   }
+  algorithms.set("A*", std::make_unique<AStar_Algorithm>());
+  algorithms.set("BFS", std::make_unique<BFS_Algorithm>());
+  algorithms.set("Dijkstra", std::make_unique<Dijkstra_Algorithm>());
 
-  // Inicializar el objeto Pathfinding con el grafo generado
-  myPathfinding = new Pathfinding(myGraph);
+  
+  myPathfinding = std::make_unique<Pathfinding>(myGraph);
+  myPathfinding->setAlgorithm(algorithms.get("A*").get());
 }
 
-// Actualiza la lógica del juego (principalmente manejo de entrada en modo
-// gráfico)
+// Actualiza la lógica del juego
 void UpdateApplication(float deltaTime) {
-  // Lógica de paneo de la cámara con clic derecho
-  if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
+    if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
     raylib::Vector2 delta =
-        GetMouseDelta(); // GetMouseDelta devuelve raylib::Vector2
-    // Escalar el movimiento del ratón por el factor de zoom para un paneo
-    // consistente
+        GetMouseDelta(); 
     delta = delta.Scale(-1.0f / camera.zoom);
-    camera.target = (raylib::Vector2)camera.target +
-                    delta; // Mover el objetivo de la cámara
+    camera.target = (raylib::Vector2)camera.target + delta; 
   }
 
   // Lógica de zoom de la cámara con la rueda del ratón
   float wheel = raylib::Mouse::GetWheelMove();
   if (wheel != 0) {
-    // Obtener la posición del ratón en coordenadas del mundo antes del zoom
     raylib::Vector2 mouseScreenPos =
-        GetMousePosition(); // Esto devuelve ::Vector2
+        GetMousePosition(); 
     raylib::Vector2 mouseWorldPos = GetScreenToWorld2D(
-        mouseScreenPos, camera); // Convierte ::Vector2 a raylib::Vector2
+        mouseScreenPos, camera); 
 
     // Actualizar el zoom
     camera.zoom += wheel * 0.1f;
     if (camera.zoom < 0.1f)
-      camera.zoom = 0.1f; // Limitar zoom mínimo para evitar invertir
+      camera.zoom = 0.1f; 
 
-    // Recalcular el offset de la cámara para mantener el punto de zoom bajo el
-    // cursor Aseguramos que ambos operandos de la resta sean raylib::Vector2
     raylib::Vector2 newMouseWorldPos =
         GetScreenToWorld2D(GetMousePosition(), camera);
     raylib::Vector2 zoomCorrection =
-        newMouseWorldPos - mouseWorldPos; // Ahora sí funcionará
+        newMouseWorldPos - mouseWorldPos; 
     camera.target = (raylib::Vector2)camera.target - zoomCorrection;
   }
 
-  HandleGraphicalInput(); // Maneja la selección de nodos y comandos de teclado
+  HandleGraphicalInput(); 
 }
 
 // Dibuja el estado actual de la aplicación (solo modo gráfico)
 void DrawApplication() {
-  BeginDrawing(); // Iniciar el modo de dibujo de Raylib
+  BeginDrawing(); 
   ClearBackground(RAYWHITE);
 
   BeginMode2D(camera);
@@ -421,6 +431,26 @@ void HandleGraphicalInput() {
       }
     }
 
+    if (IsKeyPressed(KEY_F1)) {
+    // Asegúrate de que "A*" exista en tu mapa de algoritmos
+      if (algorithms.contains("A*")) {
+          myPathfinding->setAlgorithm(algorithms.get("A*").get());
+          std::cout << "Algoritmo cambiado a A*." << std::endl;
+      }
+    }
+    if (IsKeyPressed(KEY_F2)) {
+      if (algorithms.contains("BFS")) {
+          myPathfinding->setAlgorithm(algorithms.get("BFS").get());
+          std::cout << "Algoritmo cambiado a BFS." << std::endl;
+      }
+    }
+    if (IsKeyPressed(KEY_F3)) {
+      if (algorithms.contains("Dijkstra")) {
+          myPathfinding->setAlgorithm(algorithms.get("Dijkstra").get());
+            std::cout << "Algoritmo cambiado a Dijkstra." << std::endl;
+      }
+    }
+
     // Recalcular la ruta con la tecla 'R'
     if (IsKeyPressed(KEY_R)) {
       if (startNodeId != -1 && endNodeId != -1) {
@@ -434,6 +464,8 @@ void HandleGraphicalInput() {
       path.clear();
     }
   }
+
+
 }
 
 // Esta función está separada de DrawApplication para mantener la modularidad
@@ -534,6 +566,17 @@ void RunTerminalMode() {
   std::string command;
   int sNode = -1, eNode = -1;
 
+
+  std::cout << "Algoritmos disponibles: ";
+  bool first = true;
+  for (const auto& pair : algorithms) {
+    if (!first) std::cout << ", ";
+    std::cout << pair.key;
+    first = false;
+  }
+  std::cout << std::endl;
+  std::string chosenAlgorithmName = "A*";
+
   do {
     std::cout << "\n------------------------------------------" << std::endl;
     std::cout << "Comandos: 'buscar', 'info', 'salir'" << std::endl;
@@ -560,7 +603,6 @@ void RunTerminalMode() {
         continue;
       }
 
-      // Realizar la búsqueda A* y medir el tiempo
       std::cout << "Buscando ruta de " << sNode << " a " << eNode << "..."
                 << std::endl;
       auto startTime = std::chrono::high_resolution_clock::now();
@@ -572,7 +614,22 @@ void RunTerminalMode() {
       std::cout << "Tiempo de busqueda: " << elapsed.count() << " segundos."
                 << std::endl;
 
-    } else if (command == "info") {
+    }else if (command == "set-algorithm"){
+      std::cout << "Algoritmos disponibles: ";
+      first = true;
+      for (const auto& pair : algorithms) {
+        if (!first) std::cout << ", ";
+        std::cout << pair.key;
+        first = false;
+      }
+      std::cout << "\nElija un algoritmo: ";
+      std::cin >> chosenAlgorithmName;
+      if (algorithms.find(chosenAlgorithmName) == algorithms.end()) {
+        std::cout << "Algoritmo no valido. Usando " << currentAlgorithm->getName() << " por defecto." << std::endl;
+        chosenAlgorithmName = "A*"; // Default
+      }
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }else if (command == "info") {
       std::cout << "Nodos totales en el grafo: " << myGraph.getNumNodes()
                 << std::endl;
       // Mostrar detalles de obstáculos en terminal
@@ -646,7 +703,7 @@ void CleanupApplication() {
     CloseWindow(); // Cierra la ventana de Raylib
   }
   if (myPathfinding) {
-    delete myPathfinding; // Libera la memoria del objeto Pathfinding
+    myPathfinding.reset(); // Libera la memoria del objeto Pathfinding
     myPathfinding = nullptr;
   }
   myGraph.clear(); // Limpia el grafo (opcional, pero buena práctica)

@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/arthurm/Documentos/AED/Pruebas/mas/aed_project
+CMAKE_SOURCE_DIR = /home/arthurm/Documentos/AED/proyecto/TIF_AED
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build
+CMAKE_BINARY_DIR = /home/arthurm/Documentos/AED/proyecto/TIF_AED/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,9 +132,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/CMakeFiles /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/CMakeFiles /home/arthurm/Documentos/AED/proyecto/TIF_AED/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -197,6 +197,78 @@ main.s: main.cpp.s
 main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+src/AStar_Algorithm.o: src/AStar_Algorithm.cpp.o
+.PHONY : src/AStar_Algorithm.o
+
+# target to build an object file
+src/AStar_Algorithm.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/AStar_Algorithm.cpp.o
+.PHONY : src/AStar_Algorithm.cpp.o
+
+src/AStar_Algorithm.i: src/AStar_Algorithm.cpp.i
+.PHONY : src/AStar_Algorithm.i
+
+# target to preprocess a source file
+src/AStar_Algorithm.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/AStar_Algorithm.cpp.i
+.PHONY : src/AStar_Algorithm.cpp.i
+
+src/AStar_Algorithm.s: src/AStar_Algorithm.cpp.s
+.PHONY : src/AStar_Algorithm.s
+
+# target to generate assembly for a file
+src/AStar_Algorithm.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/AStar_Algorithm.cpp.s
+.PHONY : src/AStar_Algorithm.cpp.s
+
+src/BFS_Algorithm.o: src/BFS_Algorithm.cpp.o
+.PHONY : src/BFS_Algorithm.o
+
+# target to build an object file
+src/BFS_Algorithm.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.o
+.PHONY : src/BFS_Algorithm.cpp.o
+
+src/BFS_Algorithm.i: src/BFS_Algorithm.cpp.i
+.PHONY : src/BFS_Algorithm.i
+
+# target to preprocess a source file
+src/BFS_Algorithm.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.i
+.PHONY : src/BFS_Algorithm.cpp.i
+
+src/BFS_Algorithm.s: src/BFS_Algorithm.cpp.s
+.PHONY : src/BFS_Algorithm.s
+
+# target to generate assembly for a file
+src/BFS_Algorithm.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.s
+.PHONY : src/BFS_Algorithm.cpp.s
+
+src/Dijkstra_Algorithm.o: src/Dijkstra_Algorithm.cpp.o
+.PHONY : src/Dijkstra_Algorithm.o
+
+# target to build an object file
+src/Dijkstra_Algorithm.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/Dijkstra_Algorithm.cpp.o
+.PHONY : src/Dijkstra_Algorithm.cpp.o
+
+src/Dijkstra_Algorithm.i: src/Dijkstra_Algorithm.cpp.i
+.PHONY : src/Dijkstra_Algorithm.i
+
+# target to preprocess a source file
+src/Dijkstra_Algorithm.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/Dijkstra_Algorithm.cpp.i
+.PHONY : src/Dijkstra_Algorithm.cpp.i
+
+src/Dijkstra_Algorithm.s: src/Dijkstra_Algorithm.cpp.s
+.PHONY : src/Dijkstra_Algorithm.s
+
+# target to generate assembly for a file
+src/Dijkstra_Algorithm.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/Dijkstra_Algorithm.cpp.s
+.PHONY : src/Dijkstra_Algorithm.cpp.s
 
 src/Graph.o: src/Graph.cpp.o
 .PHONY : src/Graph.o
@@ -286,6 +358,15 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/AStar_Algorithm.o"
+	@echo "... src/AStar_Algorithm.i"
+	@echo "... src/AStar_Algorithm.s"
+	@echo "... src/BFS_Algorithm.o"
+	@echo "... src/BFS_Algorithm.i"
+	@echo "... src/BFS_Algorithm.s"
+	@echo "... src/Dijkstra_Algorithm.o"
+	@echo "... src/Dijkstra_Algorithm.i"
+	@echo "... src/Dijkstra_Algorithm.s"
 	@echo "... src/Graph.o"
 	@echo "... src/Graph.i"
 	@echo "... src/Graph.s"

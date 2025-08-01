@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/include -I/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/data_structures -I/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include
+CXX_INCLUDES = -I/home/arthurm/Documentos/AED/proyecto/TIF_AED/include -I/home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures -I/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include
 
 CXX_FLAGS = -std=gnu++23 -I/usr/include
 

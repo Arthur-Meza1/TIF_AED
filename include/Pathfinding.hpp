@@ -4,26 +4,27 @@
 #include "MyVector.hpp"
 #include "Node.hpp"
 #include "SimpleMap.hpp"
+#include "SearchAlgorithm.hpp"
 #include "list.hpp"
+#include <memory>
 #include <utility>
 
 class Pathfinding {
 public:
-  Pathfinding(const Graph& g);
+  Pathfinding(const Graph& graph);
+  ~Pathfinding() = default;
 
-  SimpleList<int> findPath(int startNodeId, int endNodeId);
+  Pathfinding(const Pathfinding&) = delete;
+  Pathfinding& operator=(const Pathfinding&) = delete;
+
+  // Métodos para el control del algoritmo
+  void setAlgorithm(const SearchAlgorithm* algorithm);
+  void selectAlgorithm(const std::string& name);
+  SimpleList<int> findPath(int startNodeId, int endNodeId) const;
+  std::string getCurrentAlgorithmName() const;
 
 private:
   const Graph& graph;
-
-  MyVector<float> gScore;
-  MyVector<float> fScore;
-  SimpleMap<int, int>
-      cameFrom; // Almacena el ID del nodo precedente en el camino óptimo
-  MyVector<bool> closedSet; // Para saber si un nodo ya ha sido evaluado
-
-  // Función heurística (distancia euclidiana)
-  float calculateHeuristic(int nodeId1, int nodeId2) const;
-
-  SimpleList<int> reconstructPath(int currentId) const;
+  SimpleMap<std::string, std::unique_ptr<SearchAlgorithm>> algorithms;
+   const SearchAlgorithm* currentAlgorithm = nullptr;
 };

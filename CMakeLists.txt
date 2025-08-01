@@ -40,6 +40,9 @@ set(PROJECT_SOURCES
   src/Graph.cpp
   src/Pathfinding.cpp
   src/Utils.cpp
+  src/AStar_Algorithm.cpp
+ src/Dijkstra_Algorithm.cpp
+  src/BFS_Algorithm.cpp
   main.cpp
 )
 

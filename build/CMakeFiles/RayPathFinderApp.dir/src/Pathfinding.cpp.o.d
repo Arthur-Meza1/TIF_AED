@@ -1,10 +1,10 @@
 CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/src/Pathfinding.cpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/src/Pathfinding.cpp \
  /usr/include/stdc-predef.h \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/include/Pathfinding.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/include/Graph.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/data_structures/MyVector.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/data_structures/initializer_list.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/include/Pathfinding.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/include/Graph.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/MyVector.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/initializer_list.hpp \
  /usr/include/c++/15.1.1/cstddef \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/c++config.h \
  /usr/include/c++/15.1.1/x86_64-pc-linux-gnu/bits/os_defines.h \
@@ -131,19 +131,19 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /usr/include/c++/15.1.1/bits/uses_allocator_args.h \
  /usr/include/c++/15.1.1/tuple /usr/include/c++/15.1.1/utility \
  /usr/include/c++/15.1.1/bits/stl_relops.h \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/include/Node.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/raylib-cpp.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./AudioDevice.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././RaylibException.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./././raylib.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/include/Node.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/raylib-cpp.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./AudioDevice.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././RaylibException.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./././raylib.hpp \
  /usr/include/raylib.h \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././raylib-cpp-utils.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././raylib.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./AudioStream.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./AutomationEventList.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./BoundingBox.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Camera2D.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././Vector2.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././raylib-cpp-utils.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././raylib.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./AudioStream.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./AutomationEventList.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./BoundingBox.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Camera2D.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././Vector2.hpp \
  /usr/include/c++/15.1.1/cmath /usr/include/math.h \
  /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
  /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
@@ -163,74 +163,76 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /usr/include/c++/15.1.1/tr1/poly_hermite.tcc \
  /usr/include/c++/15.1.1/tr1/poly_laguerre.tcc \
  /usr/include/c++/15.1.1/tr1/riemann_zeta.tcc \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./././raylib-cpp-utils.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./././raymath.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./././raylib-cpp-utils.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./././raymath.hpp \
  /usr/include/raymath.h /usr/include/c++/15.1.1/math.h \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Camera3D.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././Vector3.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Color.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././Vector4.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./FileData.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./FileText.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Font.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././TextureUnmanaged.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./././Image.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././././Color.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././././RaylibException.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././././raylib-cpp-utils.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././././raylib.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./././Material.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Camera3D.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././Vector3.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Color.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././Vector4.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./FileData.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./FileText.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Font.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././TextureUnmanaged.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./././Image.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././././Color.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././././RaylibException.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././././raylib-cpp-utils.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././././raylib.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./././Material.hpp \
  /usr/include/c++/15.1.1/vector \
  /usr/include/c++/15.1.1/bits/stl_uninitialized.h \
  /usr/include/c++/15.1.1/bits/stl_vector.h \
  /usr/include/c++/15.1.1/bits/stl_bvector.h \
  /usr/include/c++/15.1.1/bits/vector.tcc \
  /usr/include/c++/15.1.1/bits/formatfwd.h \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./././RaylibException.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./././Vector2.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Functions.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Gamepad.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Image.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Keyboard.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Material.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Matrix.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././raymath.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Mesh.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././BoundingBox.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././MeshUnmanaged.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./././BoundingBox.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./././Model.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././Model.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Model.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./ModelAnimation.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././Mesh.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Mouse.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Music.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Ray.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/././RayCollision.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./RayCollision.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./RaylibException.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Rectangle.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./RenderTexture.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Shader.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./ShaderUnmanaged.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./././RaylibException.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./././Vector2.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Functions.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Gamepad.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Image.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Keyboard.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Material.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Matrix.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././raymath.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Mesh.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././BoundingBox.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././MeshUnmanaged.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./././BoundingBox.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./././Model.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././Model.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Model.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./ModelAnimation.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././Mesh.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Mouse.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Music.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Ray.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/././RayCollision.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./RayCollision.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./RaylibException.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Rectangle.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./RenderTexture.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Shader.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./ShaderUnmanaged.hpp \
  /usr/include/rlgl.h \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Texture.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Sound.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Text.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Texture.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./TextureUnmanaged.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Touch.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Vector2.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Vector3.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Vector4.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./VrStereoConfig.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Wave.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src/include/./Window.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/include/Obstacle.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/data_structures/pair.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/data_structures/SimpleMap.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/data_structures/list.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Texture.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Sound.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Text.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Texture.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./TextureUnmanaged.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Touch.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Vector2.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Vector3.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Vector4.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./VrStereoConfig.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Wave.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src/include/./Window.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/include/Obstacle.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/pair.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/SimpleMap.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/MyVector.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/pair.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/list.hpp \
  /usr/include/c++/15.1.1/iostream /usr/include/c++/15.1.1/ostream \
  /usr/include/c++/15.1.1/bits/ostream.h /usr/include/c++/15.1.1/ios \
  /usr/include/c++/15.1.1/bits/ios_base.h \
@@ -286,5 +288,46 @@ CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o: \
  /usr/include/c++/15.1.1/bits/istream.tcc \
  /usr/include/c++/15.1.1/iterator \
  /usr/include/c++/15.1.1/bits/stream_iterator.h \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/include/Utils.hpp \
- /home/arthurm/Documentos/AED/Pruebas/mas/aed_project/data_structures/queue.hpp
+ /usr/include/c++/15.1.1/functional \
+ /usr/include/c++/15.1.1/bits/std_function.h \
+ /usr/include/c++/15.1.1/unordered_map \
+ /usr/include/c++/15.1.1/bits/unordered_map.h \
+ /usr/include/c++/15.1.1/bits/hashtable.h \
+ /usr/include/c++/15.1.1/bits/hashtable_policy.h \
+ /usr/include/c++/15.1.1/ext/aligned_buffer.h \
+ /usr/include/c++/15.1.1/bits/node_handle.h \
+ /usr/include/c++/15.1.1/bits/erase_if.h \
+ /usr/include/c++/15.1.1/bits/move_only_function.h \
+ /usr/include/c++/15.1.1/bits/mofunc_impl.h \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/include/SearchAlgorithm.hpp \
+ /home/arthurm/Documentos/AED/proyecto/TIF_AED/data_structures/queue.hpp \
+ /usr/include/c++/15.1.1/memory \
+ /usr/include/c++/15.1.1/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/15.1.1/bits/align.h \
+ /usr/include/c++/15.1.1/bits/unique_ptr.h \
+ /usr/include/c++/15.1.1/bits/shared_ptr.h \
+ /usr/include/c++/15.1.1/bits/shared_ptr_base.h \
+ /usr/include/c++/15.1.1/bits/allocated_ptr.h \
+ /usr/include/c++/15.1.1/ext/concurrence.h \
+ /usr/include/c++/15.1.1/bits/shared_ptr_atomic.h \
+ /usr/include/c++/15.1.1/bits/atomic_base.h \
+ /usr/include/c++/15.1.1/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/15.1.1/bits/atomic_wait.h \
+ /usr/include/c++/15.1.1/climits \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/limits.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/15.1.1/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
+ /usr/include/bits/uio_lim.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
+ /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
+ /usr/include/bits/getopt_core.h /usr/include/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h /usr/include/syscall.h \
+ /usr/include/sys/syscall.h /usr/include/asm/unistd.h \
+ /usr/include/asm/unistd_64.h /usr/include/bits/syscall.h \
+ /usr/include/c++/15.1.1/bits/std_mutex.h \
+ /usr/include/c++/15.1.1/backward/auto_ptr.h \
+ /usr/include/c++/15.1.1/bits/ranges_uninitialized.h \
+ /usr/include/c++/15.1.1/bits/out_ptr.h \
+ /usr/include/c++/15.1.1/pstl/glue_memory_defs.h

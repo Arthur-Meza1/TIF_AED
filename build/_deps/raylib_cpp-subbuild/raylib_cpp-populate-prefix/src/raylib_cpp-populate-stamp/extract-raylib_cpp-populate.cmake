@@ -5,8 +5,8 @@ cmake_minimum_required(VERSION ${CMAKE_VERSION}) # this file comes with cmake
 
 # Make file names absolute:
 #
-get_filename_component(filename "/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-subbuild/raylib_cpp-populate-prefix/src/v5.5.0.tar.gz" ABSOLUTE)
-get_filename_component(directory "/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-src" ABSOLUTE)
+get_filename_component(filename "/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-subbuild/raylib_cpp-populate-prefix/src/v5.5.0.tar.gz" ABSOLUTE)
+get_filename_component(directory "/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/_deps/raylib_cpp-src" ABSOLUTE)
 
 message(VERBOSE "extracting...
      src='${filename}'
