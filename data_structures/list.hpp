@@ -1,8 +1,7 @@
 #pragma once
-#include <cstddef> // std::ptrdiff_t
+#include <cstddef> 
 #include <iostream>
-#include <iterator> // std::forward_iterator_tag
-
+#include <iterator> 
 template <typename T>
 class SimpleList {
 private:
@@ -19,7 +18,6 @@ private:
 public:
   SimpleList() : head(nullptr), tail(nullptr), count(0) {}
 
-  // Evitamos copias
   SimpleList(const SimpleList&) = delete;
   SimpleList& operator=(const SimpleList&) = delete;
 
@@ -32,7 +30,6 @@ public:
     other.count = 0;
   }
 
-  // Operador de asignación por movimiento
   SimpleList& operator=(SimpleList&& other) noexcept {
     if (this != &other) {
       clear();
