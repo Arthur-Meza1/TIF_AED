@@ -18,7 +18,7 @@ private:
   MyVector<Pair> data;
   size_t count = 0;
   size_t capacity = 8;
-  const double LOAD_FACTOR = 0.75;
+  double LOAD_FACTOR = 0.75;
 
   void resize() {
     size_t newCapacity = capacity * 2;
@@ -85,12 +85,12 @@ public:
       return it->value;
     }
     
-    // Si no se encuentra, inserta un nuevo par con un valor por defecto
+    
     if ((double)count / capacity >= LOAD_FACTOR) {
       resize();
     }
     data[count].key = key;
-    data[count].value = V(); // V() llama al constructor por defecto de V
+    data[count].value = V(); 
     count++;
     return data[count - 1].value;
   }
@@ -104,7 +104,7 @@ public:
     throw std::out_of_range("Key not found");
   }
 
-  // get() constante que usa find()
+  
   const V& get(const K& key) const {
     const_iterator it = find(key);
     if (it != end()) {
@@ -113,7 +113,7 @@ public:
     throw std::out_of_range("Key not found");
   } 
   
-  // set() mejorado que usa find()
+  
   void set(const K& key, V value) {
     iterator it = find(key);
     if (it != end()) {

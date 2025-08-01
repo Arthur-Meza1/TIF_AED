@@ -25,10 +25,10 @@ public:
   }
 };
 
-// Macro para crear un my_initializer_list de forma literal
+
 #define MY_INIT_LIST(name, type, ...)                                          \
   static constexpr type name##_array[] = {__VA_ARGS__};                        \
   constexpr my_initializer_list<type> name(                                    \
       name##_array, sizeof(name##_array) / sizeof(type))
 
-#endif // MY_INITIALIZER_LIST_H
+#endif 

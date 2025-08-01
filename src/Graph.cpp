@@ -35,12 +35,12 @@ bool Graph::addEdge(int sourceId, int targetId, float weight) {
 
   for (size_t i = 0; i < adjacencyList[sourceId].size(); ++i) {
     if (adjacencyList[sourceId][i].first == targetId) {
-      return false; // La arista ya existe, no se añade de nuevo
+      return false;  //exsite no se pone 
     }
   }
 
-  // Añadir la arista de source a target
-  adjacencyList[sourceId].push_back(Pair<int, float>(targetId, weight));
+  // Grafo no difirigo
+  adjacencyList[sourceId].push_back(Pair<int, float>(targetId, weight)); 
 
   adjacencyList[targetId].push_back(Pair<int, float>(sourceId, weight));
 
@@ -52,8 +52,6 @@ const Node& Graph::getNode(int id) const {
   if (!isValidNodeId(id)) {
     std::cerr << "Error: Acceso a nodo con ID fuera de rango: " << id
               << std::endl;
-    // Retornar un nodo por defecto para evitar un crash inmediato, pero es un
-    // error lógico.
     static Node defaultNode(-1, -1.0f, -1.0f);
     return defaultNode;
   }
@@ -63,8 +61,6 @@ const Node& Graph::getNode(int id) const {
 // Obtiene la lista de nodos adyacentes a un nodo dado
 const MyVector<Pair<int, float>>& Graph::getAdjacentNodes(int id) const {
   if (!isValidNodeId(id)) {
-    // std::cerr << "Error: ID de nodo invalido al obtener adyacentes: " << id
-    // << std::endl;
     static const MyVector<Pair<int, float>>
         emptyList; // Lista vacía para IDs inválidos
     return emptyList;
@@ -84,8 +80,7 @@ int Graph::findNodeAtPosition(const raylib::Vector2& clickPos,
   float radiusSq =
       radius * radius; // Comparar con distancia al cuadrado para evitar sqrt
   for (const auto& node : nodes) {
-    // Asegúrate de que el nodo sea válido (no sea un nodo por defecto con ID
-    // -1)
+    
     if (node.id != -1 && clickPos.DistanceSqr(node.position) <= radiusSq) {
       return node.id;
     }
@@ -114,8 +109,7 @@ void Graph::generateRandomNodes(int count, int maxWidth, int maxHeight,
   for (int r = 0; r < gridRows; ++r) {
     spatialGrid[r].resize(gridCols);
     for (int c = 0; c < gridCols; ++c) {
-      spatialGrid[r][c].reserve(
-          10); // Reservar para evitar muchas reasignaciones
+      spatialGrid[r][c].reserve(10); // Reservar para evitar muchas reasignaciones
     }
   }
 
@@ -125,6 +119,8 @@ void Graph::generateRandomNodes(int count, int maxWidth, int maxHeight,
     float y = (float)GetRandomValue(0, maxHeight);
 
     nodes.emplace_back(i, x, y);
+
+    //std::cout << "Creando nodo con ID: " << i << std::endl;
 
     int cellX = getCellX(x);
     int cellY = getCellY(y);

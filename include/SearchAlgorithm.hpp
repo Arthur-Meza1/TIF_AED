@@ -15,6 +15,7 @@ public:
                                    int endNodeId) const = 0;
   virtual std::string getName() const = 0;
   virtual ~SearchAlgorithm() = default;
+  
 };
 
 // --- Functor para tu algoritmo A* original ---
@@ -49,9 +50,36 @@ public:
   SimpleList<int> findPath(const Graph& graph, int startNodeId,
                            int endNodeId) const override;
   std::string getName() const override {
-    return "Dijkstra (con Min-Heap)";
+    return "Dijkstra";
   }
 private:
   SimpleList<int> reconstructPath(const SimpleMap<int, int>& cameFrom,
                                   int currentId) const;
+};
+
+// FUnctor para Best-First-Search 
+
+class BestFirst_Algorithm : public SearchAlgorithm {
+public:
+  SimpleList<int> findPath(const Graph& graph, int startNodeId, int endNodeId) const override;
+  std::string getName() const override {
+    return "Best-First Search";
+  }
+private:
+  SimpleList<int> reconstructPath(const SimpleMap<int, int>& cameFrom, int currentId) const;
+};
+
+
+//Functos para DFS
+
+class DFS_Algorithm : public SearchAlgorithm {
+public:
+    DFS_Algorithm() = default;
+    ~DFS_Algorithm() override = default;
+
+    SimpleList<int> findPath(const Graph& graph, int startNodeId, int endNodeId) const override;
+    std::string getName() const override { return "Depth-First Search"; }
+
+private:
+    SimpleList<int> reconstructPath(const SimpleMap<int, int>& cameFrom, int currentId) const;
 };

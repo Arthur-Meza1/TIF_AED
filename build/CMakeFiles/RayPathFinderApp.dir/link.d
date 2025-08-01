@@ -8,6 +8,8 @@ RayPathFinderApp: \
   CMakeFiles/RayPathFinderApp.dir/src/AStar_Algorithm.cpp.o \
   CMakeFiles/RayPathFinderApp.dir/src/Dijkstra_Algorithm.cpp.o \
   CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.o \
+  CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.o \
+  CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.o \
   CMakeFiles/RayPathFinderApp.dir/main.cpp.o \
   /usr/lib/libraylib.so \
   /usr/lib/libraylib.so \
@@ -56,6 +58,10 @@ CMakeFiles/RayPathFinderApp.dir/src/AStar_Algorithm.cpp.o:
 CMakeFiles/RayPathFinderApp.dir/src/Dijkstra_Algorithm.cpp.o:
 
 CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.o:
+
+CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.o:
+
+CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.o:
 
 CMakeFiles/RayPathFinderApp.dir/main.cpp.o:
 

@@ -21,7 +21,7 @@ const int SCREEN_HEIGHT = 800;
 const int GRAPHICAL_NODE_LIMIT = 700; 
 const float NODE_GENERATION_AREA_PADDING = 50.0f;
 const int MAX_EDGES_PER_NODE_GENERATION = 4;
-const float MAX_CONNECTION_DISTANCE_GENERATION =200.0f; // radio para la conexion
+const float MAX_CONNECTION_DISTANCE_GENERATION =200.0f; 
 const int NUM_OBSTACLES = 5;
 
 Graph myGraph;
@@ -62,7 +62,6 @@ int GetValidNodeIdFromUser(const std::string& prompt, int maxId);
 
 // --- Implementación de main ---
 int main() {
-  // 1. Solicitar cantidad de nodos al usuario
   int numNodes;
   std::cout << "------------------------------------------" << std::endl;
   std::cout << "        RECORRIDOS DE GRAFOS              " << std::endl;
@@ -76,13 +75,15 @@ int main() {
     std::cerr << "Error: Entrada invalida. Por favor, ingrese un numero entero "
                  "positivo."
               << std::endl;
-    return 1; // Salir con código de error
+    return 1; 
   }
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
 
   algorithms["A*"] = std::make_unique<AStar_Algorithm>();
   algorithms["BFS"] = std::make_unique<BFS_Algorithm>();
+  algorithms["BestFirst-Search"] = std::make_unique<BestFirst_Algorithm>();
+  algorithms["DFS"] = std::make_unique<DFS_Algorithm>();
   algorithms["Dijkstra"] = std::make_unique<Dijkstra_Algorithm>();
 
 
@@ -97,21 +98,53 @@ int main() {
   if (graphicalMode) {
     // Modo Gráfico: Bucle de Raylib
     while (!WindowShouldClose()) {
-      UpdateApplication(GetFrameTime()); // Actualiza la lógica del juego
-      DrawApplication();                 // Dibuja el estado actual
+      UpdateApplication(GetFrameTime()); 
+      DrawApplication();                 
     }
   } else {
-    // Modo Terminal: Lógica de interacción por consola
     RunTerminalMode();
   }
 
-  // 4. Limpiar recursos antes de salir
   CleanupApplication();
 
   return 0;
 }
 
+
+//------ Funcion para comparar ----------
+void CompareAlgorithms(int startNodeId, int endNodeId) {
+    if (startNodeId == -1 || endNodeId == -1) {
+        std::cout << "ERROR: Por favor, seleccione un nodo de inicio y fin validos." << std::endl;
+        return;
+    }
+
+    std::cout << "\n--- Comparando la eficiencia de los algoritmos ---\n";
+    std::cout << "Buscando del nodo " << startNodeId << " al nodo " << endNodeId << ".\n";
+
+    
+    auto& algorithmsMap = myPathfinding->getAlgorithms(); 
+    
+    for (const auto& pair : algorithmsMap) {
+        const std::string& name = pair.key;
+        const SearchAlgorithm* algorithm = pair.value.get();
+        
+        myPathfinding->setAlgorithm(algorithm);
+
+        auto start_time = std::chrono::high_resolution_clock::now();
+        SimpleList<int> pathResult = myPathfinding->findPath(startNodeId, endNodeId);
+        auto end_time = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
+
+        std::cout << "\nAlgoritmo: " << name << std::endl;
+        std::cout << "Tiempo de busqueda: " << duration.count() << " us" << std::endl;
+        std::cout << "Tamaño de la ruta: " << pathResult.size() << " nodos" << std::endl;
+        std::cout << "Memoria usada: " << Utils::GetCurrentMemoryUsageInKB() << " KB" << std::endl;
+  
+    }
+    std::cout << "---------------------------------------------------\n";
+}
 // --- Implementaciones de Funciones Auxiliares ---
+
 
 
 void InitializeApplication(int numNodes) {
@@ -180,6 +213,7 @@ void InitializeApplication(int numNodes) {
   algorithms.set("A*", std::make_unique<AStar_Algorithm>());
   algorithms.set("BFS", std::make_unique<BFS_Algorithm>());
   algorithms.set("Dijkstra", std::make_unique<Dijkstra_Algorithm>());
+  algorithms.set("BestFirst-Search", std::make_unique<BestFirst_Algorithm>());
 
   
   myPathfinding = std::make_unique<Pathfinding>(myGraph);
@@ -203,7 +237,6 @@ void UpdateApplication(float deltaTime) {
     raylib::Vector2 mouseWorldPos = GetScreenToWorld2D(
         mouseScreenPos, camera); 
 
-    // Actualizar el zoom
     camera.zoom += wheel * 0.1f;
     if (camera.zoom < 0.1f)
       camera.zoom = 0.1f; 
@@ -228,9 +261,8 @@ void DrawApplication() {
   // --- Dibuja los obstáculos PRIMERO para que no tapen la ruta ---
   for (const auto& obstacle : myGraph.getObstacles()) {
     DrawRectangleRec(obstacle.rect,
-                     Fade(obstacle.color, 0.7f));  // Dibuja con transparencia
-    DrawRectangleLinesEx(obstacle.rect, 2, BLACK); // Borde negro
-    // Dibuja el nombre del obstáculo
+                     Fade(obstacle.color, 0.7f));  
+    DrawRectangleLinesEx(obstacle.rect, 2, BLACK); 
     DrawText(obstacle.name.c_str(), (int)(obstacle.rect.x + 5),
              (int)(obstacle.rect.y + 5), 10, BLACK);
   }
@@ -253,10 +285,9 @@ void DrawApplication() {
                     endNodeId); // Dibuja la ruta y nodos
   EndMode2D();                  // Finalizar el modo 2D
 
-  DrawGraphicalHUD(); // Dibuja la Interfaz de Usuario (HUD)
+  DrawGraphicalHUD(); 
 
-  // Dibuja la caja de entrada de texto para el nombre del obstáculo (en
-  // coordenadas de pantalla)
+  // Dibuja la caja de entrada de texto para el nombre del obstáculo 
   if (editingObstacles && typingObstacleName) {
     DrawRectangleRec(nameInputBox, LIGHTGRAY);
     DrawRectangleLinesEx(nameInputBox, 2, BLACK);
@@ -265,7 +296,7 @@ void DrawApplication() {
     DrawText(obstacleNameInput, (int)nameInputBox.x + 5,
              (int)nameInputBox.y + 8, 15, BLACK);
     // Dibuja un cursor parpadeante
-    if (((int)(GetTime() * 2)) % 2 == 0) { // Parpadeo simple
+    if (((int)(GetTime() * 2)) % 2 == 0) { 
       DrawText("_",
                (int)nameInputBox.x + 5 + MeasureText(obstacleNameInput, 15),
                (int)nameInputBox.y + 8, 15, BLACK);
@@ -275,22 +306,19 @@ void DrawApplication() {
   EndDrawing(); // Finalizar el modo de dibujo
 }
 
-// Maneja la interacción del usuario en modo gráfico (clics de ratón, teclas)
+//----- maneja los externo------
 void HandleGraphicalInput() {
-  // Tecla 'O' para alternar el modo de edición de obstáculos
   if (IsKeyPressed(KEY_O)) {
     editingObstacles = !editingObstacles;
     if (editingObstacles) {
       std::cout << "Modo de edicion de obstaculos ACTIVADO." << std::endl;
-      // Limpiar selección de nodos cuando entras en modo edición
       startNodeId = -1;
       endNodeId = -1;
       path.clear();
     } else {
       std::cout << "Modo de edicion de obstaculos DESACTIVADO." << std::endl;
-      // Si el nombre se estaba escribiendo, cancelar
       typingObstacleName = false;
-      obstacleNameInput[0] = '\0'; // Limpiar el buffer
+      obstacleNameInput[0] = '\0'; 
     }
   }
 
@@ -300,7 +328,6 @@ void HandleGraphicalInput() {
         GetScreenToWorld2D(GetMousePosition(), camera);
 
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-      // Si no estamos tecleando el nombre, iniciar el arrastre para dibujar
       if (!typingObstacleName) {
         startDragPos = mouseWorldPos;
         isDragging = true;
@@ -315,16 +342,9 @@ void HandleGraphicalInput() {
         float y2 = std::max(startDragPos.y, mouseWorldPos.y);
 
         Rectangle newRect = {x1, y1, x2 - x1, y2 - y1};
-
-        // Asegurarse de que el rectángulo sea válido (no 0 ancho/alto o muy
-        // pequeño)
         if (newRect.width > 5 && newRect.height > 5) {
-          // Si el nombre no ha sido introducido, activar el modo de tecleo
           typingObstacleName = true;
-          // El rectángulo se añade al grafo solo cuando se presiona ENTER
         } else {
-          // Si el rectángulo es muy pequeño, considerar que fue un clic simple
-          // y no un arrastre
           typingObstacleName = false;
           obstacleNameInput[0] = '\0';
         }
@@ -335,7 +355,6 @@ void HandleGraphicalInput() {
     if (typingObstacleName) {
       int key = GetCharPressed();
       while (key > 0) {
-        // Permitir caracteres ASCII imprimibles y limitar longitud
         if (((key >= 32) && (key <= 125)) &&
             (strlen(obstacleNameInput) < sizeof(obstacleNameInput) - 1)) {
           obstacleNameInput[strlen(obstacleNameInput)] = (char)key;
@@ -380,56 +399,44 @@ void HandleGraphicalInput() {
       }
     }
 
-    // Si se presiona ESC y se está tecleando, cancelar la entrada de nombre
+    
     if (IsKeyPressed(KEY_ESCAPE) && typingObstacleName) {
       typingObstacleName = false;
       obstacleNameInput[0] = '\0';
     }
 
-    // Eliminación de obstáculos con clic derecho (cuando no se arrastra para
-    // panear)
+    // Eliminación de obstáculos con clic derecho 
     if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT) && !isDragging) {
       for (int i = 0; i < myGraph.getObstacles().size(); ++i) {
-        // CheckCollisionPointRec es una función del API C de Raylib, compatible
-        // con raylib-cpp
         if (CheckCollisionPointRec(mouseWorldPos,
                                    myGraph.getObstacles()[i].rect)) {
           std::cout << "Obstaculo '" << myGraph.getObstacles()[i].name
                     << "' eliminado." << std::endl;
           myGraph.removeObstacle(i);
-          // Recalcular la ruta si ya hay inicio y fin seleccionados
           if (startNodeId != -1 && endNodeId != -1) {
             path = myPathfinding->findPath(startNodeId, endNodeId);
           }
-          break; // Solo elimina un obstáculo por clic
+          break; 
         }
       }
     }
 
-  } else { // Si NO estamos en modo de edición de obstáculos, la lógica de
-           // selección de nodos funciona
-    // Lógica original de selección de nodos
+  } else { 
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
       raylib::Vector2 mouseScreenPos = GetMousePosition();
       raylib::Vector2 mouseWorldPos = GetScreenToWorld2D(
-          mouseScreenPos, camera); // Convierte a raylib::Vector2
+          mouseScreenPos, camera); 
       int clickedNodeId = myGraph.findNodeAtPosition(mouseWorldPos, 8.0f);
 
-      if (clickedNodeId != -1) { // Si se hizo clic en un nodo
+      if (clickedNodeId != -1) { 
         if (startNodeId == -1) {
-          // Primer clic: Seleccionar nodo de inicio
           startNodeId = clickedNodeId;
-          endNodeId = -1; // Resetear el nodo final
-          path.clear();   // Limpiar cualquier ruta anterior
+          endNodeId = -1; 
+          path.clear();   
         } else if (endNodeId == -1 && clickedNodeId != startNodeId) {
-          // Segundo clic: Seleccionar nodo final (si no es el mismo que el
-          // inicio)
           endNodeId = clickedNodeId;
-          // Si ambos nodos (inicio y fin) están seleccionados, calcular la ruta
           path = myPathfinding->findPath(startNodeId, endNodeId);
         } else {
-          // Si ya hay inicio y fin, el siguiente clic resetea y selecciona un
-          // nuevo inicio
           startNodeId = clickedNodeId;
           endNodeId = -1;
           path.clear();
@@ -456,15 +463,33 @@ void HandleGraphicalInput() {
             std::cout << "Algoritmo cambiado a Dijkstra." << std::endl;
       }
     }
-
-    // Recalcular la ruta con la tecla 'R'
+    
+    if(IsKeyPressed(KEY_F5)){
+      if (startNodeId != -1 && endNodeId != -1) {
+        CompareAlgorithms(startNodeId, endNodeId);
+      } else {
+        std::cout << "ERROR: Seleccione un nodo de inicio y fin primero." << std::endl;
+      }
+    }
+    if (IsKeyPressed(KEY_F6)) {
+      if (algorithms.contains("BestFirst-Search")) {
+          myPathfinding->setAlgorithm(algorithms.get("BestFirst-Search").get());
+            std::cout << "Algoritmo cambiado a BestFirst-Search." << std::endl;
+      }
+    }
+    if (IsKeyPressed(KEY_F7)) {
+      if (algorithms.contains("DFS")) {
+          myPathfinding->setAlgorithm(algorithms.get("DFS").get());
+            std::cout << "Algoritmo cambiado a DFS" << std::endl;
+      }
+    }
     if (IsKeyPressed(KEY_R)) {
       if (startNodeId != -1 && endNodeId != -1) {
         path = myPathfinding->findPath(startNodeId, endNodeId);
       }
     }
 
-    if (IsKeyPressed(KEY_C)) { // limpieza
+    if (IsKeyPressed(KEY_C)) { 
       startNodeId = -1;
       endNodeId = -1;
       path.clear();
@@ -507,7 +532,7 @@ void DrawGraphElements(const Graph& graph, const SimpleList<int>& pathNodes,
     for (auto it = pathNodes.begin(); it != pathNodes.end(); ++it) {
       int nodeId = *it;
       if (nodeId < 0 || nodeId >= graph.getNumNodes())
-        continue; // Seguridad
+        continue; 
 
       const Node& currentPathNode = graph.getNode(nodeId);
       raylib::Vector2 currentPos = currentPathNode.position;
@@ -538,13 +563,12 @@ void DrawGraphicalHUD() {
   DrawText(TextFormat("Nodos: %i", myGraph.getNumNodes()), 10, 10, 20,
            DARKGRAY);
 
-  // Muestra los IDs de los nodos de inicio y fin seleccionados
   if (startNodeId != -1)
     DrawText(TextFormat("Inicio: %i", startNodeId), 10, 30, 20, DARKGRAY);
   if (endNodeId != -1)
     DrawText(TextFormat("Fin: %i", endNodeId), 10, 50, 20, DARKGRAY);
 
-  // Instrucciones para el usuario
+  
   DrawText("Clic IZQ: Seleccionar Inicio/Fin", 10, 80, 15, BLACK);
   DrawText("Clic DER + Arrastrar: Paneo", 10, 100, 15, BLACK);
   DrawText("Rueda mouse: Zoom", 10, 120, 15, BLACK);
@@ -556,9 +580,9 @@ void DrawGraphicalHUD() {
              10, 160, 15, RED);
   }
 
-  // Instrucciones adicionales para el modo de edición de obstáculos
+  
   DrawText("O: Alternar modo edicion obstaculos", 10, 180, 15,
-           BLACK); // Ajustado para no solapar
+           BLACK); 
   if (editingObstacles) {
     DrawText("En Modo Edicion Obstaculos:", 10, 200, 15, DARKBLUE);
     DrawText("Clic IZQ + Arrastrar: Dibujar obstaculo", 10, 220, 15, DARKBLUE);
@@ -585,17 +609,17 @@ void RunTerminalMode() {
 
   do {
     std::cout << "\n------------------------------------------" << std::endl;
-    std::cout << "Comandos: 'buscar', 'info', 'salir' 'set-algorithm'" << std::endl;
+    std::cout << "Comandos: 'buscar', 'info', 'salir' 'set-algorithm' 'comparar'" << std::endl;
     std::cout << "Ingrese comando: ";
     std::cin >> command;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(),
-                    '\n'); // Limpiar buffer
+                    '\n'); 
 
     if (command == "buscar") {
       sNode = GetValidNodeIdFromUser("Ingrese ID del nodo de inicio: ",
                                      myGraph.getNumNodes() - 1);
       if (sNode == -1)
-        continue; // Si la entrada no fue válida
+        continue; 
 
       eNode = GetValidNodeIdFromUser("Ingrese ID del nodo final: ",
                                      myGraph.getNumNodes() - 1);
@@ -632,7 +656,7 @@ void RunTerminalMode() {
       std::cin >> chosenAlgorithmName;
       if (algorithms.find(chosenAlgorithmName) == algorithms.end()) {
         std::cout << "Algoritmo no valido. Usando " << currentAlgorithm->getName() << " por defecto." << std::endl;
-        chosenAlgorithmName = "A*"; // Default
+        chosenAlgorithmName = "A*"; 
       }
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }else if (command == "info") {
@@ -653,7 +677,14 @@ void RunTerminalMode() {
         }
       }
       std::cout << "----------------------------" << std::endl;
-    } else if (command != "salir") {
+    }else if (command == "comparar") {
+      int sNode = GetValidNodeIdFromUser("ID de nodo de inicio: ", myGraph.getNumNodes() - 1);
+      int eNode = GetValidNodeIdFromUser("ID de nodo de fin: ", myGraph.getNumNodes() - 1);
+
+      if (sNode != -1 && eNode != -1) {
+        CompareAlgorithms(sNode, eNode);
+      }
+    }else if (command != "salir") {
       std::cout << "Comando desconocido. Intente 'buscar', 'info', o 'salir'."
                 << std::endl;
     }
@@ -662,8 +693,7 @@ void RunTerminalMode() {
   std::cout << "Saliendo del modo terminal." << std::endl;
 }
 
-// Función auxiliar para obtener un ID de nodo válido del usuario en modo
-// terminal
+// obtener un ID de nodo válido del usuario en modo terminal
 int GetValidNodeIdFromUser(const std::string& prompt, int maxId) {
   int nodeId;
   std::cout << prompt;
@@ -673,14 +703,14 @@ int GetValidNodeIdFromUser(const std::string& prompt, int maxId) {
               << std::endl;
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    return -1; // Indica entrada inválida
+    return -1; 
   }
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
   if (nodeId < 0 || nodeId > maxId) {
     std::cerr << "Error: ID de nodo fuera de rango. Rango valido: 0 a " << maxId
               << std::endl;
-    return -1; // Indica ID fuera de rango
+    return -1; 
   }
   return nodeId;
 }
@@ -703,15 +733,15 @@ void PrintPathToTerminal(const SimpleList<int>& p) {
   }
 }
 
-// Libera los recursos asignados
+
 void CleanupApplication() {
   if (graphicalMode) {
-    CloseWindow(); // Cierra la ventana de Raylib
+    CloseWindow(); 
   }
   if (myPathfinding) {
-    myPathfinding.reset(); // Libera la memoria del objeto Pathfinding
+    myPathfinding.reset();
     myPathfinding = nullptr;
   }
-  myGraph.clear(); // Limpia el grafo (opcional, pero buena práctica)
+  myGraph.clear(); 
   std::cout << "Recursos liberados. Adios!" << std::endl;
 }

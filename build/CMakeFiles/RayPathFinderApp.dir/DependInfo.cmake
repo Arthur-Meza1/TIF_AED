@@ -11,6 +11,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/arthurm/Documentos/AED/proyecto/TIF_AED/main.cpp" "CMakeFiles/RayPathFinderApp.dir/main.cpp.o" "gcc" "CMakeFiles/RayPathFinderApp.dir/main.cpp.o.d"
   "/home/arthurm/Documentos/AED/proyecto/TIF_AED/src/AStar_Algorithm.cpp" "CMakeFiles/RayPathFinderApp.dir/src/AStar_Algorithm.cpp.o" "gcc" "CMakeFiles/RayPathFinderApp.dir/src/AStar_Algorithm.cpp.o.d"
   "/home/arthurm/Documentos/AED/proyecto/TIF_AED/src/BFS_Algorithm.cpp" "CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.o" "gcc" "CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.o.d"
+  "/home/arthurm/Documentos/AED/proyecto/TIF_AED/src/BestFirst_Algorithm.cpp" "CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.o" "gcc" "CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.o.d"
+  "/home/arthurm/Documentos/AED/proyecto/TIF_AED/src/DFS_Algorithm.cpp" "CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.o" "gcc" "CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.o.d"
   "/home/arthurm/Documentos/AED/proyecto/TIF_AED/src/Dijkstra_Algorithm.cpp" "CMakeFiles/RayPathFinderApp.dir/src/Dijkstra_Algorithm.cpp.o" "gcc" "CMakeFiles/RayPathFinderApp.dir/src/Dijkstra_Algorithm.cpp.o.d"
   "/home/arthurm/Documentos/AED/proyecto/TIF_AED/src/Graph.cpp" "CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o" "gcc" "CMakeFiles/RayPathFinderApp.dir/src/Graph.cpp.o.d"
   "/home/arthurm/Documentos/AED/proyecto/TIF_AED/src/Pathfinding.cpp" "CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o" "gcc" "CMakeFiles/RayPathFinderApp.dir/src/Pathfinding.cpp.o.d"

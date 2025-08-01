@@ -36,7 +36,7 @@ SimpleList<int> Dijkstra_Algorithm::findPath(const Graph& graph, int startNodeId
       int neighborId = neighborPair.first;
       float edgeCost = neighborPair.second;
 
-      // Verifica colisión con obstáculos (similar a A*)
+      // Verifica colisión con obstáculos 
       const raylib::Vector2 currentPos = graph.getNode(currentId).position;
       const raylib::Vector2 neighborPos = graph.getNode(neighborId).position;
       bool isBlocked = false;

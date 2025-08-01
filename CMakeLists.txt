@@ -43,6 +43,8 @@ set(PROJECT_SOURCES
   src/AStar_Algorithm.cpp
  src/Dijkstra_Algorithm.cpp
   src/BFS_Algorithm.cpp
+  src/BestFirst_Algorithm.cpp
+  src/DFS_Algorithm.cpp
   main.cpp
 )
 

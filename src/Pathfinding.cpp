@@ -1,10 +1,12 @@
 #include "Pathfinding.hpp"
 
 Pathfinding::Pathfinding(const Graph& graph) : graph(graph) {
-  // Inicializamos los algoritmos usando move-semantics
+  
   algorithms.set("A*", std::make_unique<AStar_Algorithm>());
-  algorithms.set("Dijkstra", std::make_unique<Dijkstra_Algorithm>());
   algorithms.set("BFS", std::make_unique<BFS_Algorithm>());
+  algorithms.set("BestFirst-Search", std::make_unique<BestFirst_Algorithm>());
+  algorithms.set("DFS", std::make_unique<DFS_Algorithm>());
+  algorithms.set("Dijkstra", std::make_unique<Dijkstra_Algorithm>());
 
   // Establecemos el algoritmo por defecto
   currentAlgorithm = algorithms.get("A*").get();

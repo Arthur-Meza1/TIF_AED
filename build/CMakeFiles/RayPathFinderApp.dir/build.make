@@ -156,10 +156,38 @@ CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arthurm/Documentos/AED/proyecto/TIF_AED/src/BFS_Algorithm.cpp -o CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.s
 
+CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.o: CMakeFiles/RayPathFinderApp.dir/flags.make
+CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.o: /home/arthurm/Documentos/AED/proyecto/TIF_AED/src/BestFirst_Algorithm.cpp
+CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.o: CMakeFiles/RayPathFinderApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.o -MF CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.o.d -o CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.o -c /home/arthurm/Documentos/AED/proyecto/TIF_AED/src/BestFirst_Algorithm.cpp
+
+CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/arthurm/Documentos/AED/proyecto/TIF_AED/src/BestFirst_Algorithm.cpp > CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.i
+
+CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arthurm/Documentos/AED/proyecto/TIF_AED/src/BestFirst_Algorithm.cpp -o CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.s
+
+CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.o: CMakeFiles/RayPathFinderApp.dir/flags.make
+CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.o: /home/arthurm/Documentos/AED/proyecto/TIF_AED/src/DFS_Algorithm.cpp
+CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.o: CMakeFiles/RayPathFinderApp.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.o -MF CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.o.d -o CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.o -c /home/arthurm/Documentos/AED/proyecto/TIF_AED/src/DFS_Algorithm.cpp
+
+CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/arthurm/Documentos/AED/proyecto/TIF_AED/src/DFS_Algorithm.cpp > CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.i
+
+CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/arthurm/Documentos/AED/proyecto/TIF_AED/src/DFS_Algorithm.cpp -o CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.s
+
 CMakeFiles/RayPathFinderApp.dir/main.cpp.o: CMakeFiles/RayPathFinderApp.dir/flags.make
 CMakeFiles/RayPathFinderApp.dir/main.cpp.o: /home/arthurm/Documentos/AED/proyecto/TIF_AED/main.cpp
 CMakeFiles/RayPathFinderApp.dir/main.cpp.o: CMakeFiles/RayPathFinderApp.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/RayPathFinderApp.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/RayPathFinderApp.dir/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/RayPathFinderApp.dir/main.cpp.o -MF CMakeFiles/RayPathFinderApp.dir/main.cpp.o.d -o CMakeFiles/RayPathFinderApp.dir/main.cpp.o -c /home/arthurm/Documentos/AED/proyecto/TIF_AED/main.cpp
 
 CMakeFiles/RayPathFinderApp.dir/main.cpp.i: cmake_force
@@ -178,6 +206,8 @@ RayPathFinderApp_OBJECTS = \
 "CMakeFiles/RayPathFinderApp.dir/src/AStar_Algorithm.cpp.o" \
 "CMakeFiles/RayPathFinderApp.dir/src/Dijkstra_Algorithm.cpp.o" \
 "CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.o" \
+"CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.o" \
+"CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.o" \
 "CMakeFiles/RayPathFinderApp.dir/main.cpp.o"
 
 # External object files for target RayPathFinderApp
@@ -189,12 +219,14 @@ RayPathFinderApp: CMakeFiles/RayPathFinderApp.dir/src/Utils.cpp.o
 RayPathFinderApp: CMakeFiles/RayPathFinderApp.dir/src/AStar_Algorithm.cpp.o
 RayPathFinderApp: CMakeFiles/RayPathFinderApp.dir/src/Dijkstra_Algorithm.cpp.o
 RayPathFinderApp: CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.o
+RayPathFinderApp: CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.o
+RayPathFinderApp: CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.o
 RayPathFinderApp: CMakeFiles/RayPathFinderApp.dir/main.cpp.o
 RayPathFinderApp: CMakeFiles/RayPathFinderApp.dir/build.make
 RayPathFinderApp: CMakeFiles/RayPathFinderApp.dir/compiler_depend.ts
 RayPathFinderApp: /usr/lib/libraylib.so
 RayPathFinderApp: CMakeFiles/RayPathFinderApp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable RayPathFinderApp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/arthurm/Documentos/AED/proyecto/TIF_AED/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable RayPathFinderApp"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/RayPathFinderApp.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

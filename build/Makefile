@@ -246,6 +246,54 @@ src/BFS_Algorithm.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/BFS_Algorithm.cpp.s
 .PHONY : src/BFS_Algorithm.cpp.s
 
+src/BestFirst_Algorithm.o: src/BestFirst_Algorithm.cpp.o
+.PHONY : src/BestFirst_Algorithm.o
+
+# target to build an object file
+src/BestFirst_Algorithm.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.o
+.PHONY : src/BestFirst_Algorithm.cpp.o
+
+src/BestFirst_Algorithm.i: src/BestFirst_Algorithm.cpp.i
+.PHONY : src/BestFirst_Algorithm.i
+
+# target to preprocess a source file
+src/BestFirst_Algorithm.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.i
+.PHONY : src/BestFirst_Algorithm.cpp.i
+
+src/BestFirst_Algorithm.s: src/BestFirst_Algorithm.cpp.s
+.PHONY : src/BestFirst_Algorithm.s
+
+# target to generate assembly for a file
+src/BestFirst_Algorithm.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/BestFirst_Algorithm.cpp.s
+.PHONY : src/BestFirst_Algorithm.cpp.s
+
+src/DFS_Algorithm.o: src/DFS_Algorithm.cpp.o
+.PHONY : src/DFS_Algorithm.o
+
+# target to build an object file
+src/DFS_Algorithm.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.o
+.PHONY : src/DFS_Algorithm.cpp.o
+
+src/DFS_Algorithm.i: src/DFS_Algorithm.cpp.i
+.PHONY : src/DFS_Algorithm.i
+
+# target to preprocess a source file
+src/DFS_Algorithm.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.i
+.PHONY : src/DFS_Algorithm.cpp.i
+
+src/DFS_Algorithm.s: src/DFS_Algorithm.cpp.s
+.PHONY : src/DFS_Algorithm.s
+
+# target to generate assembly for a file
+src/DFS_Algorithm.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/RayPathFinderApp.dir/build.make CMakeFiles/RayPathFinderApp.dir/src/DFS_Algorithm.cpp.s
+.PHONY : src/DFS_Algorithm.cpp.s
+
 src/Dijkstra_Algorithm.o: src/Dijkstra_Algorithm.cpp.o
 .PHONY : src/Dijkstra_Algorithm.o
 
@@ -364,6 +412,12 @@ help:
 	@echo "... src/BFS_Algorithm.o"
 	@echo "... src/BFS_Algorithm.i"
 	@echo "... src/BFS_Algorithm.s"
+	@echo "... src/BestFirst_Algorithm.o"
+	@echo "... src/BestFirst_Algorithm.i"
+	@echo "... src/BestFirst_Algorithm.s"
+	@echo "... src/DFS_Algorithm.o"
+	@echo "... src/DFS_Algorithm.i"
+	@echo "... src/DFS_Algorithm.s"
 	@echo "... src/Dijkstra_Algorithm.o"
 	@echo "... src/Dijkstra_Algorithm.i"
 	@echo "... src/Dijkstra_Algorithm.s"

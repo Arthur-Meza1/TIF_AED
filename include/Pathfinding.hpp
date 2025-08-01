@@ -22,6 +22,9 @@ public:
   void selectAlgorithm(const std::string& name);
   SimpleList<int> findPath(int startNodeId, int endNodeId) const;
   std::string getCurrentAlgorithmName() const;
+  const SimpleMap<std::string, std::unique_ptr<SearchAlgorithm>>& getAlgorithms() const {
+    return algorithms;
+  }
 
 private:
   const Graph& graph;
