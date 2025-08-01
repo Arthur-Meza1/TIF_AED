@@ -1,0 +1,3 @@
+/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-subbuild/CMakeFiles/raylib_cpp-populate.dir
+/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-subbuild/CMakeFiles/edit_cache.dir
+/home/arthurm/Documentos/AED/Pruebas/mas/aed_project/build/_deps/raylib_cpp-subbuild/CMakeFiles/rebuild_cache.dir

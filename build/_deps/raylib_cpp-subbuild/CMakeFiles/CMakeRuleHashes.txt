@@ -1,0 +1,11 @@
+# Hashes of file build rules.
+79ca5f48df00c43bfc463995a4664eac CMakeFiles/raylib_cpp-populate
+afc5016e5c3f7087077c39f11c3bad4a CMakeFiles/raylib_cpp-populate-complete
+02015379d61946678fed179a958c8b5b raylib_cpp-populate-prefix/src/raylib_cpp-populate-stamp/raylib_cpp-populate-build
+54d89bc970b280b0019e22b53065c7e9 raylib_cpp-populate-prefix/src/raylib_cpp-populate-stamp/raylib_cpp-populate-configure
+5bce21cbb2b94dd0a355675e67834458 raylib_cpp-populate-prefix/src/raylib_cpp-populate-stamp/raylib_cpp-populate-download
+437b56856dcbc534944447ac4bde7315 raylib_cpp-populate-prefix/src/raylib_cpp-populate-stamp/raylib_cpp-populate-install
+206976884fca387fae5292b0ff4d9684 raylib_cpp-populate-prefix/src/raylib_cpp-populate-stamp/raylib_cpp-populate-mkdir
+0fb3ad39f6f9b13ddaa20b6bae3d4390 raylib_cpp-populate-prefix/src/raylib_cpp-populate-stamp/raylib_cpp-populate-patch
+3d31eeb7781dccdfbe0b75b5789dd64c raylib_cpp-populate-prefix/src/raylib_cpp-populate-stamp/raylib_cpp-populate-test
+9483dab81f804a8931005a0c36386c2d raylib_cpp-populate-prefix/src/raylib_cpp-populate-stamp/raylib_cpp-populate-update

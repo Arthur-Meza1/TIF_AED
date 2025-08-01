@@ -1,3 +1,0 @@
-/home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/build/CMakeFiles/RayPathFinderApp.dir
-/home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/build/CMakeFiles/edit_cache.dir
-/home/arthurm/Documentos/AED/proyecto/TIF_AED/RayPahtfinder/build/CMakeFiles/rebuild_cache.dir
